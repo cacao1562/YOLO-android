@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="homeTabTheme" parent="MaterialTheme">
+        <item name="tabTextColor">@color/gray</item>
+        <item name="tabSelectedTextColor">@color/main</item>
+        <item name="tabTextAppearance">@style/tabTextAppearence</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabBackground">@drawable/tab_selected</item>
+    </style>
+
+    <style name="tabTextAppearence" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

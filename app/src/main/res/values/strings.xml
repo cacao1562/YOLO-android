@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">YOLO-android</string>
+
+    <string name="bottom_menu_home">홈</string>
+    <string name="bottom_menu_sub">구독</string>
+    <string name="bottom_menu_community">커뮤니티</string>
+    <string name="bottom_menu_mypage">마이</string>
+
 </resources>
