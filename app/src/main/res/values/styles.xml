@@ -4,14 +4,18 @@
     <style name="homeTabTheme" parent="MaterialTheme">
         <item name="tabTextColor">@color/gray</item>
         <item name="tabSelectedTextColor">@color/main</item>
-        <item name="tabTextAppearance">@style/tabTextAppearence</item>
+        <item name="tabTextAppearance">@style/homelistTabTextAppearence</item>
         <item name="tabIndicatorHeight">0dp</item>
         <item name="tabBackground">@drawable/tab_selected</item>
     </style>
 
-    <style name="tabTextAppearence" parent="TextAppearance.Design.Tab">
+    <style name="homelistTabTextAppearence" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16dp</item>
-        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="communityTabTextAppearence" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

@@ -8,9 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <com.yolo.yolo_android.ui.custom.TopNavBarView
             android:id="@+id/top_navigation"
-            layout="@layout/layout_navigation_bar"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:title_text="지역/날짜"
+            app:visible_back="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.tabs.TabLayout
             style="@style/homeTabTheme"

@@ -6,6 +6,9 @@ plugins {
     id "androidx.navigation.safeargs"
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 30
 
@@ -17,6 +20,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "SERVICE_KEY", properties['servicekey']
+
     }
 
     buildTypes {
@@ -102,4 +108,7 @@ dependencies {
     def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // image picker
+    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.4'
 }
