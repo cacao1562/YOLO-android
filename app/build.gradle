@@ -102,4 +102,14 @@ dependencies {
     def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // social login
+    def naver_sdk_version = "4.2.6"
+    def kakao_sdk_version = "2.4.1"
+    implementation("com.naver.nid:naveridlogin-android-sdk:$naver_sdk_version")
+    implementation("com.kakao.sdk:v2-user:$kakao_sdk_version") {
+        exclude group: 'com.google.code.gson', module: 'gson'
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
 }

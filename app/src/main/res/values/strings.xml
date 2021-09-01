@@ -6,4 +6,8 @@
     <string name="bottom_menu_community">커뮤니티</string>
     <string name="bottom_menu_mypage">마이</string>
 
+    <!-- 소셜 로그인 -->
+    <string name="naver_client_id">ohyNBf06jqeBerlos8N1</string>
+    <string name="naver_client_secret">LE9Otwd4RT</string>
+    <string name="kakao_native_app_key">afe44e86a7ea2b5f6d5adc061e114f1a</string>
 </resources>
