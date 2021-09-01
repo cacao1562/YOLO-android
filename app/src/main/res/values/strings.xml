@@ -6,4 +6,6 @@
     <string name="bottom_menu_community">커뮤니티</string>
     <string name="bottom_menu_mypage">마이</string>
 
+    <string name="top_title_community_upload">내스팟 공유하기</string>
+
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TopNavBarView">
+        <attr name="visible_back" format="reference|boolean"/>
+        <attr name="title_text" format="reference|string" />
+    </declare-styleable>
+</resources>
