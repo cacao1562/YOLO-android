@@ -96,7 +96,6 @@
             android:layout_height="40dp"
             android:focusable="false"
             android:clickable="false"
-            android:hint="제주시 애월읍 애월로 111"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@id/tv_title_picture_location"
@@ -104,6 +103,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <Button
+            android:id="@+id/btn_picture_upload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="등록하기"

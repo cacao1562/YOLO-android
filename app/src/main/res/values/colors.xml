@@ -11,6 +11,7 @@
     <color name="main">#4D7BFF</color>
     <color name="gray">#BDBDBD</color>
     <color name="gray_line">#E2E2E2</color>
+    <color name="gray_light">#EFEFEF</color>
     <color name="font_black">#222222</color>
     <color name="dark_gray">#656565</color>
 </resources>
