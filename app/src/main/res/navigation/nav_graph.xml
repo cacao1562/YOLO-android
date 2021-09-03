@@ -42,6 +42,19 @@
         android:id="@+id/communityUploadFragment"
         android:name="com.yolo.yolo_android.ui.community_upload.CommunityUploadFragment"
         android:label="CommunityUploadFragment"
-        tools:layout="@layout/fragment_community_upload"/>
+        tools:layout="@layout/fragment_community_upload">
+        <action
+            android:id="@+id/action_communityUploadFragment_to_placeListFragment"
+            app:destination="@id/placeListFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/placeListFragment"
+        android:name="com.yolo.yolo_android.ui.place_list.PlaceListFragment"
+        android:label="PlaceListFragment"
+        tools:layout="@layout/fragment_place_list"/>
 
 </navigation>

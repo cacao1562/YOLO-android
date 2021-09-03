@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.yolo.yolo_android.ui.place_list.PlaceListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yolo.yolo_android.ui.custom.TopNavBarView
+            android:id="@+id/view_top_nav"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:title_text="위치태그"
+            app:visible_back="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchV_place"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:queryBackground="@drawable/bg_search"
+            app:queryHint="검색"
+            app:iconifiedByDefault="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/view_top_nav"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_place_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/searchV_place"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="@+id/rv_place_list"
+            app:layout_constraintStart_toStartOf="@+id/rv_place_list"
+            app:layout_constraintEnd_toEndOf="@+id/rv_place_list"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_place_list"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

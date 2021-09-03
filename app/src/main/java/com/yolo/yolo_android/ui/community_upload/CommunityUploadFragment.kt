@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.exifinterface.media.ExifInterface
+import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.*
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityUploadBinding
+import com.yolo.yolo_android.model.Document
+import com.yolo.yolo_android.ui.place_list.PlaceListFragment
 import gun0912.tedimagepicker.builder.TedImagePicker
 
 class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R.layout.fragment_community_upload) {
@@ -45,6 +49,16 @@ class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R
                 }
                 imageSelectedAdapter.setData(it)
             }
+        }
+        binding.etPictureLocation.setOnClickListener {
+            val action = CommunityUploadFragmentDirections.actionCommunityUploadFragmentToPlaceListFragment()
+            findNavController().navigate(action)
+        }
+
+        setFragmentResultListener(PlaceListFragment.REQ_SELECTED_PLACE) { requestKey, bundle ->
+            val result = bundle.getParcelable<Document>("data")
+            Log.d("aaa", "result=$result")
+            binding.etPictureLocation.hint = result?.place_name
         }
     }
 }
