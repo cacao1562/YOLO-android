@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="56dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_layout_nav_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-        android:padding="16dp"
-        android:scaleX="2"
-        android:scaleY="2"
+        android:src="@drawable/icn_40_back"
+        android:layout_marginStart="@dimen/default_margin_16"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -21,10 +20,11 @@
         android:id="@+id/tv_layout_nav_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="지역/날짜"
-        android:textSize="22dp"
+        tools:text="지역/날짜"
+        android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="@color/font_black"
+        android:textColor="@color/font_black_131313"
+        android:fontFamily="@font/notosanskr_bold_hestia"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

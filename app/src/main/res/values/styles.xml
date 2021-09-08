@@ -42,4 +42,11 @@
         <item name="itemIconPadding">16dp</item>
     </style>
 
+    <style name="communityUploadTitle">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/color_gray_707070</item>
+        <item name="fontFamily">@font/notosanskr_regular_hestia</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

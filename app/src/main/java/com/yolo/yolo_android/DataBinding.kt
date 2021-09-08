@@ -1,19 +1,28 @@
 package com.yolo.yolo_android
 
 import android.net.Uri
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.yolo.yolo_android.ui.community_upload.ImageSelectedAdapter
+import com.yolo.yolo_android.ui.community_upload.ImageSelectedDecoration
 
 object DataBinding {
 
     @JvmStatic
     @BindingAdapter("loadImageOrDefault")
-    fun loadImageOrDefault(imageView: ImageView, imgUrl: String?) {
-        if (!imgUrl.isNullOrEmpty())
+    fun <T: Any> loadImageOrDefault(imageView: ImageView, path: T?) {
+        if (path != null)
             Glide.with(imageView)
-                .load(imgUrl)
+                .load(path)
                 .apply(
                     RequestOptions()
                         .placeholder(android.R.drawable.ic_menu_gallery)
@@ -24,17 +33,38 @@ object DataBinding {
     }
 
     @JvmStatic
-    @BindingAdapter("loadUriOrDefault")
-    fun loadUriOrDefault(imageView: ImageView, imgUrl: Uri?) {
-        if (imgUrl != null)
-            Glide.with(imageView)
-                .load(imgUrl)
-                .apply(
-                    RequestOptions()
-                        .placeholder(android.R.drawable.ic_menu_gallery)
-                        .error(android.R.drawable.stat_notify_error))
-                .into(imageView)
-        else
-            imageView.setImageResource(android.R.drawable.ic_menu_gallery)
+    @BindingAdapter("setUriItems")
+    fun setUriItems(recyclerView: RecyclerView, items: List<Uri>) {
+        if (recyclerView.adapter == null) {
+            recyclerView.apply {
+                adapter = ImageSelectedAdapter()
+                setHasFixedSize(true)
+                addItemDecoration(ImageSelectedDecoration(12.dpToPx()))
+            }
+        }
+        (recyclerView.adapter as ImageSelectedAdapter).setData(items)
     }
+
+    @JvmStatic
+    @BindingAdapter("navigateTo")
+    fun navigateTo(view: View, action: NavDirections) {
+        view.setOnClickListener {
+            view.findNavController().navigate(action)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setPlaceData")
+    fun setPlaceData(textView: TextView, place: String?) {
+        if (place.isNullOrEmpty()) {
+            textView.setTextColor(AppCompatResources.getColorStateList(textView.context, R.color.color_gray_c0c0c0))
+            textView.typeface = ResourcesCompat.getFont(textView.context, R.font.notosanskr_regular_hestia)
+            textView.text = textView.context.getString(R.string.hint_picture_location)
+        }else {
+            textView.setTextColor(AppCompatResources.getColorStateList(textView.context, R.color.font_black_131313))
+            textView.typeface = ResourcesCompat.getFont(textView.context, R.font.notosanskr_medium_hestia)
+            textView.text = place
+        }
+    }
+
 }
