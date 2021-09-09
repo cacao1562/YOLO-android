@@ -25,7 +25,7 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
             tab.text = tabTitle[position]
         }.attach()
 
-        binding.fabCommunity.setOnClickListener {
+        binding.ivCreatePost.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToCommunityUploadFragment()
             findNavController().navigate(action)
         }

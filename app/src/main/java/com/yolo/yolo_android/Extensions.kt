@@ -1,6 +1,7 @@
 package com.yolo.yolo_android
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -8,6 +9,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,6 +17,12 @@ import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okio.BufferedSink
+import okio.source
 import java.io.File
 
 fun View.delayOnLifecycle(
@@ -120,4 +128,26 @@ fun Activity.hideSystemUI() {
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
     }
 
+}
+
+fun Uri.asMultipart(name: String, contentResolver: ContentResolver): MultipartBody.Part? {
+    return contentResolver.query(this, null, null, null, null)?.let {
+        if (it.moveToNext()) {
+            val displayName = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            val requestBody = object : RequestBody() {
+                override fun contentType(): MediaType? {
+                    return contentResolver.getType(this@asMultipart)?.toMediaType()
+                }
+
+                override fun writeTo(sink: BufferedSink) {
+                    sink.writeAll(contentResolver.openInputStream(this@asMultipart)?.source()!!)
+                }
+            }
+            it.close()
+            MultipartBody.Part.createFormData(name, displayName, requestBody)
+        } else {
+            it.close()
+            null
+        }
+    }
 }

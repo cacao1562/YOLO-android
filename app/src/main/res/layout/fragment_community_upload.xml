@@ -105,6 +105,7 @@
             android:id="@+id/et_picture_description"
             android:layout_width="0dp"
             android:layout_height="156dp"
+            android:text="@={viewModel.description}"
             android:maxLength="100"
             android:maxLines="10"
             android:ellipsize="end"
@@ -163,6 +164,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_upload_caution"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginBottom="36dp"
@@ -195,10 +197,20 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ImageView
+            android:id="@+id/iv_test"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/tv_title_picture_upload"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/view_upload_caution"/>
+
         <Button
             android:id="@+id/btn_picture_upload"
             android:layout_width="0dp"
             android:layout_height="48dp"
+            android:onClick="@{(v) -> viewModel.clickUploadPost(v.context)}"
             android:text="@string/picture_upload"
             android:textColor="@color/white"
             android:textStyle="normal"

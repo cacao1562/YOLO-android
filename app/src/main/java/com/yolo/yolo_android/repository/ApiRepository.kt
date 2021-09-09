@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.util.HashMap
 import javax.inject.Inject
 
 class ApiRepository @Inject constructor(
@@ -28,6 +31,26 @@ class ApiRepository @Inject constructor(
         val response = service.searchKeyword(authorization = BuildConfig.KAKAO_KEY, query = keyWord)
         response.suspendOnSuccess {
             val resData = data.documents
+            emit(resData)
+        }.onError {
+            onError("[Code: ${statusCode.code}]: ${message()}")
+        }.onException {
+            onError(message())
+        }
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
+
+
+    @WorkerThread
+    fun uploadPost(
+        images: List<MultipartBody.Part>,
+        params: HashMap<String, RequestBody>,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ) = flow {
+        val response = service.uploadPost(images = images, params = params)
+        response.suspendOnSuccess {
+            val resData = data.message
             emit(resData)
         }.onError {
             onError("[Code: ${statusCode.code}]: ${message()}")

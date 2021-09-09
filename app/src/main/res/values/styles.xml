@@ -32,6 +32,7 @@
     <style name="communityTabTextAppearence" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/notosanskr_bold_hestia</item>
     </style>
 
     <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
