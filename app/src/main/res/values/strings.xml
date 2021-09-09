@@ -20,4 +20,8 @@
     <string name="caution_upload">관련없는 사진은 관리자에 의해 삭제될 수 있습니다\n나만의 멋진 스팟 공유로 매너있는 커뮤니티를 만드세요!</string>
     <string name="picture_upload">등록하기</string>
 
+<!--    alert-->
+    <string name="alert">알림</string>
+    <string name="alert_msg_picture_limit">최대 3장까지 선택가능합니다.</string>
+
 </resources>

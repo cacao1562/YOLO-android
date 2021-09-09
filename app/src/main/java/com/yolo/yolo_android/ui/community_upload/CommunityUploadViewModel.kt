@@ -2,10 +2,13 @@ package com.yolo.yolo_android.ui.community_upload
 
 import android.content.Context
 import android.net.Uri
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.yolo.yolo_android.R
 import com.yolo.yolo_android.model.Document
+import com.yolo.yolo_android.ui.dialog.CommonDialog
 import gun0912.tedimagepicker.builder.TedImagePicker
 
 class CommunityUploadViewModel: ViewModel() {
@@ -20,7 +23,12 @@ class CommunityUploadViewModel: ViewModel() {
 
     fun clickPresentImagePicker(context: Context) {
         TedImagePicker.with(context).startMultiImage {
-            _uriData.value = it
+            if (it.size > 3) {
+                CommonDialog
+                    .newInstance(context.getString(R.string.alert), context.getString(R.string.alert_msg_picture_limit))
+                    .show((context as FragmentActivity).supportFragmentManager, CommonDialog::class.java.simpleName)
+            }
+            _uriData.value = it.take(3)
         }
     }
 
