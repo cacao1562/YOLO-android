@@ -4,14 +4,17 @@ import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.skydoves.whatif.whatIfNotNullOrEmpty
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedAdapter
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedDecoration
 
@@ -49,7 +52,7 @@ object DataBinding {
     @BindingAdapter("navigateTo")
     fun navigateTo(view: View, action: NavDirections) {
         view.setOnClickListener {
-            view.findNavController().navigate(action)
+            view.findNavController().safeNavigate(action)
         }
     }
 
@@ -64,6 +67,20 @@ object DataBinding {
             textView.setTextColor(AppCompatResources.getColorStateList(textView.context, R.color.font_black_131313))
             textView.typeface = ResourcesCompat.getFont(textView.context, R.font.notosanskr_medium_hestia)
             textView.text = place
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("isVisible")
+    fun setIsVisible(view: View, shouldBeGone: Boolean) {
+        view.isVisible = shouldBeGone
+    }
+
+    @JvmStatic
+    @BindingAdapter("toast")
+    fun bindToast(view: View, text: String?) {
+        text.whatIfNotNullOrEmpty {
+            Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
         }
     }
 

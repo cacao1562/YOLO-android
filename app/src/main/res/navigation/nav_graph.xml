@@ -56,5 +56,17 @@
         android:name="com.yolo.yolo_android.ui.place_list.PlaceListFragment"
         android:label="PlaceListFragment"
         tools:layout="@layout/fragment_place_list"/>
+    <dialog
+        android:id="@+id/commonDialog"
+        android:name="com.yolo.yolo_android.ui.dialog.CommonDialog"
+        android:label="CommonDialog"
+        tools:layout="@layout/dialog_common">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="msg"
+            app:argType="string" />
+    </dialog>
 
 </navigation>

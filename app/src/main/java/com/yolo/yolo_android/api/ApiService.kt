@@ -30,7 +30,7 @@ interface ApiService {
         @Query("query") query: String
     ): ApiResponse<KeyWordResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzEyNzc2NjgsImlhdCI6MTYzMTE5MTI2OH0.I7jKAOHmiw1GcIROK2-W2fZvgtB8yM4R8ThrFhHzIFkeoi-dQLNyrgqhVIeOy720W_EAl9gaidjUDODCl73XEA")
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzEzNjU3NzMsImlhdCI6MTYzMTI3OTM3M30.nP8pAzk1bTXxUPLD9EqG3_x-ztalOfn7iTxFcX4JIsmLp2nxve7YbaMVzGr_9RZ4PzZ55MGL2dC2ebAIavawsg")
     @Multipart
     @POST
     suspend fun uploadPost(
@@ -39,7 +39,7 @@ interface ApiService {
         @PartMap params: HashMap<String, RequestBody>
     ): ApiResponse<CommonResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzEyNzc2NjgsImlhdCI6MTYzMTE5MTI2OH0.I7jKAOHmiw1GcIROK2-W2fZvgtB8yM4R8ThrFhHzIFkeoi-dQLNyrgqhVIeOy720W_EAl9gaidjUDODCl73XEA")
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzEzNjU3NzMsImlhdCI6MTYzMTI3OTM3M30.nP8pAzk1bTXxUPLD9EqG3_x-ztalOfn7iTxFcX4JIsmLp2nxve7YbaMVzGr_9RZ4PzZ55MGL2dC2ebAIavawsg")
     @GET
     suspend fun getCommunityList(
         @Url url: String = "http://54.180.209.66:8080/community",

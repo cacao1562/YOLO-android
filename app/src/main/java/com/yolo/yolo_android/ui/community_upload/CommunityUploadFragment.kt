@@ -3,10 +3,12 @@ package com.yolo.yolo_android.ui.community_upload
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.R
@@ -15,6 +17,8 @@ import com.yolo.yolo_android.databinding.FragmentCommunityUploadBinding
 import com.yolo.yolo_android.model.Document
 import com.yolo.yolo_android.ui.place_list.PlaceListFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R.layout.fragment_community_upload) {
@@ -25,8 +29,12 @@ class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R
 
     private val viewModel: CommunityUploadViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root = super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = viewModel
 
         setFragmentResultListener(PlaceListFragment.REQ_SELECTED_PLACE) { requestKey, bundle ->
@@ -37,14 +45,13 @@ class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R
             }
         }
 
-        viewModel.uploadResponse.observe(viewLifecycleOwner, Observer {
-            Log.d("aaa", "uploadResponse=$it")
-            findNavController().popBackStack()
-        })
-
-        viewModel.mBitmap.observe(viewLifecycleOwner, Observer {
-            binding.ivTest.setImageBitmap(it)
-        })
+        lifecycleScope.launch {
+            viewModel.events.collect {
+                Log.d("aaa", "events=$it")
+                findNavController().popBackStack()
+            }
+        }
+        return root
     }
 }
 

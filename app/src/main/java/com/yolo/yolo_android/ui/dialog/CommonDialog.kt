@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.yolo.yolo_android.R
+import androidx.navigation.fragment.navArgs
 import com.yolo.yolo_android.databinding.DialogCommonBinding
 
 class CommonDialog: DialogFragment() {
@@ -24,6 +24,8 @@ class CommonDialog: DialogFragment() {
             return fragment
         }
     }
+
+    private val args: CommonDialogArgs by navArgs()
 
     private lateinit var binding: DialogCommonBinding
 
@@ -43,8 +45,8 @@ class CommonDialog: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvDialogTitle.text = arguments?.getString(KEY_TITLE)
-        binding.tvDialogMsg.text = arguments?.getString(KEY_MSG)
+        binding.tvDialogTitle.text = args.title
+        binding.tvDialogMsg.text = args.msg
     }
 
     override fun onStart() {

@@ -2,7 +2,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="default_margin_16">16dp</dimen>
     <dimen name="default_margin_24">24dp</dimen>
-
-    <dimen name="design_fab_size_normal" tools:override="true">64dp</dimen>
-    <dimen name="design_fab_image_size" tools:override="true">64dp</dimen>
 </resources>

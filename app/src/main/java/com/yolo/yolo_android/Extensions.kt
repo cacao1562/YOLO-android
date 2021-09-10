@@ -8,13 +8,19 @@ import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.view.*
+import androidx.annotation.IdRes
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.NavGraph
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
 import okhttp3.MediaType
@@ -150,4 +156,8 @@ fun Uri.asMultipart(name: String, contentResolver: ContentResolver): MultipartBo
             null
         }
     }
+}
+
+fun NavController.safeNavigate(direction: NavDirections) {
+    currentDestination?.getAction(direction.actionId)?.run { navigate(direction) }
 }
