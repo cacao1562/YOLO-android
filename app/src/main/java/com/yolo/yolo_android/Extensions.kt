@@ -1,5 +1,6 @@
 package com.yolo.yolo_android
 
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.coroutineScope
@@ -29,3 +30,4 @@ fun TabLayout.setMargin(left: Int, top: Int, right: Int, bottom: Int) {
 }
 
 fun Int.dpToPx(): Int = (this * YoLoApplication.context!!.resources.displayMetrics.density).toInt()
+fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
