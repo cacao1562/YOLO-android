@@ -25,6 +25,7 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
         TabLayoutMediator(binding.tlCommunityTab, binding.vp2Community) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+        binding.vp2Community.isUserInputEnabled = false
 
         binding.ivCreatePost.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToCommunityUploadFragment()

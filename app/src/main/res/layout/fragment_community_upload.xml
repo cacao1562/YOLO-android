@@ -54,8 +54,7 @@
                 android:id="@+id/iv_image_picker"
                 android:layout_width="85dp"
                 android:layout_height="84dp"
-                android:background="@drawable/bg_photo_select"
-                android:onClick="@{(v) -> viewModel.clickPresentImagePicker(v)}">
+                android:background="@drawable/bg_photo_select">
 
                 <ImageView
                     android:layout_width="wrap_content"

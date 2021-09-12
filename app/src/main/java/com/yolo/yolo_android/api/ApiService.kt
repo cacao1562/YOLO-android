@@ -30,7 +30,7 @@ interface ApiService {
         @Query("query") query: String
     ): ApiResponse<KeyWordResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzEzNjU3NzMsImlhdCI6MTYzMTI3OTM3M30.nP8pAzk1bTXxUPLD9EqG3_x-ztalOfn7iTxFcX4JIsmLp2nxve7YbaMVzGr_9RZ4PzZ55MGL2dC2ebAIavawsg")
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
     @Multipart
     @POST
     suspend fun uploadPost(
@@ -39,10 +39,29 @@ interface ApiService {
         @PartMap params: HashMap<String, RequestBody>
     ): ApiResponse<CommonResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzEzNjU3NzMsImlhdCI6MTYzMTI3OTM3M30.nP8pAzk1bTXxUPLD9EqG3_x-ztalOfn7iTxFcX4JIsmLp2nxve7YbaMVzGr_9RZ4PzZ55MGL2dC2ebAIavawsg")
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
     @GET
     suspend fun getCommunityList(
         @Url url: String = "http://54.180.209.66:8080/community",
         @Query("page") page: Int
-    ): ApiResponse<CommunityListResponse>
+    ): CommunityListResponse
+
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @DELETE
+    suspend fun deletePost(
+        @Url url: String
+    ): ApiResponse<CommonResponse>
+
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @POST
+    suspend fun likePost(
+        @Url url: String
+    ): ApiResponse<CommonResponse>
+
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @DELETE
+    suspend fun unLikePost(
+        @Url url: String
+    ): ApiResponse<CommonResponse>
+
 }

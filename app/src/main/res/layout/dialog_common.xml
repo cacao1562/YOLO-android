@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="type"
+            type="com.yolo.yolo_android.DialogButtonType" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -54,17 +60,70 @@
                 <Button
                     android:id="@+id/btn_dialog_confirm"
                     android:layout_width="0dp"
-                    android:layout_height="45.5dp"
-                    android:layout_marginTop="47.5dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="41dp"
                     android:background="@color/main"
                     android:fontFamily="@font/notosanskr_medium_hestia"
                     android:text="확인"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="14dp"
+                    app:isVisible="@{type == type.Cancel}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_dialog_msg" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="41dp"
+                    app:isVisible="@{type == type.CancelNConfirm}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_dialog_msg">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_gray_dfdfdf"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/btn_dialog_cancel"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:layout_weight="1"
+                            android:text="취소"
+                            android:textSize="16dp"
+                            android:textColor="@color/color_gray_909090"
+                            android:fontFamily="@font/notosanskr_medium_hestia"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:background="@color/white"/>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="52dp"
+                            android:background="@color/color_gray_dfdfdf"/>
+                        <TextView
+                            android:id="@+id/btn_dialog_confirm2"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:layout_weight="1"
+                            android:text="확인"
+                            android:textSize="16dp"
+                            android:textColor="@color/main"
+                            android:fontFamily="@font/notosanskr_medium_hestia"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:background="@color/white"/>
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

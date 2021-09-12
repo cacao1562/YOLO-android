@@ -10,18 +10,23 @@ import com.squareup.moshi.Moshi
 @Entity(tableName = "tb_post")
 data class PostEntity(
     @NonNull @PrimaryKey val postId: Int,
-    val author: Boolean,
-    val authorImage: String,
+    val nickname: String,
+    val authorImage: String?,
+    val content: String,
+    @TypeConverters(ListConverter::class) val imageUrl: List<String> = emptyList(),
+    val latitude: Double,
+    val longitude: Double,
+    val createAt: String,
     val cntOfComment: Int,
     val cntOfLike: Int,
-    val content: String,
-    val createAt: String,
-    @TypeConverters(ListConverter::class) val imageUrl: List<String> = emptyList(),
-    val latitude: Int,
-    val liked: Boolean,
-    val longitude: Int,
-    val nickname: String
-)
+    val author: Boolean,
+    val liked: Boolean
+) {
+
+    fun getDisplayLikeCount() = "좋아요 ${cntOfLike}개"
+    fun getDisplayCommentCount() = "댓글 ${cntOfComment}개"
+
+}
 
 class ListConverter {
     @TypeConverter

@@ -1,15 +1,16 @@
 package com.yolo.yolo_android.ui.community_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import com.yolo.yolo_android.DialogButtonType
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityListBinding
+import com.yolo.yolo_android.ui.dialog.CommonDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -32,10 +33,17 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
         initAdapter()
         initSwipeLayout()
         getPosts()
+        childFragmentManager.setFragmentResultListener(CommonDialog.REQ_RESULT_POST_ID, this) { requestKey, bundle ->
+            val postId = bundle.getInt("postId")
+            if (postId != -1) listViewModel.deletePost()
+        }
+        listViewModel.deletePostId.observe(viewLifecycleOwner, Observer {
+            if (it != -1) presentDialog(it)
+        })
     }
 
     private fun initAdapter() {
-        mAdapter = CommunityListPagingAdapter()
+        mAdapter = CommunityListPagingAdapter(listViewModel)
         binding.rvCommunityList.apply {
             adapter = mAdapter
             setHasFixedSize(true)
@@ -61,6 +69,15 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
                 mAdapter.submitData(it)
             }
         }
+    }
+
+    private fun presentDialog(id: Int) {
+        val dialog = CommonDialog
+            .newInstance(getString(R.string.alert),
+                getString(R.string.alert_msg_delete_post),
+                DialogButtonType.CancelNConfirm,
+                id)
+        dialog.show(childFragmentManager, CommonDialog::class.java.simpleName)
     }
 
 }

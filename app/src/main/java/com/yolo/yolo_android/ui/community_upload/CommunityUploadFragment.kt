@@ -15,8 +15,10 @@ import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityUploadBinding
 import com.yolo.yolo_android.model.Document
+import com.yolo.yolo_android.ui.dialog.CommonDialog
 import com.yolo.yolo_android.ui.place_list.PlaceListFragment
 import dagger.hilt.android.AndroidEntryPoint
+import gun0912.tedimagepicker.builder.TedImagePicker
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -37,6 +39,9 @@ class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R
         val root = super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = viewModel
 
+        binding.ivImagePicker.setOnClickListener {
+            presentImagePicker()
+        }
         setFragmentResultListener(PlaceListFragment.REQ_SELECTED_PLACE) { requestKey, bundle ->
             val result = bundle.getParcelable<Document>("data")
             Log.d("aaa", "Document=$result")
@@ -52,6 +57,16 @@ class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R
             }
         }
         return root
+    }
+
+    private fun presentImagePicker() {
+        TedImagePicker.with(requireContext()).startMultiImage {
+            if (it.size > 3) {
+                val dialog = CommonDialog.newInstance(getString(R.string.alert), getString(R.string.alert_msg_picture_limit))
+                dialog.show(childFragmentManager, CommonDialog::class.java.simpleName)
+            }
+            viewModel.setUri(it)
+        }
     }
 }
 

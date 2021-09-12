@@ -23,5 +23,6 @@
 <!--    alert-->
     <string name="alert">알림</string>
     <string name="alert_msg_picture_limit">최대 3장까지 선택가능합니다.</string>
+    <string name="alert_msg_delete_post">게시글을 삭제 하시겠습니까?</string>
 
 </resources>

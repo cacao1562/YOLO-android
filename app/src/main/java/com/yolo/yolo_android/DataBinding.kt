@@ -9,6 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.skydoves.whatif.whatIfNotNullOrEmpty
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedAdapter
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedDecoration
+import com.yolo.yolo_android.ui.dialog.CommonDialog
 
 object DataBinding {
 
@@ -74,6 +76,12 @@ object DataBinding {
     @BindingAdapter("isVisible")
     fun setIsVisible(view: View, shouldBeGone: Boolean) {
         view.isVisible = shouldBeGone
+    }
+
+    @JvmStatic
+    @BindingAdapter("isSelected")
+    fun setIsSelected(view: View, selected: Boolean) {
+        view.isSelected = selected
     }
 
     @JvmStatic

@@ -3,20 +3,15 @@ package com.yolo.yolo_android.ui.community_upload
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
-import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BaseViewModel
 import com.yolo.yolo_android.model.Document
 import com.yolo.yolo_android.repository.ApiRepository
 import com.yolo.yolo_android.utils.ImageUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
-import gun0912.tedimagepicker.builder.TedImagePicker
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -88,21 +83,9 @@ class CommunityUploadViewModel @Inject constructor(
         }
     }
 
-    /**
-     * - 이미지 선택 라이브러리 열기
-     * (최대 3장)
-     */
-    fun clickPresentImagePicker(view: View) {
 
-        TedImagePicker.with(view.context).startMultiImage {
-            if (it.size > 3) {
-                val bundle = bundleOf(
-                            "title" to view.context.getString(R.string.alert),
-                            "msg" to view.context.getString(R.string.alert_msg_picture_limit))
-                view.findNavController().navigate(R.id.commonDialog, bundle)
-            }
-            _uriData.value = it.take(3)
-        }
+    fun setUri(data: List<Uri>) {
+        _uriData.value = data.take(3)
     }
 
     fun setDocument(data: Document) {

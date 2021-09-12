@@ -2,8 +2,6 @@ package com.yolo.yolo_android.ui.community_list
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -15,13 +13,10 @@ import com.yolo.yolo_android.db.YoloDatabase
 import com.yolo.yolo_android.db.keys.RemoteKeys
 import com.yolo.yolo_android.db.post.PostEntity
 import com.yolo.yolo_android.model.CommunityListResponse
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 @OptIn(ExperimentalPagingApi::class)
 class CommunityPostMediator @Inject constructor(
@@ -32,6 +27,7 @@ class CommunityPostMediator @Inject constructor(
     private val remoteKeyDao = database.remoteKeyDao()
     private val postDao = database.postDao()
     
+    private var prevList = emptyList<PostEntity>()
 
     override suspend fun load(
         loadType: LoadType,
@@ -68,10 +64,10 @@ class CommunityPostMediator @Inject constructor(
             // since Retrofit's Coroutine CallAdapter dispatches on a
             // worker thread.
             val apiResponse = service.getCommunityList(page = loadKey)
+            val postList = apiResponse.result
+            val endOfPaginationReached = postList.isEmpty() || prevList == postList
 
-            val postList = getPosts(apiResponse).asLiveData(coroutineContext).value ?: emptyList()
-            val endOfPaginationReached = postList.isEmpty()
-
+            prevList = postList
             // Store loaded data, and next key in transaction, so that
             // they're always consistent.
             database.withTransaction {
@@ -99,13 +95,13 @@ class CommunityPostMediator @Inject constructor(
     }
 
     @WorkerThread
-    private fun getPosts(apiResponse: ApiResponse<CommunityListResponse>) = flow {
+    private fun getPosts(apiResponse: ApiResponse<CommunityListResponse>, onError: (String) -> Unit) = flow {
         apiResponse.suspendOnSuccess {
             emit(data.result)
         }.onError {
-//            emit(data.result)
+            onError("[Code: ${statusCode.code}]: ${message()}")
         }.onException {
-//            emit(null)
+            onError(message())
         }
     }
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, PostEntity>): RemoteKeys? {
