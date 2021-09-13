@@ -1,5 +1,6 @@
 package com.yolo.yolo_android
 
+
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
@@ -42,6 +43,9 @@ fun TabLayout.setMargin(left: Int, top: Int, right: Int, bottom: Int) {
 }
 
 fun Int.dpToPx(): Int = (this * YoLoApplication.context!!.resources.displayMetrics.density).toInt()
+
+fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
+
 
 
 fun uri2path(context: Context, contentUri: Uri): String? {
@@ -126,3 +130,4 @@ fun Activity.hideSystemUI() {
 }
 
 fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
+

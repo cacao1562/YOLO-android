@@ -113,6 +113,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+
     // image picker
     implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.4'
 
