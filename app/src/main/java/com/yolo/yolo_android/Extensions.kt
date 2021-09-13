@@ -129,5 +129,4 @@ fun Activity.hideSystemUI() {
 
 }
 
-fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
 
