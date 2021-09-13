@@ -11,6 +11,9 @@ import android.provider.MediaStore
 import android.view.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import android.util.TypedValue
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.google.android.material.tabs.TabLayout
@@ -121,3 +124,5 @@ fun Activity.hideSystemUI() {
     }
 
 }
+
+fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
