@@ -9,6 +9,52 @@
         android:id="@+id/mainFragment"
         android:name="com.yolo.yolo_android.ui.main.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_communityUploadFragment"
+            app:destination="@id/communityUploadFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.yolo.yolo_android.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/homeListFragment"
+        android:name="com.yolo.yolo_android.ui.home_list.HomeListFragment"
+        android:label="HomeListFragment"
+        tools:layout="@layout/fragment_home_list"/>
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.yolo.yolo_android.ui.community.CommunityFragment"
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_community"/>
+    <fragment
+        android:id="@+id/communityListFragment"
+        android:name="com.yolo.yolo_android.ui.community_list.CommunityListFragment"
+        android:label="CommunityListFragment"
+        tools:layout="@layout/fragment_community_list"/>
+    <fragment
+        android:id="@+id/communityUploadFragment"
+        android:name="com.yolo.yolo_android.ui.community_upload.CommunityUploadFragment"
+        android:label="CommunityUploadFragment"
+        tools:layout="@layout/fragment_community_upload">
+        <action
+            android:id="@+id/action_communityUploadFragment_to_placeListFragment"
+            app:destination="@id/placeListFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/placeListFragment"
+        android:name="com.yolo.yolo_android.ui.place_list.PlaceListFragment"
+        android:label="PlaceListFragment"
+        tools:layout="@layout/fragment_place_list"/>
 
 </navigation>

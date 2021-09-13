@@ -4,7 +4,11 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id "androidx.navigation.safeargs"
+    id 'kotlin-parcelize'
 }
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 30
@@ -17,6 +21,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "SERVICE_KEY", properties['servicekey']
+        buildConfigField "String", "KAKAO_KEY", properties['kakaokey']
+
     }
 
     buildTypes {
@@ -59,6 +67,7 @@ dependencies {
     implementation "com.github.skydoves:sandwich:1.2.0"  // response interface
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
@@ -69,6 +78,7 @@ dependencies {
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
 
     // architecture components
@@ -102,4 +112,33 @@ dependencies {
     def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+
+    // image picker
+    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.4'
+
+    // social login
+    def naver_sdk_version = "4.2.6"
+    def kakao_sdk_version = "2.4.1"
+    implementation("com.naver.nid:naveridlogin-android-sdk:$naver_sdk_version")
+    implementation("com.kakao.sdk:v2-user:$kakao_sdk_version") {
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+
+    // rx
+    def rxJava_version = "2.2.16"
+    def rxAndroid_version = "2.1.1"
+    def rxKotlin_version = "2.4.0"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
+
+    // Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences-rxjava2:1.0.0"
+
+    // etc
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 }

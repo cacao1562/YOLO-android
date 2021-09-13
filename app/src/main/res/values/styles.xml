@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.YOLOandroid" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/main</item>
+        <item name="colorPrimaryVariant">@color/main</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
+        <!-- Status bar color. -->
+<!--                <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MaterialTheme" parent="Theme.MaterialComponents.NoActionBar"/>
 
     <style name="homeTabTheme" parent="MaterialTheme">
         <item name="tabTextColor">@color/gray</item>
         <item name="tabSelectedTextColor">@color/main</item>
-        <item name="tabTextAppearance">@style/tabTextAppearence</item>
+        <item name="tabTextAppearance">@style/homelistTabTextAppearence</item>
         <item name="tabIndicatorHeight">0dp</item>
         <item name="tabBackground">@drawable/tab_selected</item>
     </style>
 
-    <style name="tabTextAppearence" parent="TextAppearance.Design.Tab">
+    <style name="homelistTabTextAppearence" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16dp</item>
-        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="communityTabTextAppearence" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconPadding">16dp</item>
     </style>
 
 </resources>
