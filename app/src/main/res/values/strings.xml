@@ -15,7 +15,7 @@
     <!-- 소셜 로그인 -->
     <string name="naver_client_id">ohyNBf06jqeBerlos8N1</string>
     <string name="naver_client_secret">LE9Otwd4RT</string>
-    <string name="kakao_native_app_key">afe44e86a7ea2b5f6d5adc061e114f1a</string>
+<!--    <string name="kakao_native_app_key">afe44e86a7ea2b5f6d5adc061e114f1a</string>-->
     <string name="login_tv_with_kakao">카카오톡으로 간편로그인</string>
     <string name="login_tv_with_other_kakao_id">다른 카카오계정으로 로그인</string>
 

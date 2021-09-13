@@ -46,8 +46,6 @@ fun Int.dpToPx(): Int = (this * YoLoApplication.context!!.resources.displayMetri
 
 fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
 
-
-
 fun uri2path(context: Context, contentUri: Uri): String? {
     val proj = arrayOf(MediaStore.Images.Media.DATA)
     val cursor: Cursor? = context.contentResolver.query(contentUri, proj, null, null, null)
@@ -128,6 +126,4 @@ fun Activity.hideSystemUI() {
     }
 
 }
-
-fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
 
