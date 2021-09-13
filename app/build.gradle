@@ -4,7 +4,11 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id "androidx.navigation.safeargs"
+    id 'kotlin-parcelize'
 }
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 30
@@ -17,6 +21,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "SERVICE_KEY", properties['servicekey']
+        buildConfigField "String", "KAKAO_KEY", properties['kakaokey']
+
     }
 
     buildTypes {
@@ -105,6 +113,10 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+
+    // image picker
+    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.4'
+
     // social login
     def naver_sdk_version = "4.2.6"
     def kakao_sdk_version = "2.4.1"
@@ -128,4 +140,5 @@ dependencies {
 
     // etc
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 }

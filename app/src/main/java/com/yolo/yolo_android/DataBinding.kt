@@ -1,5 +1,6 @@
 package com.yolo.yolo_android
 
+import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -19,6 +20,21 @@ object DataBinding {
                         .error(android.R.drawable.stat_notify_error))
                 .into(imageView)
         else
-            imageView.setImageResource(android.R.drawable.star_off)
+            imageView.setImageResource(android.R.drawable.ic_menu_gallery)
+    }
+
+    @JvmStatic
+    @BindingAdapter("loadUriOrDefault")
+    fun loadUriOrDefault(imageView: ImageView, imgUrl: Uri?) {
+        if (imgUrl != null)
+            Glide.with(imageView)
+                .load(imgUrl)
+                .apply(
+                    RequestOptions()
+                        .placeholder(android.R.drawable.ic_menu_gallery)
+                        .error(android.R.drawable.stat_notify_error))
+                .into(imageView)
+        else
+            imageView.setImageResource(android.R.drawable.ic_menu_gallery)
     }
 }

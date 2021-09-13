@@ -2,6 +2,7 @@ package com.yolo.yolo_android.ui.home_list
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.yolo.yolo_android.BuildConfig
 import com.yolo.yolo_android.api.ApiService
 import com.yolo.yolo_android.model.Item
 import javax.inject.Inject
@@ -17,7 +18,7 @@ class HomeListDataSource @Inject constructor(
             val currentLoadingPageKey = params.key ?: 1
 
             val response = service.fetchList(
-                "ServiveKey",
+                BuildConfig.SERVICE_KEY,
                 contentTypeId,
                 20,
                 currentLoadingPageKey

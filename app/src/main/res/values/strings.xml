@@ -2,9 +2,12 @@
     <string name="app_name">YOLO-android</string>
 
     <string name="bottom_menu_home">홈</string>
-    <string name="bottom_menu_sub">구독</string>
+    <string name="bottom_menu_magazine">욜로갈래</string>
     <string name="bottom_menu_community">커뮤니티</string>
     <string name="bottom_menu_mypage">마이</string>
+
+    <string name="top_title_community_upload">내스팟 공유하기</string>
+    <string name="home_main_title">즉흥여행\n지금 바로 떠나볼까요?</string>
 
     <!-- 페이지 타이틀 -->
     <string name="page_title_nick_name">닉네임 설정</string>
