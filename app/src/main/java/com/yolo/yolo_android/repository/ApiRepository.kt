@@ -71,7 +71,7 @@ class ApiRepository @Inject constructor(
         response.suspendOnSuccess {
             val resData = data.message
             Log.d("aaa", "emit=$resData")
-            database.postDao().deletePostById(postId)
+//            database.postDao().deletePostById(postId)
             emit(resData)
         }.onError {
             onError("[Code: ${statusCode.code}]: ${message()}")
