@@ -12,8 +12,11 @@ interface PostDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllRoom(roomEntity: List<PostEntity>)
 
-    @Query("SELECT * FROM tb_post")
-    fun getPosts(): PagingSource<Int, PostEntity>
+    @Query("SELECT * FROM tb_post ORDER BY postId DESC")
+    fun getPostsByLatest(): PagingSource<Int, PostEntity>
+
+    @Query("SELECT * FROM tb_post ORDER BY cntOfLike DESC, createAt DESC")
+    fun getPostsByLiked(): PagingSource<Int, PostEntity>
 
     @Query("UPDATE tb_post SET cntOfLike = :likeCount, liked = :isLike WHERE postId = :id")
     fun updateLikeCount(id: Int, likeCount: Int, isLike: Boolean)

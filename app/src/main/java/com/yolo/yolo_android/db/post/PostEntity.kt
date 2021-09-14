@@ -18,9 +18,9 @@ data class PostEntity(
     val longitude: Double,
     val createAt: String,
     val cntOfComment: Int,
-    val cntOfLike: Int,
-    val author: Boolean,
-    val liked: Boolean
+    var cntOfLike: Int,
+    val author: Boolean? = false,
+    var liked: Boolean? = false
 ) {
 
     fun getDisplayLikeCount() = "좋아요 ${cntOfLike}개"

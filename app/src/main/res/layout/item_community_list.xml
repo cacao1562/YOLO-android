@@ -68,7 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icn_24_more"
-            android:onClick="@{() -> viewModel.clickMore(data.postId)}"
             app:layout_constraintTop_toTopOf="@+id/iv_post_profile_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/iv_post_profile_img"/>
@@ -138,7 +137,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/selected_post_like"
-            android:onClick="@{(v) -> viewModel.clickLike(v, data.postId, data.cntOfLike)}"
             android:layout_marginEnd="@dimen/default_margin_16"
             android:layout_marginBottom="@dimen/default_margin_16"
             app:isSelected="@{data.liked}"
@@ -177,6 +175,7 @@
                 tools:text="제주시 애월읍"/>
 
             <TextView
+                android:id="@+id/tv_item_post_move_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"

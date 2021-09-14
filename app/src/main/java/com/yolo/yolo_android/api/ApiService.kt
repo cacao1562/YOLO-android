@@ -1,6 +1,7 @@
 package com.yolo.yolo_android.api
 
 import com.skydoves.sandwich.ApiResponse
+import com.yolo.yolo_android.baseToKen
 import com.yolo.yolo_android.model.CommonResponse
 import com.yolo.yolo_android.model.CommunityListResponse
 import com.yolo.yolo_android.model.KeyWordResponse
@@ -30,7 +31,7 @@ interface ApiService {
         @Query("query") query: String
     ): ApiResponse<KeyWordResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @Headers("Authorization: ${baseToKen}")
     @Multipart
     @POST
     suspend fun uploadPost(
@@ -39,26 +40,27 @@ interface ApiService {
         @PartMap params: HashMap<String, RequestBody>
     ): ApiResponse<CommonResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @Headers("Authorization: ${baseToKen}")
     @GET
     suspend fun getCommunityList(
         @Url url: String = "http://54.180.209.66:8080/community",
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("sort") sort: String = "createAt"
     ): CommunityListResponse
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @Headers("Authorization: ${baseToKen}")
     @DELETE
     suspend fun deletePost(
         @Url url: String
     ): ApiResponse<CommonResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @Headers("Authorization: ${baseToKen}")
     @POST
     suspend fun likePost(
         @Url url: String
     ): ApiResponse<CommonResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE0NTI2ODIsImlhdCI6MTYzMTM2NjI4Mn0.W8mwGj1XNyfPjgyrx4akYilhCUiiLJueJ8WxuzSvcGS0NQvOZbJFsXLYm_HCsZHJoztFqD8uIrUVD3KjCEX7MA")
+    @Headers("Authorization: ${baseToKen}")
     @DELETE
     suspend fun unLikePost(
         @Url url: String

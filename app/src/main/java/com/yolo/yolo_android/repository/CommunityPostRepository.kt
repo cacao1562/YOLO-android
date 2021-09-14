@@ -1,9 +1,11 @@
 package com.yolo.yolo_android.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.yolo.yolo_android.CommunitySort
 import com.yolo.yolo_android.api.ApiService
 import com.yolo.yolo_android.db.YoloDatabase
 import com.yolo.yolo_android.db.post.PostEntity
@@ -18,14 +20,18 @@ class CommunityPostRepository @Inject constructor(
     private val database: YoloDatabase
 ) {
 
-    fun getPosts(): Flow<PagingData<PostEntity>> {
+    fun getPosts(sorted: CommunitySort): Flow<PagingData<PostEntity>> {
 
-        val pagingSourceFactory = { database.postDao().getPosts() }
+        Log.d("bbb", "sorted=$sorted")
+        val pagingSourceFactory = when(sorted) {
+            CommunitySort.ByLatest -> { {database.postDao().getPostsByLatest()} }
+            CommunitySort.ByLiked -> { {database.postDao().getPostsByLiked()} }
+        }
 
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-            remoteMediator = CommunityPostMediator(service, database),
+            remoteMediator = CommunityPostMediator(service, database, sorted.sorted),
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }

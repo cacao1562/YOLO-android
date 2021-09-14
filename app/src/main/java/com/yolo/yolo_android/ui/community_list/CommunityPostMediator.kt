@@ -21,7 +21,8 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class CommunityPostMediator @Inject constructor(
     private val service: ApiService,
-    private val database: YoloDatabase
+    private val database: YoloDatabase,
+    private val sorted: String
 ): RemoteMediator<Int, PostEntity>() {
 
     private val remoteKeyDao = database.remoteKeyDao()
@@ -63,7 +64,9 @@ class CommunityPostMediator @Inject constructor(
             // be wrapped in a withContext(Dispatcher.IO) { ... } block
             // since Retrofit's Coroutine CallAdapter dispatches on a
             // worker thread.
-            val apiResponse = service.getCommunityList(page = loadKey)
+
+            Log.d("bbb", "mediator sorted = $sorted")
+            val apiResponse = service.getCommunityList(page = loadKey, sort = sorted)
             val postList = apiResponse.result
             val endOfPaginationReached = postList.isEmpty() || prevList == postList
 

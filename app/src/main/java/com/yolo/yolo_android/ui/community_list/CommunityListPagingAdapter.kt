@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yolo.yolo_android.databinding.ItemCommunityListBinding
 import com.yolo.yolo_android.db.post.PostEntity
+import com.yolo.yolo_android.model.CallbackPostButton
 
 class CommunityListPagingAdapter(
-    private val viewModel: CommunityListViewModel
+    private val viweModel: CommunityListViewModel
 ): PagingDataAdapter<PostEntity, CommunityViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityViewHolder {
-        return CommunityViewHolder.from(parent, viewModel)
+        return CommunityViewHolder.from(parent, viweModel)
     }
 
     override fun onBindViewHolder(holder: CommunityViewHolder, position: Int) {
@@ -38,7 +39,7 @@ class CommunityListPagingAdapter(
 
 class CommunityViewHolder(
     private val binding: ItemCommunityListBinding,
-    private val viewModel: CommunityListViewModel
+    private val viweModel: CommunityListViewModel
 ): RecyclerView.ViewHolder(binding.root) {
 
     init {
@@ -46,7 +47,7 @@ class CommunityViewHolder(
         TabLayoutMediator(binding.tlItemPost, binding.vp2ItemPostImages) { tab, position ->
             binding.vp2ItemPostImages.currentItem = tab.position
         }.attach()
-        binding.viewModel = viewModel
+        binding.viewModel = viweModel
     }
 
     fun bind(data: PostEntity) {
@@ -54,6 +55,16 @@ class CommunityViewHolder(
         val adapter = binding.vp2ItemPostImages.adapter
         if (adapter != null) {
             (adapter as CommunityPostImageAdapter).setItems(data.imageUrl)
+        }
+        binding.llItemLocation.isVisible = data.latitude > 0 && data.longitude > 0
+        binding.ivItemPostMore.setOnClickListener {
+            viweModel.setViewEvent(CallbackPostButton.More(data.postId))
+        }
+        binding.ivItemPostLike.setOnClickListener {
+            viweModel.onViewEvent(CallbackPostButton.Like(it, data.postId, data.cntOfLike, data.liked ?: false))
+        }
+        binding.tvItemPostMoveMap.setOnClickListener {
+            viweModel.setViewEvent(CallbackPostButton.Map(data.latitude, data.longitude))
         }
 
         binding.tvItemPostContent.post {
@@ -71,10 +82,10 @@ class CommunityViewHolder(
     }
 
     companion object {
-        fun from(parent: ViewGroup, viewModel: CommunityListViewModel): CommunityViewHolder {
+        fun from(parent: ViewGroup, viweModel: CommunityListViewModel): CommunityViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ItemCommunityListBinding.inflate(layoutInflater, parent, false)
-            return CommunityViewHolder(binding, viewModel)
+            return CommunityViewHolder(binding, viweModel)
         }
     }
 }

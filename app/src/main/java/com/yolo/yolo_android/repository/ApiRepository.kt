@@ -85,7 +85,6 @@ class ApiRepository @Inject constructor(
     fun likePost(
         postId: Int,
         isLike: Boolean,
-        likeCnt: Int,
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (String?) -> Unit
@@ -96,9 +95,6 @@ class ApiRepository @Inject constructor(
         response.suspendOnSuccess {
             val resData = data.message
             Log.d("aaa", "emit=$resData")
-            var likeCount = likeCnt
-            if (isLike) likeCount-=1 else likeCount+=1
-            database.postDao().updateLikeCount(postId, likeCount, !isLike)
             emit(resData)
         }.onError {
             onError("[Code: ${statusCode.code}]: ${message()}")
