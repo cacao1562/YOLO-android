@@ -7,7 +7,7 @@
     <string name="bottom_menu_mypage">마이</string>
 
     <string name="top_title_community_upload">내스팟 공유하기</string>
-    <string name="home_main_title">즉흥여행\n지금 바로 떠나볼까요?</string>
+    <string name="top_title_choose_schedule">일정선택</string>
 
     <!-- 페이지 타이틀 -->
     <string name="page_title_nick_name">닉네임 설정</string>
@@ -15,7 +15,6 @@
     <!-- 소셜 로그인 -->
     <string name="naver_client_id">ohyNBf06jqeBerlos8N1</string>
     <string name="naver_client_secret">LE9Otwd4RT</string>
-<!--    <string name="kakao_native_app_key">afe44e86a7ea2b5f6d5adc061e114f1a</string>-->
     <string name="login_tv_with_kakao">카카오톡으로 간편로그인</string>
     <string name="login_tv_with_other_kakao_id">다른 카카오계정으로 로그인</string>
 
@@ -24,11 +23,16 @@
     <string name="signup_hint">ex.하리보</string>
     <string name="signup_guide">영문/한글/밑줄 포함 최대 10글자까지 입력이 가능합니다.</string>
 
+    <!-- Home -->
+    <string name="home_main_title">즉흥여행\n지금 바로 떠나볼까요?</string>
+    <string name="home_btn_select_date">즉흥일자 선택하기</string>
+
     <!-- Message -->
     <string name="message_network_unstable">네트워크가 불안정합니다. 잠시후에 다시 이용해 주세요.</string>
     <string name="message_request_failed_please_try_again">서버 통신에 실패하였습니다. 잠시 후 재시도해주세요.</string>
 
     <!-- common -->
     <string name="common_complete">완료</string>
+    <string name="common_apply">적용하기</string>
 
 </resources>
