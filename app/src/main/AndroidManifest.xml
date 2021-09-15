@@ -19,7 +19,7 @@
             android:name=".ui.signup.SignupActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -34,7 +34,7 @@
             android:windowSoftInputMode="adjustPan"
             android:name=".ui.login.LoginActivity"
             android:exported="true" />
-        <activity android:name=".ui.main.MainActivity" />
+<!--        <activity android:name=".ui.main.MainActivity" />-->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

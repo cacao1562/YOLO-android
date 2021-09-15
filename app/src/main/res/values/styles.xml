@@ -25,4 +25,8 @@
         <item name="itemIconPadding">16dp</item>
     </style>
 
+    <style name="CustomCalendarDateAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">@color/selector_calendar_date</item>
+    </style>
+
 </resources>

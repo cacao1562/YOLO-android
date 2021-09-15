@@ -24,6 +24,7 @@ class CalendarFragment : BindingFragment<FragmentCalendarBinding>(R.layout.fragm
     private fun initCalendar() {
         binding.calendarView.apply {
             addDecorators(
+                SelectedDecorator(requireContext()),
                 SaturdayDecorator(),
                 SundayDecorator(),
                 NonSelectableDecorator(
@@ -38,17 +39,13 @@ class CalendarFragment : BindingFragment<FragmentCalendarBinding>(R.layout.fragm
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit()
 
-//            setOnDateChangedListener(onDateSelectedListener)
+            setOnDateChangedListener(onDateSelectedListener)
 
         }
     }
 
-//    private val onDateSelectedListener =
-//        OnDateSelectedListener { _, calendarDay, _ ->
-//            binding.calendarView.addDecorator(
-//                SelectedDecorator(requireContext(), calendarDay)
-//            )
-//        }
+    private val onDateSelectedListener =
+        OnDateSelectedListener { _, calendarDay, _ -> }
 
     companion object {
         fun newInstance(): CalendarFragment {
@@ -61,4 +58,4 @@ class CalendarFragment : BindingFragment<FragmentCalendarBinding>(R.layout.fragm
 }
 
 fun minLocalDate(): LocalDate = LocalDate.now()
-fun maxLocalDate(): LocalDate = LocalDate.now().plusDays(60)
+fun maxLocalDate(): LocalDate = LocalDate.now().plusDays(30)

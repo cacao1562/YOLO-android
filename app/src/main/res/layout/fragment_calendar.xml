@@ -72,6 +72,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:mcv_dateTextAppearance="@style/CustomCalendarDateAppearance"
+                app:mcv_leftArrow="@drawable/ic_calendar_left_arrow"
+                app:mcv_rightArrow="@drawable/ic_calendar_right_arrow"
+                app:mcv_selectionColor="#000000"
                 app:mcv_selectionMode="single"
                 app:mcv_showOtherDates="all" />
 
