@@ -1,7 +1,7 @@
 package com.yolo.yolo_android
 
 const val BASE_URL = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
-const val baseToKen = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE2MzMwNDYsImlhdCI6MTYzMTU0NjY0Nn0.OMV8aAMVliCwKn86SCKVQaVkMTW6HK_xS4Ows05qvgaJGmT97GtSBrQoGjyOt7P-OTgjZz9HD9r2N_mv5DHBSw"
+const val baseToKen = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTkiLCJleHAiOjE2MzE3NzExNzYsImlhdCI6MTYzMTY4NDc3Nn0.Aquq0RypFB_W6SRW9s1pCkf0JGPixrtgyaDaQoOJbkWZcU4s0RWlB0BTSZDqoC5uZsHjjWXUZ1HpVE-E63MS8w"
 
 enum class DialogButtonType {
     Cancel,

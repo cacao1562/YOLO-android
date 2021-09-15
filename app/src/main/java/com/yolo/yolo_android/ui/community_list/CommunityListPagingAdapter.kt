@@ -66,6 +66,7 @@ class CommunityViewHolder(
         binding.tvItemPostMoveMap.setOnClickListener {
             viweModel.setViewEvent(CallbackPostButton.Map(data.latitude, data.longitude))
         }
+        binding.tvItemPostContentMore.isVisible = false
 
         binding.tvItemPostContent.post {
             val lineCount = binding.tvItemPostContent.layout.lineCount

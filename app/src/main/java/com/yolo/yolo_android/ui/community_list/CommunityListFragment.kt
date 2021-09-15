@@ -3,8 +3,10 @@ package com.yolo.yolo_android.ui.community_list
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +19,9 @@ import com.yolo.yolo_android.databinding.FragmentCommunityListBinding
 import com.yolo.yolo_android.model.CallbackPostButton
 import com.yolo.yolo_android.ui.dialog.CommonDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -58,12 +62,15 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
             mAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
 
-        viewModel.callbackPostBtn.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                is CallbackPostButton.More -> presentDialog(it.postId)
-                is CallbackPostButton.Map -> presentMap(it)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.callbackPostBtn.collect {
+                when(it) {
+                    is CallbackPostButton.More -> presentDialog(it.postId)
+                    is CallbackPostButton.Map -> presentMap(it)
+                }
             }
-        })
+        }
 
     }
 
@@ -80,10 +87,26 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
             mAdapter.refresh()
         }
 
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launch {
             mAdapter.loadStateFlow.collectLatest { loadStates ->
-                binding.swipeVCommunityList.isRefreshing = loadStates.mediator?.refresh is LoadState.Loading
+                Log.d("error addLoadStateListener", "${loadStates}")
+
+                binding.swipeVCommunityList.isRefreshing = loadStates.source.refresh is LoadState.Loading
+                binding.llCommunityError.isVisible = loadStates.source.refresh is LoadState.Error
+
+                val errorState = loadStates.source.refresh as? LoadState.Error
+                    ?: loadStates.refresh as? LoadState.Error
+                    ?: loadStates.append as? LoadState.Error
+                    ?: loadStates.prepend as? LoadState.Error
+                errorState?.let {
+                    viewModel._toastMessage.value = it.error.message
+                }
+
             }
+        }
+
+        binding.btnCommunityRetry.setOnClickListener {
+            mAdapter.retry()
         }
     }
 

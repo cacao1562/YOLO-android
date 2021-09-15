@@ -44,11 +44,13 @@ class CommunityListViewModel @AssistedInject constructor(
 
     val listData: LiveData<PagingData<PostEntity>> = _listData
 
-    private val _callbackPostBtn = MutableLiveData<CallbackPostButton>()
-    val callbackPostBtn: LiveData<CallbackPostButton> = _callbackPostBtn
+    private val _callbackPostBtn = MutableSharedFlow<CallbackPostButton>()
+    val callbackPostBtn = _callbackPostBtn.asSharedFlow()
 
     fun setViewEvent(callback: CallbackPostButton) {
-        _callbackPostBtn.value = callback
+        viewModelScope.launch {
+            _callbackPostBtn.emit(callback)
+        }
     }
 
     fun onViewEvent(callback: CallbackPostButton) {
@@ -67,7 +69,7 @@ class CommunityListViewModel @AssistedInject constructor(
                 }
             }
             is CallbackPostButton.Like -> {
-                likePost(callback.view, callback.postId, callback.likeCount) { msg ->
+                likePost(callback.view, callback.postId) { msg ->
                     if (msg != null) {
                         if (msg.contains("성공")) {
                             pagingData
@@ -106,7 +108,7 @@ class CommunityListViewModel @AssistedInject constructor(
         }
     }
 
-    private fun likePost(view: View, postId: Int, likeCount: Int, block: (String?) -> Unit) {
+    private fun likePost(view: View, postId: Int, block: (String?) -> Unit) {
         viewModelScope.launch {
             apiRepository.likePost(
                 postId = postId,
