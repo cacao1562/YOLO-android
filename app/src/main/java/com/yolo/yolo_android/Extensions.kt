@@ -126,4 +126,3 @@ fun Activity.hideSystemUI() {
     }
 
 }
-
