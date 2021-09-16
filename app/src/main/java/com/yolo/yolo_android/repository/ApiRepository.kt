@@ -25,7 +25,7 @@ class ApiRepository @Inject constructor(
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ) = flow {
-        val response = service.searchKeyword(authorization = BuildConfig.KAKAO_KEY, query = keyWord)
+        val response = service.searchKeyword(authorization = BuildConfig.KAKAO_REST_KEY, query = keyWord)
         response.suspendOnSuccess {
             val resData = data.documents
             emit(resData)

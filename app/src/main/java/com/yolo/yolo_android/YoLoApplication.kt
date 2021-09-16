@@ -19,11 +19,11 @@ class YoLoApplication: Application() {
 
         dataStore = DataStoreModule(this)
 
-        val naverClientId = getString(R.string.naver_client_id)
-        val naverClientSecret = getString(R.string.naver_client_secret)
+        val naverClientId = BuildConfig.NAVER_CLIENT_ID
+        val naverClientSecret = BuildConfig.NAVER_CLIENT_SECRET
         val naverClientName = getString(R.string.app_name)  // Naver App 을 통한 로그인시 노출되는 이름
         naverOAuthLoginInstance.init(this, naverClientId, naverClientSecret, naverClientName)
-        KakaoSdk.init(this, BuildConfig.KAKAO_KEY)
+        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_KEY)
     }
 
     companion object {

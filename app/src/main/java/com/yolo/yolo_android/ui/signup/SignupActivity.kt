@@ -22,7 +22,10 @@ class SignupActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
         binding.vm = signupViewModel
 
         signupViewModel.navigateToMain.observe(this, EventObserver {
-            Intent(this, MainActivity::class.java).also { startActivity(it) }
+            Intent(this, MainActivity::class.java).also {
+                startActivity(it)
+                finish()
+            }
         })
     }
 }

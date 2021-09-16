@@ -1,4 +1,4 @@
-package com.yolo.yolo_android.ui
+package com.yolo.yolo_android.ui.splash
 
 import android.content.Intent
 import android.os.Bundle

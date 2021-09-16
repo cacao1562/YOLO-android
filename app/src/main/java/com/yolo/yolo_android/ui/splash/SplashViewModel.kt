@@ -1,4 +1,4 @@
-package com.yolo.yolo_android.ui
+package com.yolo.yolo_android.ui.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

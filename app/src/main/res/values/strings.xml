@@ -13,8 +13,6 @@
     <string name="page_title_nick_name">닉네임 설정</string>
 
     <!-- 소셜 로그인 -->
-    <string name="naver_client_id">ohyNBf06jqeBerlos8N1</string>
-    <string name="naver_client_secret">LE9Otwd4RT</string>
     <string name="login_tv_with_kakao">카카오톡으로 간편로그인</string>
     <string name="login_tv_with_other_kakao_id">다른 카카오계정으로 로그인</string>
 

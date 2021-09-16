@@ -64,7 +64,10 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             })
 
             navigateToMain.observe(this@LoginActivity, {
-                Intent(this@LoginActivity, MainActivity::class.java).also { startActivity(it) }
+                Intent(this@LoginActivity, MainActivity::class.java).also {
+                    startActivity(it)
+                    finish()
+                }
             })
 
             showKakaoLoginType.observe(this@LoginActivity, EventObserver {
