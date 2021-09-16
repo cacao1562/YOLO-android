@@ -108,7 +108,11 @@ class LoginViewModel @Inject constructor(
                         hideProgress()
                         MyLogger.e("message : ${result.data.message}")
                         viewModelScope.launch(Dispatchers.IO) {
-                            YoLoApplication.context?.getDataStore()?.set(DataStoreModule.USER_TOKEN, result.data.token)
+                            YoLoApplication.context?.getDataStore()?.setLoginInfo(
+                                token = result.data.token,
+                                loginType = loginType,
+                                userId = id
+                            )
                         }
                         _navigateToMain.value = Event(true)
                     }
