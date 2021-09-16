@@ -6,14 +6,16 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.yolo.yolo_android.YoLoApplication
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import org.jetbrains.annotations.NotNull
 
-
 class DataStoreModule(val context: Context) {
     companion object {
-        val USER_TOKEN = stringPreferencesKey("user_token")
+        val KEY_USER_TOKEN = stringPreferencesKey("user_token")
+        val KEY_LOGIN_TYPE = stringPreferencesKey("login_type")
+        val KEY_USER_ID = stringPreferencesKey("user_id")
     }
 
     suspend fun <T> set(key: Preferences.Key<T>, @NotNull value: T) = when (value) {
@@ -27,6 +29,12 @@ class DataStoreModule(val context: Context) {
 
     suspend fun <T> get(key: Preferences.Key<T>): T? {
         return context.dataStore.data.map { it[key] }.firstOrNull()
+    }
+
+    suspend fun setLoginInfo(token: String, loginType: String, userId: String) {
+        set(KEY_USER_TOKEN, token)
+        set(KEY_LOGIN_TYPE, loginType)
+        set(KEY_USER_ID, userId)
     }
 }
 

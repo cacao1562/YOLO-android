@@ -30,6 +30,7 @@
     <!-- Message -->
     <string name="message_network_unstable">네트워크가 불안정합니다. 잠시후에 다시 이용해 주세요.</string>
     <string name="message_request_failed_please_try_again">서버 통신에 실패하였습니다. 잠시 후 재시도해주세요.</string>
+    <string name="message_please_press_again_if_you_want_finish">앱을 종료 하려면 한번 더 눌러주세요.</string>
 
     <!-- common -->
     <string name="common_complete">완료</string>

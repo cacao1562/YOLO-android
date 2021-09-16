@@ -2,15 +2,13 @@ package com.yolo.yolo_android.ui.signup
 
 import androidx.lifecycle.*
 import com.yolo.yolo_android.YoLoApplication
-import com.yolo.yolo_android.api.YoloApiService
 import com.yolo.yolo_android.base.DisposableViewModel
 import com.yolo.yolo_android.common.Event
 import com.yolo.yolo_android.common.constants.LOGIN_TYPE
 import com.yolo.yolo_android.common.constants.NICKNAME
 import com.yolo.yolo_android.common.constants.SOCIAL_ID
 import com.yolo.yolo_android.data.ResultData
-import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.USER_TOKEN
-import com.yolo.yolo_android.data.error.ErrorEntity
+import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.KEY_USER_TOKEN
 import com.yolo.yolo_android.repository.YoloRepository
 import com.yolo.yolo_android.util.MyLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -84,14 +82,17 @@ class SignupViewModel @Inject constructor(
                         hideProgress()
                         MyLogger.e("message : ${result.data.message}")
                         viewModelScope.launch(Dispatchers.IO) {
-                            YoLoApplication.context?.getDataStore()?.set(USER_TOKEN, result.data.token)
+                            YoLoApplication.context?.getDataStore()?.setLoginInfo(
+                                token = result.data.token,
+                                loginType = loginType,
+                                userId = socialID
+                            )
                         }
                         _navigateToMain.value = Event(true)
                     }
 
                     is ResultData.Error -> {
                         hideProgress()
-
                     }
                 }
             }.addTo(compositeDisposable)
