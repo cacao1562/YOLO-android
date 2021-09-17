@@ -3,6 +3,7 @@ package com.yolo.yolo_android.ui.place_list
 import androidx.annotation.MainThread
 import androidx.lifecycle.*
 import com.skydoves.whatif.whatIf
+import com.yolo.yolo_android.base.BaseViewModel
 import com.yolo.yolo_android.repository.ApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,13 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PlaceListViewModel @Inject constructor(
     private val apiRepository: ApiRepository
-): ViewModel() {
-
-    private val _toastMessage: MutableLiveData<String> = MutableLiveData()
-    val toastMessage: LiveData<String> get() = _toastMessage
-
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean> = _isLoading
+): BaseViewModel() {
 
     private val placeFetchingKeyWord: MutableStateFlow<String> = MutableStateFlow("")
     val placeListFlow = placeFetchingKeyWord

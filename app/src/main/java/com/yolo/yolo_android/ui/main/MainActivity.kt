@@ -41,6 +41,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     override fun onBackPressed() {
-        backPressedSubject.onNext(System.currentTimeMillis())
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.let {
+            if (it.childFragmentManager.backStackEntryCount == 0) {
+                backPressedSubject.onNext(System.currentTimeMillis())
+            }else {
+                super.onBackPressed()
+            }
+        }
     }
 }

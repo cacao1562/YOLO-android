@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">YOLO-android</string>
 
+<!--    main bottom navigation-->
     <string name="bottom_menu_home">홈</string>
     <string name="bottom_menu_magazine">욜로갈래</string>
     <string name="bottom_menu_community">커뮤니티</string>
     <string name="bottom_menu_mypage">마이</string>
 
+<!--    community upload-->
     <string name="top_title_community_upload">내스팟 공유하기</string>
     <string name="top_title_choose_schedule">일정선택</string>
 
@@ -33,5 +35,18 @@
     <!-- common -->
     <string name="common_complete">완료</string>
     <string name="common_apply">적용하기</string>
+
+    <string name="title_picture_upload">사진등록</string>
+    <string name="picture_upload_limit">최대 3개</string>
+    <string name="title_picture_description">내용입력</string>
+    <string name="title_picture_location">위치태그</string>
+    <string name="hint_picture_location">위치 검색을 클릭하세요</string>
+    <string name="caution_upload">관련없는 사진은 관리자에 의해 삭제될 수 있습니다\n나만의 멋진 스팟 공유로 매너있는 커뮤니티를 만드세요!</string>
+    <string name="picture_upload">등록하기</string>
+
+<!--    alert-->
+    <string name="alert">알림</string>
+    <string name="alert_msg_picture_limit">최대 3장까지 선택가능합니다.</string>
+    <string name="alert_msg_delete_post">게시글을 삭제 하시겠습니까?</string>
 
 </resources>

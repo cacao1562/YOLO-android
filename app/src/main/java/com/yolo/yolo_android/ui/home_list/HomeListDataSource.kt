@@ -4,12 +4,13 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.yolo.yolo_android.BuildConfig
 import com.yolo.yolo_android.api.ApiService
+import com.yolo.yolo_android.api.TourService
 import com.yolo.yolo_android.model.Item
 import javax.inject.Inject
 
 
 class HomeListDataSource @Inject constructor(
-    private val service: ApiService,
+    private val service: TourService,
     private val contentTypeId: Int?
 ): PagingSource<Int, Item>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {

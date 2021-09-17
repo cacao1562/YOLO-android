@@ -39,10 +39,11 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_community_tab"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             app:tabTextColor="@color/gray"
             app:tabSelectedTextColor="@color/main"
             app:tabBackground="@color/white"
+            app:tabIndicatorHeight="0dp"
             app:tabTextAppearance="@style/communityTabTextAppearence"
             app:layout_constraintTop_toBottomOf="@+id/view_top_nav"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,17 +58,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_community"
+        <ImageView
+            android:id="@+id/iv_create_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            android:backgroundTint="@color/white"
-            app:rippleColor="@color/main"
-            app:backgroundTint="@color/main"
-            app:borderWidth="1dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="25dp"
+            android:src="@drawable/icn_64_creat_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 

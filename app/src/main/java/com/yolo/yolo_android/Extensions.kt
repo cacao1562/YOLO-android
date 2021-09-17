@@ -2,6 +2,7 @@ package com.yolo.yolo_android
 
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -9,16 +10,25 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.provider.OpenableColumns
+import android.util.Log
+import android.util.TypedValue
 import android.view.*
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import android.util.TypedValue
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okio.BufferedSink
+import okio.source
 import java.io.File
 
 fun View.delayOnLifecycle(
@@ -46,14 +56,15 @@ fun Int.dpToPx(): Int = (this * YoLoApplication.context!!.resources.displayMetri
 
 fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
 
-fun uri2path(context: Context, contentUri: Uri): String? {
-    val proj = arrayOf(MediaStore.Images.Media.DATA)
+fun uri2path(context: Context, contentUri: Uri): Pair<String?, Long?> {
+    val proj = arrayOf(MediaStore.Images.Media.DATA, MediaStore.Images.Media.SIZE)
     val cursor: Cursor? = context.contentResolver.query(contentUri, proj, null, null, null)
     cursor?.moveToNext()
     val path = cursor?.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA))
+    val size = cursor?.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE))
     val uri = Uri.fromFile(File(path))
     cursor?.close()
-    return path
+    return Pair(path, size)
 }
 
 
@@ -125,4 +136,30 @@ fun Activity.hideSystemUI() {
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
     }
 
+}
+
+fun Uri.asMultipart(name: String, contentResolver: ContentResolver): MultipartBody.Part? {
+    return contentResolver.query(this, null, null, null, null)?.let {
+        if (it.moveToNext()) {
+            val displayName = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            val requestBody = object : RequestBody() {
+                override fun contentType(): MediaType? {
+                    return contentResolver.getType(this@asMultipart)?.toMediaType()
+                }
+
+                override fun writeTo(sink: BufferedSink) {
+                    sink.writeAll(contentResolver.openInputStream(this@asMultipart)?.source()!!)
+                }
+            }
+            it.close()
+            MultipartBody.Part.createFormData(name, displayName, requestBody)
+        } else {
+            it.close()
+            null
+        }
+    }
+}
+
+fun NavController.safeNavigate(direction: NavDirections) {
+    currentDestination?.getAction(direction.actionId)?.run { navigate(direction) }
 }

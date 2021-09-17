@@ -8,12 +8,27 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_dot">#99FFFFFF</color>
 
-    <color name="main">#4D7BFF</color>
+    <color name="main">#5786ff</color>
     <color name="gray">#BDBDBD</color>
     <color name="gray_line">#E2E2E2</color>
     <color name="gray_light">#EFEFEF</color>
     <color name="font_black">#222222</color>
+    <color name="font_black_131313">#131313</color>
     <color name="dark_gray">#656565</color>
+
     <color name="transparent">#00000000</color>
+
+    <color name="color_gray_bababa">#bababa</color>
+    <color name="color_gray_dbdbdb">#dbdbdb</color>
+    <color name="color_gray_707070">#707070</color>
+    <color name="color_gray_c0c0c0">#c0c0c0</color>
+    <color name="color_gray_f4f5f8">#f4f5f8</color>
+    <color name="color_gray_909090">#909090</color>
+    <color name="color_gray_c9c9c9">#c9c9c9</color>
+    <color name="color_gray_888888">#888888</color>
+    <color name="color_gray_f0f0f0">#f0f0f0</color>
+    <color name="color_gray_dfdfdf">#dfdfdf</color>
+
 </resources>

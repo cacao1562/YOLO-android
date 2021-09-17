@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginBottom="66dp"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/notosanskr_medium_hestia"
                         android:letterSpacing="0.02"
                         android:lineSpacingExtra="6dp"
                         android:text="@string/home_main_title"

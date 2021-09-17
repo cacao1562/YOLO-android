@@ -7,6 +7,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityBinding
+import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
 
 class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
@@ -24,10 +25,11 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
         TabLayoutMediator(binding.tlCommunityTab, binding.vp2Community) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
+        binding.vp2Community.isUserInputEnabled = false
 
-        binding.fabCommunity.setOnClickListener {
+        binding.ivCreatePost.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToCommunityUploadFragment()
-            findNavController().navigate(action)
+            findNavController().safeNavigate(action)
         }
     }
 }

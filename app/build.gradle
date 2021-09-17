@@ -121,7 +121,7 @@ dependencies {
 
     // image picker
     implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.4'
-
+    
     // social login
     def naver_sdk_version = "4.2.6"
     def kakao_sdk_version = "2.4.1"
@@ -149,5 +149,8 @@ dependencies {
     // calendar
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
+
+    // swiperefreshlayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 }

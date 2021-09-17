@@ -7,13 +7,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.yolo.yolo_android.api.ApiService
+import com.yolo.yolo_android.api.TourService
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
 
 class HomeListViewModel @AssistedInject constructor(
-    private val service: ApiService,
+    private val service: TourService,
     @Assisted private val contentTypeId: Int?
 ): ViewModel() {
 

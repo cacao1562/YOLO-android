@@ -2,13 +2,12 @@ package com.yolo.yolo_android.di
 
 import com.yolo.yolo_android.api.ApiService
 import com.yolo.yolo_android.api.KakaoApiService
-import com.yolo.yolo_android.api.NaverApiService
+import com.yolo.yolo_android.api.YoloApiService
 import com.yolo.yolo_android.data.datasource.local.SnsLocalDataSource
 import com.yolo.yolo_android.data.datasource.remote.SnsDataSource
 import com.yolo.yolo_android.data.datasource.remote.YoloDataSource
-import com.yolo.yolo_android.data.datasource.remote.YoloDataSourceImpl
+import com.yolo.yolo_android.db.YoloDatabase
 import com.yolo.yolo_android.repository.*
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,9 +21,10 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideMainRepository(
-        service: ApiService
+        yoloApiService: YoloApiService,
+        kakaoApiService: KakaoApiService
     ): ApiRepository {
-        return ApiRepository(service)
+        return ApiRepository(yoloApiService, kakaoApiService)
     }
 
     @Provides

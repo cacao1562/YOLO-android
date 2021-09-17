@@ -44,5 +44,5 @@ data class Item(
     val modifiedtime: Long?,
     val readcount: Int?,
     val sigungucode: Int?,
-    val title: String?
+    var title: String?
 )
