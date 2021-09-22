@@ -59,6 +59,7 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
         }
 
         viewModel.listData.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
             mAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
 

@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
+import com.yolo.yolo_android.common.extensions.ToastExt.toast
+import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.databinding.FragmentPlaceListBinding
 import com.yolo.yolo_android.model.Document
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +53,17 @@ class PlaceListFragment: BindingFragment<FragmentPlaceListBinding>(R.layout.frag
             }
         })
         viewModel.placeListFlow.observe(viewLifecycleOwner, Observer {
-            placeListAdapter.submitList(it)
+            when(it) {
+                is ResultData.Success -> {
+                    placeListAdapter.submitList(it.data.documents)
+                }
+                is ResultData.Error -> {
+                    toast(it.errorEntity.message)
+                }
+                is ResultData.ErrorMsg -> {
+                    toast(it.msg)
+                }
+            }
         })
 
     }

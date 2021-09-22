@@ -16,15 +16,39 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class AuthInterceptorOkHttpClient
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class BaseInterceptorOkHttpClient
+
+
+    @AuthInterceptorOkHttpClient
     @Provides
-    @Singleton
-    fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
+    fun provideAuthOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        val okHttpClient = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            okHttpClient.addInterceptor(MyLoggerInterceptor())
+            okHttpClient.addInterceptor(AuthorizationInterceptor())
+        }
+        okHttpClient.interceptors().add(logging)
+        return okHttpClient.build()
+    }
+
+    @BaseInterceptorOkHttpClient
+    @Provides
+    fun provideBaseOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         val okHttpClient = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
@@ -32,13 +56,7 @@ object NetworkModule {
             okHttpClient.addInterceptor(MyLoggerInterceptor())
         }
         okHttpClient.interceptors().add(logging)
-        return okHttpClient
-    }
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(okHttpClientBuilder: OkHttpClient.Builder): OkHttpClient {
-        return okHttpClientBuilder.build()
+        return okHttpClient.build()
     }
 
     @Provides
@@ -51,7 +69,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitBuilder(client: OkHttpClient, moshi: Moshi) : Retrofit.Builder {
+    fun provideRetrofitBuilder(@BaseInterceptorOkHttpClient client: OkHttpClient, moshi: Moshi) : Retrofit.Builder {
         return Retrofit.Builder()
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -65,12 +83,10 @@ object NetworkModule {
         return retrofitBuilder.build()
     }
 
-
     @Provides
     @Singleton
-    fun provideApiService(retrofitBuilder: Retrofit.Builder): ApiService {
-        return retrofitBuilder.baseUrl(BASE_URL).build().create(ApiService::class.java)
-    }
+    fun provideAuthorizationInterceptor() = AuthorizationInterceptor()
+
 
     @Provides
     @Singleton
@@ -80,15 +96,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideYoloService(retrofitBuilder: Retrofit.Builder, okHttpClientBuilder: OkHttpClient.Builder) : YoloApiService {
-        val okhttp = okHttpClientBuilder.addInterceptor(AuthorizationInterceptor()).build()
-        return retrofitBuilder.baseUrl(YOLO_URL).client(okhttp).build().create(YoloApiService::class.java)
+    fun provideYoloService(retrofitBuilder: Retrofit.Builder, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) : YoloApiService {
+        return retrofitBuilder.baseUrl(YOLO_URL).client(okHttpClient).build().create(YoloApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideKakaoService(retrofitBuilder: Retrofit.Builder) : KakaoApiService {
-        return retrofitBuilder.baseUrl(KAKAO_URL).build().create(KakaoApiService::class.java)
+    fun provideKakaoService(retrofitBuilder: Retrofit.Builder, @BaseInterceptorOkHttpClient client: OkHttpClient) : KakaoApiService {
+        return retrofitBuilder.baseUrl(KAKAO_URL).client(client).build().create(KakaoApiService::class.java)
     }
 
     @Provides

@@ -5,7 +5,6 @@ import androidx.paging.PagingState
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.yolo.yolo_android.CommunitySort
-import com.yolo.yolo_android.api.ApiService
 import com.yolo.yolo_android.api.YoloApiService
 import com.yolo.yolo_android.db.post.PostEntity
 import com.yolo.yolo_android.model.CommonResponse

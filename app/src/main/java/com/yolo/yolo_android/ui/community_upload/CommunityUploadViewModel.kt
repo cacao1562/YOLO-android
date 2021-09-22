@@ -8,8 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yolo.yolo_android.base.BaseViewModel
+import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.model.Document
-import com.yolo.yolo_android.repository.ApiRepository
+import com.yolo.yolo_android.repository.YoloRepository
 import com.yolo.yolo_android.utils.ImageUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -24,7 +25,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommunityUploadViewModel @Inject constructor(
-    private val apiRepository: ApiRepository
+    private val yoloRepository: YoloRepository
 ): BaseViewModel() {
 
     /**
@@ -58,12 +59,11 @@ class CommunityUploadViewModel @Inject constructor(
 
     private val uploadIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     private val uploadFlow = uploadIndex.filter { it != 0 }.flatMapLatest { idx ->
-        apiRepository.uploadPost(
+        yoloRepository.uploadPost(
             images = images,
             params = params,
             onStart = { _isLoading.postValue(true) },
-            onComplete = { _isLoading.postValue(false) },
-            onError = { _toastMessage.postValue(it) }
+            onComplete = { _isLoading.postValue(false) }
         )
     }
 
@@ -73,12 +73,24 @@ class CommunityUploadViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            uploadFlow.collect {
-                Log.d("aaa", "usersListFlow=$it")
-                if (it == "success") {
-                    _events.emit(it)
-                    _toastMessage.value = "업로드 성공"
-                }else _toastMessage.value = "업로드 실패.."
+            uploadFlow.collect { result ->
+                Log.d("aaa", "usersListFlow=$result")
+                when(result) {
+                    is ResultData.Success -> {
+                        result.data.resultCode?.let {
+                            if (it == 200) {
+                                _events.emit(it.toString())
+                            }
+                        }
+                    }
+                    is ResultData.ErrorMsg -> {
+                        _toastMessage.value = result.msg
+                    }
+                    is ResultData.Error -> {
+                        _toastMessage.value = result.errorEntity.message
+                    }
+                }
+
             }
         }
     }
