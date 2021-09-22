@@ -1,6 +1,7 @@
 package com.yolo.yolo_android.data.datasource.remote
 
 import com.yolo.yolo_android.data.ResultData
+import com.yolo.yolo_android.model.CommentListResponse
 import com.yolo.yolo_android.model.CommonResponse
 import com.yolo.yolo_android.model.LoginResponse
 import com.yolo.yolo_android.model.SignupResponse
@@ -29,4 +30,10 @@ interface YoloDataSource {
                          onStart: () -> Unit,
                          onComplete: () -> Unit
     ): Flow<ResultData<CommonResponse>>
+
+    suspend fun getCommentList(postId: Int,
+                               onStart: () -> Unit,
+                               onComplete: () -> Unit
+    ): Flow<ResultData<CommentListResponse>>
+
 }

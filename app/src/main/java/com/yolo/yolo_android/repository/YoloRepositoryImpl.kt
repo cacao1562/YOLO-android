@@ -2,6 +2,7 @@ package com.yolo.yolo_android.repository
 
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.datasource.remote.YoloDataSource
+import com.yolo.yolo_android.model.CommentListResponse
 import com.yolo.yolo_android.model.CommonResponse
 import com.yolo.yolo_android.model.LoginResponse
 import com.yolo.yolo_android.model.SignupResponse
@@ -48,4 +49,11 @@ class YoloRepositoryImpl @Inject constructor(
         return datasource.likePost(postId, isLike, onStart, onComplete)
     }
 
+    override suspend fun getCommentList(
+        postId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommentListResponse>> {
+        return datasource.getCommentList(postId, onStart, onComplete)
+    }
 }

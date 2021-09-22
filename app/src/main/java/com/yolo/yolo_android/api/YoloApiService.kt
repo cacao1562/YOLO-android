@@ -1,10 +1,7 @@
 package com.yolo.yolo_android.api
 
 import com.yolo.yolo_android.YOLO_URL
-import com.yolo.yolo_android.model.CommonResponse
-import com.yolo.yolo_android.model.CommunityListResponse
-import com.yolo.yolo_android.model.LoginResponse
-import com.yolo.yolo_android.model.SignupResponse
+import com.yolo.yolo_android.model.*
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -47,4 +44,9 @@ interface YoloApiService {
     suspend fun unLikePost(
         @Path("postId") postId: Int
     ): Response<CommonResponse>
+
+    @GET("community/{postId}/comment")
+    suspend fun getCommentList(
+        @Path("postId") postId: Int
+    ): Response<CommentListResponse>
 }

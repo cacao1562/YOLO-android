@@ -6,6 +6,7 @@ import com.yolo.yolo_android.common.extensions.safeApiCall
 import com.yolo.yolo_android.common.extensions.toResult
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.error.ErrorHandlerImpl
+import com.yolo.yolo_android.model.CommentListResponse
 import com.yolo.yolo_android.model.CommonResponse
 import com.yolo.yolo_android.model.LoginResponse
 import com.yolo.yolo_android.model.SignupResponse
@@ -66,6 +67,19 @@ class YoloDataSourceImpl @Inject constructor(
             emit(safeApiCall(errorHandler) {
                 if (isLike) yoloService.unLikePost(postId)
                 else yoloService.likePost(postId)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getCommentList(
+        postId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommentListResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.getCommentList(postId)
             })
         }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
     }

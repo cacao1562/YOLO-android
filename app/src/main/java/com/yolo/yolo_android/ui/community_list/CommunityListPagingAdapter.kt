@@ -63,6 +63,9 @@ class CommunityViewHolder(
         binding.ivItemPostLike.setOnClickListener {
             viweModel.onViewEvent(CallbackPostButton.Like(it, data.postId, data.cntOfLike, data.liked ?: false))
         }
+        binding.tvItemPostCommentCount.setOnClickListener {
+            viweModel.setViewEvent(CallbackPostButton.Comment(data.postId))
+        }
         binding.tvItemPostMoveMap.setOnClickListener {
             viweModel.setViewEvent(CallbackPostButton.Map(data.latitude, data.longitude))
         }

@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.yolo.yolo_android.CommunitySort
 import com.yolo.yolo_android.DialogButtonType
@@ -17,7 +18,9 @@ import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityListBinding
 import com.yolo.yolo_android.model.CallbackPostButton
+import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.dialog.CommonDialog
+import com.yolo.yolo_android.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -69,6 +72,7 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
                 when(it) {
                     is CallbackPostButton.More -> presentDialog(it.postId)
                     is CallbackPostButton.Map -> presentMap(it)
+                    is CallbackPostButton.Comment -> presentComment(it.postId)
                 }
             }
         }
@@ -126,6 +130,11 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
         Intent(Intent.ACTION_VIEW, Uri.parse(url)).also {
             startActivity(it)
         }
+    }
+
+    private fun presentComment(id: Int) {
+        val action = MainFragmentDirections.actionMainFragmentToCommentListFragment(id)
+        findNavController().safeNavigate(action)
     }
 
 }
