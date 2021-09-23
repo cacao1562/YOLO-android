@@ -2,9 +2,13 @@ package com.yolo.yolo_android.repository
 
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.datasource.remote.YoloDataSource
+import com.yolo.yolo_android.model.CommonResponse
 import com.yolo.yolo_android.model.LoginResponse
 import com.yolo.yolo_android.model.SignupResponse
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class YoloRepositoryImpl @Inject constructor(
@@ -17,4 +21,31 @@ class YoloRepositoryImpl @Inject constructor(
     override fun login(queryMap: HashMap<String, String>): Single<ResultData<LoginResponse>> {
         return datasource.login(queryMap)
     }
+
+    override suspend fun uploadPost(
+        images: List<MultipartBody.Part>,
+        params: HashMap<String, RequestBody>,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        return datasource.uploadPost(images, params, onStart, onComplete)
+    }
+
+    override suspend fun deletePost(
+        postId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        return datasource.deletePost(postId, onStart, onComplete)
+    }
+
+    override suspend fun likePost(
+        postId: Int,
+        isLike: Boolean,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        return datasource.likePost(postId, isLike, onStart, onComplete)
+    }
+
 }

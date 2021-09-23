@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.yolo.yolo_android.api.ApiService
 import com.yolo.yolo_android.api.TourService
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory

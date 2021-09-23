@@ -9,8 +9,9 @@ import com.yolo.yolo_android.data.error.NaverErrorHandlerImpl
 import com.yolo.yolo_android.model.KakaoUserInfoResponse
 import com.yolo.yolo_android.model.NaverUserInfoResponse
 import io.reactivex.Single
+import javax.inject.Inject
 
-class SnsDataSourceImpl(
+class SnsDataSourceImpl @Inject constructor(
     private val kakaoApiService: KakaoApiService,
     private val naverApiService: NaverApiService,
     private val resourceProvider: ResourceProvider
