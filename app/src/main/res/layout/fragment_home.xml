@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         tools:ignore="ContentDescription, SpUsage">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -68,6 +68,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvSelectDate"
                     android:layout_width="312dp"
                     android:layout_height="52dp"
                     android:layout_marginTop="32dp"
@@ -107,10 +108,24 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/cvSelectDate">
+
+                    <include
+                        android:id="@+id/layout_home_recommend_by_region"
+                        layout="@layout/layout_home_recommend_by_region"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp" />
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

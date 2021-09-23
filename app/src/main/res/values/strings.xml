@@ -26,6 +26,10 @@
     <!-- Home -->
     <string name="home_main_title">즉흥여행\n지금 바로 떠나볼까요?</string>
     <string name="home_btn_select_date">즉흥일자 선택하기</string>
+    <string name="home_recommend_by_region">지역별 여행지 추천</string>
+    <string name="home_event_banner">이벤트 기획전</string>
+    <string name="home_popular_restaurant_ranking">인기 맛집 순위표</string>
+    <string name="home_popular_place_ranking">인기 장소 순위표</string>
 
     <!-- Message -->
     <string name="message_network_unstable">네트워크가 불안정합니다. 잠시후에 다시 이용해 주세요.</string>
