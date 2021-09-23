@@ -119,7 +119,17 @@
                         layout="@layout/layout_home_recommend_by_region"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/default_margin_24"
                         android:layout_marginTop="60dp" />
+
+                    <include
+                        android:id="@+id/layout_home_event"
+                        layout="@layout/layout_home_event"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin_24"
+                        android:layout_marginTop="60dp" />
+
 
                 </LinearLayout>
 
