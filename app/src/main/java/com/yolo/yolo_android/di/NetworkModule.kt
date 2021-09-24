@@ -1,6 +1,5 @@
 package com.yolo.yolo_android.di
 
-import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.yolo.yolo_android.*
@@ -73,7 +72,6 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     }
 

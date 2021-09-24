@@ -8,17 +8,13 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.yolo.yolo_android.CommunitySort
-import com.yolo.yolo_android.DialogButtonType
-import com.yolo.yolo_android.R
+import com.yolo.yolo_android.*
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityListBinding
 import com.yolo.yolo_android.model.CallbackPostButton
-import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.dialog.CommonDialog
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -104,7 +100,7 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
                     ?: loadStates.append as? LoadState.Error
                     ?: loadStates.prepend as? LoadState.Error
                 errorState?.let {
-                    viewModel._toastMessage.value = it.error.message
+                    viewModel._toastMessage.emit(it.error.message ?: "")
                 }
 
             }

@@ -1,10 +1,7 @@
 package com.yolo.yolo_android.data.datasource.remote
 
 import com.yolo.yolo_android.data.ResultData
-import com.yolo.yolo_android.model.CommentListResponse
-import com.yolo.yolo_android.model.CommonResponse
-import com.yolo.yolo_android.model.LoginResponse
-import com.yolo.yolo_android.model.SignupResponse
+import com.yolo.yolo_android.model.*
 import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -36,4 +33,15 @@ interface YoloDataSource {
                                onComplete: () -> Unit
     ): Flow<ResultData<CommentListResponse>>
 
+    suspend fun postComment(postId: Int,
+                            param: HashMap<String, RequestBody>,
+                            image: MultipartBody.Part?,
+                            onStart: () -> Unit,
+                            onComplete: () -> Unit
+    ): Flow<ResultData<PostCommentResponse>>
+
+    suspend fun deleteComment(commentId: Int,
+                              onStart: () -> Unit,
+                              onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>>
 }

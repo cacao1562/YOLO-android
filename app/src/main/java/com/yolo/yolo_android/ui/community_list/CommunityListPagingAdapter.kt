@@ -1,6 +1,7 @@
 package com.yolo.yolo_android.ui.community_list
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
@@ -16,7 +17,15 @@ class CommunityListPagingAdapter(
 ): PagingDataAdapter<PostEntity, CommunityViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityViewHolder {
-        return CommunityViewHolder.from(parent, viweModel)
+        return CommunityViewHolder.from(parent) { view, position, btnType ->
+            val data = getItem(position) ?: return@from
+            when(btnType) {
+                BtnType.More -> { viweModel.setViewEvent(CallbackPostButton.More(data.postId)) }
+                BtnType.Like -> { viweModel.onViewEvent(CallbackPostButton.Like(view, data.postId, data.cntOfLike, data.liked ?: false)) }
+                BtnType.CommentCount -> { viweModel.setViewEvent(CallbackPostButton.Comment(data.postId)) }
+                BtnType.Map -> { viweModel.setViewEvent(CallbackPostButton.Map(data.latitude, data.longitude)) }
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: CommunityViewHolder, position: Int) {
@@ -37,9 +46,16 @@ class CommunityListPagingAdapter(
 
 }
 
+enum class BtnType {
+    More,
+    Like,
+    CommentCount,
+    Map
+}
+
 class CommunityViewHolder(
     private val binding: ItemCommunityListBinding,
-    private val viweModel: CommunityListViewModel
+    private val callback: (View, Int, BtnType) -> Unit
 ): RecyclerView.ViewHolder(binding.root) {
 
     init {
@@ -47,49 +63,57 @@ class CommunityViewHolder(
         TabLayoutMediator(binding.tlItemPost, binding.vp2ItemPostImages) { tab, position ->
             binding.vp2ItemPostImages.currentItem = tab.position
         }.attach()
-        binding.viewModel = viweModel
+
+        binding.ivItemPostMore.setOnClickListener {
+            callback.invoke(it, bindingAdapterPosition, BtnType.More)
+        }
+        binding.ivItemPostLike.setOnClickListener {
+            callback.invoke(it, bindingAdapterPosition, BtnType.Like)
+        }
+        binding.tvItemPostCommentCount.setOnClickListener {
+            callback.invoke(it, bindingAdapterPosition, BtnType.CommentCount)
+        }
+        binding.tvItemPostMoveMap.setOnClickListener {
+            callback.invoke(it, bindingAdapterPosition, BtnType.Map)
+        }
+
     }
 
     fun bind(data: PostEntity) {
         binding.data = data
+
         val adapter = binding.vp2ItemPostImages.adapter
         if (adapter != null) {
             (adapter as CommunityPostImageAdapter).setItems(data.imageUrl)
         }
         binding.llItemLocation.isVisible = data.latitude > 0 && data.longitude > 0
-        binding.ivItemPostMore.setOnClickListener {
-            viweModel.setViewEvent(CallbackPostButton.More(data.postId))
-        }
-        binding.ivItemPostLike.setOnClickListener {
-            viweModel.onViewEvent(CallbackPostButton.Like(it, data.postId, data.cntOfLike, data.liked ?: false))
-        }
-        binding.tvItemPostCommentCount.setOnClickListener {
-            viweModel.setViewEvent(CallbackPostButton.Comment(data.postId))
-        }
-        binding.tvItemPostMoveMap.setOnClickListener {
-            viweModel.setViewEvent(CallbackPostButton.Map(data.latitude, data.longitude))
-        }
-        binding.tvItemPostContentMore.isVisible = false
 
-        binding.tvItemPostContent.post {
-            val lineCount = binding.tvItemPostContent.layout.lineCount
-            if (lineCount > 0) {
-                if (binding.tvItemPostContent.layout.getEllipsisCount(lineCount -1) > 0) {
-                    binding.tvItemPostContentMore.isVisible = true
-                }
-                binding.tvItemPostContentMore.setOnClickListener {
-                    binding.tvItemPostContent.maxLines = Int.MAX_VALUE
-                    binding.tvItemPostContentMore.isVisible = false
+        if (!data.isExpand) {
+            binding.tvItemPostContent.post {
+                val lineCount = binding.tvItemPostContent.layout.lineCount
+                if (lineCount > 0) {
+                    if (binding.tvItemPostContent.layout.getEllipsisCount(lineCount -1) > 0) {
+                        binding.tvItemPostContentMore.isVisible = true
+                    }
+                    binding.tvItemPostContentMore.setOnClickListener {
+                        binding.tvItemPostContent.maxLines = Int.MAX_VALUE
+                        binding.tvItemPostContentMore.isVisible = false
+                        data.isExpand = true
+                    }
                 }
             }
+        }else {
+            binding.tvItemPostContent.maxLines = Int.MAX_VALUE
+            binding.tvItemPostContentMore.isVisible = false
         }
+
     }
 
     companion object {
-        fun from(parent: ViewGroup, viweModel: CommunityListViewModel): CommunityViewHolder {
+        fun from(parent: ViewGroup, callback: (View, Int, BtnType) -> Unit): CommunityViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ItemCommunityListBinding.inflate(layoutInflater, parent, false)
-            return CommunityViewHolder(binding, viweModel)
+            return CommunityViewHolder(binding, callback)
         }
     }
 }

@@ -18,6 +18,7 @@
     <color name="font_black">#222222</color>
     <color name="font_black_131313">#131313</color>
     <color name="dark_gray">#656565</color>
+    <color name="bg_comment_img">#56D8D8D8</color>
 
     <color name="transparent">#00000000</color>
 

@@ -6,10 +6,7 @@ import com.yolo.yolo_android.common.extensions.safeApiCall
 import com.yolo.yolo_android.common.extensions.toResult
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.error.ErrorHandlerImpl
-import com.yolo.yolo_android.model.CommentListResponse
-import com.yolo.yolo_android.model.CommonResponse
-import com.yolo.yolo_android.model.LoginResponse
-import com.yolo.yolo_android.model.SignupResponse
+import com.yolo.yolo_android.model.*
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -80,6 +77,34 @@ class YoloDataSourceImpl @Inject constructor(
         return flow {
             emit(safeApiCall(errorHandler) {
                 yoloService.getCommentList(postId)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun postComment(
+        postId: Int,
+        param: HashMap<String, RequestBody>,
+        image: MultipartBody.Part?,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<PostCommentResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.postComment(postId, param, image)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun deleteComment(
+        commentId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.deleteComment(commentId)
             })
         }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
     }

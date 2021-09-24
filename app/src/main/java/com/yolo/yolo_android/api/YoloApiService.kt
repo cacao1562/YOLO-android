@@ -21,7 +21,7 @@ interface YoloApiService {
     @Multipart
     suspend fun uploadPost(
         @Part images: List<MultipartBody.Part>,
-        @PartMap params: java.util.HashMap<String, RequestBody>
+        @PartMap params: HashMap<String, RequestBody>
     ): Response<CommonResponse>
 
     @GET("community")
@@ -49,4 +49,18 @@ interface YoloApiService {
     suspend fun getCommentList(
         @Path("postId") postId: Int
     ): Response<CommentListResponse>
+
+    @POST("community/{postId}/comment")
+    @Multipart
+    suspend fun postComment(
+        @Path("postId") postId: Int,
+        @PartMap params: HashMap<String, RequestBody>,
+        @Part image: MultipartBody.Part?
+    ): Response<PostCommentResponse>
+
+    @DELETE("community/comment/{commentId}")
+    suspend fun deleteComment(
+        @Path("commentId") commentId: Int
+    ): Response<CommonResponse>
+
 }

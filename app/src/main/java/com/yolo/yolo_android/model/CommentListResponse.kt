@@ -4,7 +4,7 @@ data class CommentListResponse(
     val message: String,
     val resultCode: Int,
     val count: Int,
-    val result: List<Comment>
+    var result: List<Comment>
 )
 
 data class Comment(
@@ -14,5 +14,5 @@ data class Comment(
     val content: String,
     val imageUrl: String?,
     val createAt: String,
-    val author: Boolean
+    var author: Boolean?
 )

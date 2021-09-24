@@ -68,11 +68,8 @@ class CommunityListViewModel @AssistedInject constructor(
                     }
                 }
             }
-            is ResultData.ErrorMsg -> {
-                _toastMessage.value = result.msg
-            }
-            is ResultData.Error -> {
-                _toastMessage.value = result.errorEntity.message
+            else -> {
+                parseError(result)
             }
         }
     }
