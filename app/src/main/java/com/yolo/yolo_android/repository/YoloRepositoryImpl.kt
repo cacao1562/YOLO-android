@@ -3,6 +3,10 @@ package com.yolo.yolo_android.repository
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.datasource.remote.YoloDataSource
 import com.yolo.yolo_android.model.*
+import com.yolo.yolo_android.model.CommonResponse
+import com.yolo.yolo_android.model.HomeResponse
+import com.yolo.yolo_android.model.LoginResponse
+import com.yolo.yolo_android.model.SignupResponse
 import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -18,6 +22,10 @@ class YoloRepositoryImpl @Inject constructor(
 
     override fun login(queryMap: HashMap<String, String>): Single<ResultData<LoginResponse>> {
         return datasource.login(queryMap)
+    }
+
+    override fun getHomeInfo(): Single<ResultData<HomeResponse>> {
+        return datasource.getHomeInfo()
     }
 
     override suspend fun uploadPost(

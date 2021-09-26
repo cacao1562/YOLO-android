@@ -2,6 +2,8 @@
 <resources>
     <dimen name="default_margin_16">16dp</dimen>
     <dimen name="default_margin_24">24dp</dimen>
+    <dimen name="default_margin_60">60dp</dimen>
+    <dimen name="radius_6">6dp</dimen>
     <dimen name="loading_progressbar_size">80dp</dimen>
     <dimen name="event_banner_width">260dp</dimen>
     <dimen name="event_banner_page_margin">12dp</dimen>

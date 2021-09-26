@@ -7,6 +7,7 @@ import com.yolo.yolo_android.common.extensions.toResult
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.error.ErrorHandlerImpl
 import com.yolo.yolo_android.model.*
+import com.yolo.yolo_android.util.MyLogger
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -24,6 +25,14 @@ class YoloDataSourceImpl @Inject constructor(
 
     override fun login(queryMap: HashMap<String, String>): Single<ResultData<LoginResponse>> {
         return yoloService.login(queryMap).toResult(ErrorHandlerImpl(resourceProvider))
+    }
+
+    override fun getHomeInfo(): Single<ResultData<HomeResponse>> {
+        return yoloService.getHomeInfo().map {
+            ResultData.Success(it) as ResultData<HomeResponse>
+        }.onErrorReturn{
+            ResultData.Error(errorEntity = ErrorHandlerImpl(resourceProvider).getError(it))
+        }
     }
 
     override suspend fun uploadPost(
