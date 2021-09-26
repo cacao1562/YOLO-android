@@ -46,7 +46,7 @@ fun TabLayout.setMargin(left: Int, top: Int, right: Int, bottom: Int) {
     for (i in 0 until this.tabCount) {
         val tab = (this.getChildAt(0) as ViewGroup).getChildAt(i)
         val p = tab.layoutParams as ViewGroup.MarginLayoutParams
-        if (i == 0) p.setMargins(right, top, right, bottom)
+        if (i == 0) p.setMargins(24.dpToPx(), top, right, bottom)
         else p.setMargins(left, top, right, bottom)
         tab.requestLayout()
     }

@@ -1,17 +1,22 @@
 package com.yolo.yolo_android.ui.home_list
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.flatMap
+import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentHomeListBinding
+import com.yolo.yolo_android.dpToPx
+import com.yolo.yolo_android.model.FilterListData
+import com.yolo.yolo_android.ui.dialog.FilterBottomDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +43,8 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         HomeListViewModel.provideFactory(factory, if (id == -1) null else id)
     }
 
+    private var mSelectedType = HomeListFilter.OPTION_01
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +55,7 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         binding.rvHomeList.apply {
             adapter = homeListPagingAdapter
             setHasFixedSize(true)
+            addItemDecoration(HomeListDecoration(20.dpToPx()))
         }
         lifecycleScope.launchWhenCreated {
             viewModel.listData.collectLatest {
@@ -55,7 +63,39 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeListPagingAdapter.loadStateFlow.collectLatest { loadStates ->
+                binding.tvHomeListCount.text = "총 ${homeListPagingAdapter.itemCount}"
+            }
+        }
+
+        binding.tvHomeListFilter.setOnClickListener {
+            val data = FilterListData("정렬 방법", HomeListFilter::class.java, mSelectedType)
+            val dialog = FilterBottomDialog.newInstance(data) {
+                mSelectedType = HomeListFilter.valueOf(it)
+            }
+            dialog.show(childFragmentManager, dialog.tag)
+
+        }
+
         return root
+    }
+
+}
+
+enum class HomeListFilter(val options: String) {
+    OPTION_01("혼잡도 낮은순"),
+    OPTION_02("혼잡도 높은순");
+
+    override fun toString(): String {
+        return options.toString()
+    }
+}
+
+class HomeListDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        outRect.bottom = space
     }
 
 }
