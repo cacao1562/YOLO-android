@@ -26,6 +26,8 @@ data class PostEntity(
     fun getDisplayLikeCount() = "좋아요 ${cntOfLike}개"
     fun getDisplayCommentCount() = "댓글 ${cntOfComment}개"
 
+    var isExpand = false
+    var isImageNotEmpty = imageUrl.isNotEmpty()
 }
 
 class ListConverter {

@@ -25,6 +25,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_commentListFragment"
+            app:destination="@id/commentListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -69,5 +76,13 @@
         android:name="com.yolo.yolo_android.ui.place_list.PlaceListFragment"
         android:label="PlaceListFragment"
         tools:layout="@layout/fragment_place_list" />
+    <fragment
+        android:id="@+id/commentListFragment"
+        android:name="com.yolo.yolo_android.ui.community_comment.CommentListFragment"
+        android:label="CommentListFragment"
+        tools:layout="@layout/fragment_comment_list">
+        <argument android:name="postId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

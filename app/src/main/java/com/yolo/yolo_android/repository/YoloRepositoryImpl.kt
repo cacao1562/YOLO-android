@@ -2,9 +2,7 @@ package com.yolo.yolo_android.repository
 
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.datasource.remote.YoloDataSource
-import com.yolo.yolo_android.model.CommonResponse
-import com.yolo.yolo_android.model.LoginResponse
-import com.yolo.yolo_android.model.SignupResponse
+import com.yolo.yolo_android.model.*
 import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -48,4 +46,29 @@ class YoloRepositoryImpl @Inject constructor(
         return datasource.likePost(postId, isLike, onStart, onComplete)
     }
 
+    override suspend fun getCommentList(
+        postId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommentListResponse>> {
+        return datasource.getCommentList(postId, onStart, onComplete)
+    }
+
+    override suspend fun postComment(
+        postId: Int,
+        param: HashMap<String, RequestBody>,
+        image: MultipartBody.Part?,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<PostCommentResponse>> {
+        return datasource.postComment(postId, param, image, onStart, onComplete)
+    }
+
+    override suspend fun deleteComment(
+        commentId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        return datasource.deleteComment(commentId, onStart, onComplete)
+    }
 }

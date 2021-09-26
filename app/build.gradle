@@ -69,7 +69,6 @@ dependencies {
     kapt 'com.google.dagger:hilt-compiler:2.36'
 
     // network
-    implementation "com.github.skydoves:sandwich:1.2.0"  // response interface
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
@@ -82,9 +81,9 @@ dependencies {
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.12.0'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
 
     // architecture components
     implementation "androidx.fragment:fragment-ktx:1.3.6"

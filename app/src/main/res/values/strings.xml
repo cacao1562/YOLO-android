@@ -53,4 +53,10 @@
     <string name="alert_msg_picture_limit">최대 3장까지 선택가능합니다.</string>
     <string name="alert_msg_delete_post">게시글을 삭제 하시겠습니까?</string>
 
+<!--    comment-->
+    <string name="comment">댓글</string>
+    <string name="caution_comment">공유한 나만의 스팟에 댓글을 남겨주세요!\n폭력적인 댓글은 신고가 될수 있으며 매너문화를 지향합시다</string>
+    <string name="post_comment">게시</string>
+    <string name="hint_input_comment">내용을 입력해주세요</string>
+
 </resources>

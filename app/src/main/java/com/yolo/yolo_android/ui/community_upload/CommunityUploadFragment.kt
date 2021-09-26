@@ -1,11 +1,13 @@
 package com.yolo.yolo_android.ui.community_upload
 
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +38,9 @@ class CommunityUploadFragment: BindingFragment<FragmentCommunityUploadBinding>(R
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         val root = super.onCreateView(inflater, container, savedInstanceState)
         binding.viewModel = viewModel
 

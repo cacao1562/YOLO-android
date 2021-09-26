@@ -8,9 +8,6 @@
         <variable
             name="data"
             type="com.yolo.yolo_android.db.post.PostEntity" />
-        <variable
-            name="viewModel"
-            type="com.yolo.yolo_android.ui.community_list.CommunityListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

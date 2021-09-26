@@ -1,7 +1,9 @@
 package com.yolo.yolo_android
 
 import android.net.Uri
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -9,16 +11,19 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.skydoves.whatif.whatIfNotNullOrEmpty
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedAdapter
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedDecoration
-import com.yolo.yolo_android.ui.dialog.CommonDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 object DataBinding {
 
@@ -86,10 +91,35 @@ object DataBinding {
 
     @JvmStatic
     @BindingAdapter("toast")
-    fun bindToast(view: View, text: String?) {
-        text.whatIfNotNullOrEmpty {
-            Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
+    fun bindToast(view: View, flow: SharedFlow<String>?) {
+        flow?.let {
+            CoroutineScope(Dispatchers.IO).launch {
+                val st = it.first()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(view.context, st, Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("postCommentEnable")
+    fun bindpostCommentEnable(textView: TextView, text: String?) {
+        if (text.isNullOrEmpty()) {
+            textView.isEnabled = false
+            textView.setTextColor(AppCompatResources.getColorStateList(textView.context, R.color.main_alpha50))
+        }else {
+            textView.isEnabled = true
+            textView.setTextColor(AppCompatResources.getColorStateList(textView.context, R.color.main))
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("textChangedListener")
+    fun bindTextWatcher(editText: EditText, textWatcher: TextWatcher?) {
+        textWatcher?.let {
+            editText.addTextChangedListener(it)
+        }
+    }
 }
