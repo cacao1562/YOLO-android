@@ -73,6 +73,7 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
             val data = FilterListData("정렬 방법", HomeListFilter::class.java, mSelectedType)
             val dialog = FilterBottomDialog.newInstance(data) {
                 mSelectedType = HomeListFilter.valueOf(it)
+                binding.tvHomeListFilter.text = mSelectedType.options
             }
             dialog.show(childFragmentManager, dialog.tag)
 

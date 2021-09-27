@@ -32,6 +32,7 @@
             android:fontFamily="@font/notosanskr_medium_hestia"
             android:drawableRight="@drawable/icn_20_dropdown"
             android:drawablePadding="4dp"
+            android:background="?selectableItemBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="혼잡도 낮은순"/>
