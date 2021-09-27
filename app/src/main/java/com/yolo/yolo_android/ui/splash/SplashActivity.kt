@@ -33,10 +33,12 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         })
 
         viewModel.navigateToMain.observe(this, EventObserver {
-            Intent(this, MainActivity::class.java).also {
-                it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(it)
-                finish()
+            binding.ivSplash.delayOnLifecycle(1500) {
+                Intent(this, MainActivity::class.java).also {
+                    it.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(it)
+                    finish()
+                }
             }
         })
     }

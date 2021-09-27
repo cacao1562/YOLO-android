@@ -23,7 +23,7 @@ class HomeTabFragment: BindingFragment<FragmentHomeTabBinding>(R.layout.fragment
         TabLayoutMediator(binding.tlHomeTab, binding.vp2HomeTab) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
-        binding.tlHomeTab.setMargin(0,0,15.dpToPx(),0)
+        binding.tlHomeTab.setMargin(0,0, 12.dpToPx(),0)
 
     }
 }

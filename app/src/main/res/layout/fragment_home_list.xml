@@ -6,14 +6,44 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/default_margin_24"
+        android:paddingEnd="@dimen/default_margin_24"
+        android:paddingTop="18dp">
+
+        <TextView
+            android:id="@+id/tv_home_list_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:textColor="@color/font_black"
+            android:fontFamily="@font/notosanskr_medium_hestia"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="총 00"/>
+
+        <TextView
+            android:id="@+id/tv_home_list_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="혼잡도 낮은순"
+            android:textSize="14dp"
+            android:textColor="@color/font_black"
+            android:fontFamily="@font/notosanskr_medium_hestia"
+            android:drawableRight="@drawable/icn_20_dropdown"
+            android:drawablePadding="4dp"
+            android:background="?selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="혼잡도 낮은순"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/default_margin_24"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_list_count"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
