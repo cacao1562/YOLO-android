@@ -10,6 +10,7 @@ import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.common.extensions.ToastExt.toast
 import com.yolo.yolo_android.databinding.FragmentCalendarBinding
+import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.home_calendar.decorator.*
 import org.threeten.bp.LocalDate
 
@@ -20,6 +21,8 @@ class CalendarFragment : BindingFragment<FragmentCalendarBinding>(R.layout.fragm
         binding.ivClose.setOnClickListener { findNavController().popBackStack() }
         binding.btnApply.setOnClickListener {
             toast("${binding.calendarView.selectedDate?.date}")
+            val action = CalendarFragmentDirections.actionCalendarFragmentToHomeTabFragment()
+            findNavController().safeNavigate(action)
         }
 
         initCalendar()

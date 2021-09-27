@@ -32,6 +32,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_homeTabFragment"
+            app:destination="@id/homeTabFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -42,7 +49,15 @@
         android:id="@+id/calendarFragment"
         android:name="com.yolo.yolo_android.ui.home_calendar.CalendarFragment"
         android:label="CalendarFragment"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_homeTabFragment"
+            app:destination="@id/homeTabFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/homeListFragment"
         android:name="com.yolo.yolo_android.ui.home_list.HomeListFragment"
@@ -83,6 +98,17 @@
         tools:layout="@layout/fragment_comment_list">
         <argument android:name="postId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeTabFragment"
+        android:name="com.yolo.yolo_android.ui.home_tab.HomeTabFragment"
+        android:label="HomeTabFragment"
+        tools:layout="@layout/fragment_home_tab">
+        <argument
+            android:name="region"
+            app:argType="com.yolo.yolo_android.model.Region"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>

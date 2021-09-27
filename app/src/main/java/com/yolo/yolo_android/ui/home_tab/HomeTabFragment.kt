@@ -2,6 +2,7 @@ package com.yolo.yolo_android.ui.home_tab
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
@@ -17,6 +18,8 @@ class HomeTabFragment: BindingFragment<FragmentHomeTabBinding>(R.layout.fragment
         fun newInstance() = HomeTabFragment()
     }
 
+    private val args: HomeTabFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vp2HomeTab.adapter = HomeListPagerAdapter(childFragmentManager, lifecycle)
@@ -24,6 +27,8 @@ class HomeTabFragment: BindingFragment<FragmentHomeTabBinding>(R.layout.fragment
             tab.text = tabTitle[position]
         }.attach()
         binding.tlHomeTab.setMargin(0,0, 12.dpToPx(),0)
-
+        args.region?.let {
+            binding.topNavigation.setRegionTitle(it.areaName)
+        }
     }
 }

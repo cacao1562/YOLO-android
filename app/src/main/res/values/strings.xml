@@ -62,4 +62,7 @@
     <string name="post_comment">게시</string>
     <string name="hint_input_comment">내용을 입력해주세요</string>
 
+<!--    욜로갈래-->
+    <string name="top_title_magazine">욜로갈래</string>
+
 </resources>
