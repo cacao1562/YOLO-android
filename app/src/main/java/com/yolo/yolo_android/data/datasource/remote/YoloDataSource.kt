@@ -10,6 +10,7 @@ import okhttp3.RequestBody
 interface YoloDataSource {
     fun signup(queryMap: HashMap<String, String>): Single<ResultData<SignupResponse>>
     fun login(queryMap: HashMap<String, String>): Single<ResultData<LoginResponse>>
+    fun getHomeInfo(): Single<ResultData<HomeResponse>>
 
     suspend fun uploadPost(images: List<MultipartBody.Part>,
                            params: HashMap<String, RequestBody>,

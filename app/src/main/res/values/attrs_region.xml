@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="areaCode">
+        <item>1</item> <!-- 서울 -->
+        <item>2</item> <!-- 인천 -->
+        <item>3</item> <!-- 대전 -->
+        <item>4</item> <!-- 대구 -->
+        <item>5</item> <!-- 광주 -->
+        <item>6</item> <!-- 부산 -->
+        <item>7</item> <!-- 울산 -->
+        <item>8</item> <!-- 세종 -->
+        <item>31</item> <!-- 경기도 -->
+        <item>32</item> <!-- 강원도 -->
+        <item>33</item> <!-- 충청북도 -->
+        <item>34</item> <!-- 충청남도 -->
+        <item>35</item> <!-- 경상북도 -->
+        <item>36</item> <!-- 경상남도 -->
+        <item>37</item> <!-- 전라북도 -->
+        <item>38</item> <!-- 전라남도-->
+        <item>39</item> <!-- 제주도 -->
+    </integer-array>
+
+    <string-array name="areaName">
+        <item>서울</item>
+        <item>인천</item>
+        <item>대전</item>
+        <item>대구</item>
+        <item>광주</item>
+        <item>부산</item>
+        <item>울산</item>
+        <item>세종</item>
+        <item>경기도</item>
+        <item>강원도</item>
+        <item>충청북도</item>
+        <item>충청남도</item>
+        <item>경상북도</item>
+        <item>경상남도</item>
+        <item>전라북도</item>
+        <item>전라남</item>
+        <item>제주도</item>
+    </string-array>
+
+    <array name="areaIcon">
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_busan</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_gyeonggi</item>
+        <item>@drawable/ic_region_gangwon</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_gyeongbuk</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_jeju</item>
+    </array>
+</resources>

@@ -144,6 +144,8 @@ dependencies {
 
     // etc
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+    implementation 'com.github.takusemba:multisnaprecyclerview:2.0.2'
 
     // calendar
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'

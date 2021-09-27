@@ -1,5 +1,7 @@
 package com.yolo.yolo_android.common.extensions
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.databinding.BindingAdapter
 
@@ -30,5 +32,11 @@ object ViewExt {
                 }
             }
         }
+    }
+
+    fun View.openExternalWebView(url: String?) {
+        if (url.isNullOrEmpty()) return
+        Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            .run { context.startActivity(this) }
     }
 }

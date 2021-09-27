@@ -17,6 +17,9 @@ interface YoloApiService {
     @POST(YOLO_URL + "login")
     fun login(@FieldMap queryMap: HashMap<String, String>): Single<LoginResponse>
 
+    @GET("home")
+    fun getHomeInfo(): Single<HomeResponse>
+
     @POST("community")
     @Multipart
     suspend fun uploadPost(

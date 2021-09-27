@@ -4,6 +4,7 @@ const val BASE_URL = "http://api.visitkorea.or.kr/openapi/service/rest/KorServic
 const val YOLO_URL = "http://54.180.209.66:8080/"
 const val NAVER_URL = "https://openapi.naver.com/"
 const val KAKAO_URL = "https://kapi.kakao.com/"
+const val KAKAO_PLACE_URL = "https://place.map.kakao.com/"
 
 enum class DialogButtonType {
     Cancel,

@@ -4,6 +4,7 @@ package com.yolo.yolo_android.common.constants
 const val SOCIAL_ID = "socialId"
 const val LOGIN_TYPE = "type"
 const val NICKNAME = "nickname"
+const val REGION_LIST = "region_list"
 
 
 /* value */
