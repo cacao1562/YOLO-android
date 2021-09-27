@@ -14,6 +14,9 @@
     <!-- 페이지 타이틀 -->
     <string name="page_title_nick_name">닉네임 설정</string>
 
+    <!-- splash -->
+    <string name="splash_title">여행에 타이밍은\n바로 지.금.부.터</string>
+
     <!-- 소셜 로그인 -->
     <string name="login_tv_with_kakao">카카오톡으로 간편로그인</string>
     <string name="login_tv_with_other_kakao_id">다른 카카오계정으로 로그인</string>
