@@ -20,13 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by viewModels()
-    private val regionPagerAdapter by lazy {
-        RegionViewPagerAdapter(requireActivity()).apply {
-            addFragment(RegionsFragment.newInstance(Regions.page1Regions))
-            addFragment(RegionsFragment.newInstance(Regions.page2Regions))
-            addFragment(RegionsFragment.newInstance(Regions.page3Regions))
-        }
-    }
     private val eventAdapter = EventBannerAdapter()
     private val eventBannerOffsetPx by lazy {
         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.event_banner_page_margin)
@@ -48,8 +41,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         // 지역별 여행지 추천
         with(binding.layoutHomeRecommendByRegion) {
-            vpRegion.adapter = regionPagerAdapter
+            vpRegion.adapter = RegionViewPagerAdapter(this@HomeFragment).apply {
+                addFragment(RegionsFragment.newInstance(Regions.page1Regions))
+                addFragment(RegionsFragment.newInstance(Regions.page2Regions))
+                addFragment(RegionsFragment.newInstance(Regions.page3Regions))
+            }
             indicator.setViewPager2(vpRegion)
+
         }
 
         // 이벤트 배너
