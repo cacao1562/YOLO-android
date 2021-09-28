@@ -43,6 +43,17 @@ object DataBinding {
     }
 
     @JvmStatic
+    @BindingAdapter("loadImageProfile")
+    fun loadImageProfile(imageView: ImageView, path: String?) {
+        imageView.setImageResource(R.drawable.img_img_noprofile)
+        if (!path.isNullOrEmpty())
+            Glide.with(imageView)
+                .load(path)
+                .into(imageView)
+    }
+
+
+    @JvmStatic
     @BindingAdapter("setUriItems")
     fun setUriItems(recyclerView: RecyclerView, items: List<Uri>) {
         if (recyclerView.adapter == null) {
@@ -57,7 +68,8 @@ object DataBinding {
 
     @JvmStatic
     @BindingAdapter("navigateTo")
-    fun navigateTo(view: View, action: NavDirections) {
+    fun navigateTo(view: View, action: NavDirections?) {
+        if (action == null) return
         view.setOnClickListener {
             view.findNavController().safeNavigate(action)
         }
@@ -87,6 +99,12 @@ object DataBinding {
     @BindingAdapter("isSelected")
     fun setIsSelected(view: View, selected: Boolean) {
         view.isSelected = selected
+    }
+
+    @JvmStatic
+    @BindingAdapter("isEnable")
+    fun setIsEnable(view: View, isEnable: Boolean) {
+        view.isEnabled = isEnable
     }
 
     @JvmStatic

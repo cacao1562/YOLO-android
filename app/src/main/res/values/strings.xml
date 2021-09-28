@@ -65,4 +65,19 @@
 <!--    욜로갈래-->
     <string name="top_title_magazine">욜로갈래</string>
 
+<!--    마이페이지-->
+    <string name="top_title_mypage">마이페이지</string>
+    <string name="mypage_like">찜</string>
+    <string name="mypage_my_spot">내스팟</string>
+    <string name="mypage_callcenter">고객센터</string>
+    <string name="mypage_coupon">쿠폰</string>
+    <string name="mypage_notice">공지사항</string>
+    <string name="mypage_guide">사용자 가이드</string>
+
+<!--    프로필 수정-->
+    <string name="top_title_profile_update">프로필 수정</string>
+    <string name="profile_update">수정완료</string>
+    <string name="alert_update_nickName">설정하신 닉네임이 저장되었습니다.</string>
+    <string name="alert_delete_profile_image">프로필 사진이 삭제되었습니다.</string>
+
 </resources>

@@ -49,4 +49,20 @@ interface YoloRepository {
                               onStart: () -> Unit,
                               onComplete: () -> Unit
     ): Flow<ResultData<CommonResponse>>
+
+    suspend fun getMyProfile(onStart: () -> Unit,
+                             onComplete: () -> Unit
+    ): Flow<ResultData<ProfileResponse>>
+
+    suspend fun updateProfile(param: HashMap<String, RequestBody>,
+                              image: MultipartBody.Part?,
+                              onStart: () -> Unit,
+                              onComplete: () -> Unit
+
+    ): Flow<ResultData<CommonResponse>>
+
+    suspend fun deleteProfileImage(imageUrl: String,
+                                   onStart: () -> Unit,
+                                   onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>>
 }

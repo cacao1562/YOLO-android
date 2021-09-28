@@ -20,6 +20,22 @@ interface YoloApiService {
     @GET("home")
     fun getHomeInfo(): Single<HomeResponse>
 
+    @GET("account/profile")
+    suspend fun getMyProfile(): Response<ProfileResponse>
+
+    @PUT("account/profile")
+    @Multipart
+    suspend fun updateProfile(
+        @PartMap params: HashMap<String, RequestBody>,
+        @Part image: MultipartBody.Part?
+    ): Response<CommonResponse>
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "account/profile/image", hasBody = true)
+    suspend fun deleteProfileImage(
+        @Field("imageUrl") imageUrl: String
+    ): Response<CommonResponse>
+
     @POST("community")
     @Multipart
     suspend fun uploadPost(

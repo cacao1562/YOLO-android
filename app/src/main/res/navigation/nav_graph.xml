@@ -39,6 +39,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_profileUpdateFragment"
+            app:destination="@id/profileUpdateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -110,5 +117,19 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/profileUpdateFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.profile_update.ProfileUpdateFragment"
+        android:label="ProfileUpdateFragment"
+        tools:layout="@layout/fragment_mypage">
+        <argument
+            android:name="profile"
+            app:argType="com.yolo.yolo_android.model.MyProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.MyPageFragment"
+        android:label="MyPageFragment"
+        tools:layout="@layout/fragment_profile_update"/>
 
 </navigation>

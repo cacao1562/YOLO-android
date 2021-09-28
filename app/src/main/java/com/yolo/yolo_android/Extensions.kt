@@ -15,6 +15,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.View
+import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.coroutineScope
@@ -162,4 +163,10 @@ fun Uri.asMultipart(name: String, contentResolver: ContentResolver): MultipartBo
 
 fun NavController.safeNavigate(direction: NavDirections) {
     currentDestination?.getAction(direction.actionId)?.run { navigate(direction) }
+}
+
+fun Group.addOnClickListener(listener: (view: View) -> Unit) {
+    referencedIds.forEach { id ->
+        rootView.findViewById<View>(id).setOnClickListener(listener)
+    }
 }

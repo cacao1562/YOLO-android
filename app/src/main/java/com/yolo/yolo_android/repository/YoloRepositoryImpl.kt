@@ -79,4 +79,28 @@ class YoloRepositoryImpl @Inject constructor(
     ): Flow<ResultData<CommonResponse>> {
         return datasource.deleteComment(commentId, onStart, onComplete)
     }
+
+    override suspend fun getMyProfile(
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<ProfileResponse>> {
+        return datasource.getMyProfile(onStart, onComplete)
+    }
+
+    override suspend fun updateProfile(
+        param: HashMap<String, RequestBody>,
+        image: MultipartBody.Part?,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        return datasource.updateProfile(param, image, onStart, onComplete)
+    }
+
+    override suspend fun deleteProfileImage(
+        imageUrl: String,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        return datasource.deleteProfileImage(imageUrl, onStart, onComplete)
+    }
 }
