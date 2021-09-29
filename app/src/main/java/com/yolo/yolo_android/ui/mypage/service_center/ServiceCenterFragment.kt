@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import com.kakao.sdk.common.util.KakaoCustomTabsClient
+import com.kakao.sdk.talk.TalkApiClient
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentServiceCenterBinding
@@ -18,7 +20,10 @@ class ServiceCenterFragment: BindingFragment<FragmentServiceCenterBinding>(R.lay
                 startActivity(it)
             }
         }
-        binding.tvServiceCenterKakao.setOnClickListener {  }
+        binding.tvServiceCenterKakao.setOnClickListener {
+            val url = TalkApiClient.instance.channelChatUrl("_panys")
+            KakaoCustomTabsClient.openWithDefault(requireContext(), url)
+        }
         binding.tvServiceCenterEmail.setOnClickListener {
             Intent(Intent.ACTION_SEND).also {
                 it.type = "plain/text";
