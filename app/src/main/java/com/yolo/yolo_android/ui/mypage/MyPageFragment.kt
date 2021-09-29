@@ -1,6 +1,7 @@
 package com.yolo.yolo_android.ui.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,12 +31,25 @@ class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_m
         binding.llMypageProfileName.setOnClickListener {
             presentProfileUpdate()
         }
+        binding.ivMypageSetting.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToSettingFragment()
+            findNavController().safeNavigate(action)
+        }
+        binding.tvMypageMySpot.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToMySpotFragment()
+            findNavController().safeNavigate(action)
+        }
+        binding.tvMypageServiceCenter.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToServiceCenterFragment()
+            findNavController().safeNavigate(action)
+        }
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
             ?.getLiveData<Boolean>(ProfileUpdateFragment.KEY_FROM_UPDATE_PROFILE)?.observe(viewLifecycleOwner) {
             if (it) {
                 viewModel.callGetMyProfile()
+                findNavController().currentBackStackEntry?.savedStateHandle?.remove<Boolean>(ProfileUpdateFragment.KEY_FROM_UPDATE_PROFILE)
             }
         }
     }

@@ -46,6 +46,27 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_mySpotFragment"
+            app:destination="@id/mySpotFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_serviceCenterFragment"
+            app:destination="@id/serviceCenterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -121,7 +142,7 @@
         android:id="@+id/profileUpdateFragment"
         android:name="com.yolo.yolo_android.ui.mypage.profile_update.ProfileUpdateFragment"
         android:label="ProfileUpdateFragment"
-        tools:layout="@layout/fragment_mypage">
+        tools:layout="@layout/fragment_profile_update">
         <argument
             android:name="profile"
             app:argType="com.yolo.yolo_android.model.MyProfile" />
@@ -130,6 +151,21 @@
         android:id="@+id/myPageFragment"
         android:name="com.yolo.yolo_android.ui.mypage.MyPageFragment"
         android:label="MyPageFragment"
-        tools:layout="@layout/fragment_profile_update"/>
+        tools:layout="@layout/fragment_mypage"/>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"/>
+    <fragment
+        android:id="@+id/mySpotFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.myspot.MySpotFragment"
+        android:label="MySpotFragment"
+        tools:layout="@layout/fragment_my_spot"/>
+    <fragment
+        android:id="@+id/serviceCenterFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.service_center.ServiceCenterFragment"
+        android:label="ServiceCenterFragment"
+        tools:layout="@layout/fragment_service_center"/>
 
 </navigation>

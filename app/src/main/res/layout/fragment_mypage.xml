@@ -27,6 +27,7 @@
         </com.yolo.yolo_android.ui.custom.TopNavBarView>
 
         <ImageView
+            android:id="@+id/iv_mypage_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icn_40_settings"
@@ -120,6 +121,7 @@
                 android:drawablePadding="4dp" />
 
             <TextView
+                android:id="@+id/tv_mypage_my_spot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -132,13 +134,14 @@
                 android:drawablePadding="4dp" />
 
             <TextView
+                android:id="@+id/tv_mypage_service_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="13dp"
                 android:textColor="@color/font_black_131313"
                 android:fontFamily="@font/notosanskr_regular_hestia"
-                android:text="@string/mypage_callcenter"
+                android:text="@string/top_title_service_center"
                 android:textAlignment="center"
                 android:drawableTop="@drawable/icn_44_my_call"
                 android:drawablePadding="4dp" />

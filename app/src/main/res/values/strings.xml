@@ -69,7 +69,6 @@
     <string name="top_title_mypage">마이페이지</string>
     <string name="mypage_like">찜</string>
     <string name="mypage_my_spot">내스팟</string>
-    <string name="mypage_callcenter">고객센터</string>
     <string name="mypage_coupon">쿠폰</string>
     <string name="mypage_notice">공지사항</string>
     <string name="mypage_guide">사용자 가이드</string>
@@ -79,5 +78,30 @@
     <string name="profile_update">수정완료</string>
     <string name="alert_update_nickName">설정하신 닉네임이 저장되었습니다.</string>
     <string name="alert_delete_profile_image">프로필 사진이 삭제되었습니다.</string>
+
+<!--    설정-->
+    <string name="top_title_setting">설정</string>
+    <string name="setting_notification">알림정보</string>
+    <string name="setting_version">버전정보</string>
+    <string name="setting_policy">약관 및 정책</string>
+    <string name="setting_user_guide">사용자 가이드</string>
+    <string name="setting_suggestion_guide">제휴사 제안 가이드</string>
+    <string name="setting_user_expire">회원탈퇴</string>
+    <string name="setting_logout">로그아웃</string>
+
+<!--    내스팟-->
+    <string name="top_title_myspot">내스팟</string>
+
+<!--    고객센터-->
+    <string name="top_title_service_center">고객센터</string>
+    <string name="service_center_question">궁금하신 점이 있으신가요?</string>
+    <string name="service_center_number">070.7383.9033</string>
+    <string name="service_center_time">오전 9시 ~ 오후6시 (공휴일 제외)</string>
+    <string name="service_center_call">전화 연결하기</string>
+    <string name="service_center_caution">*공휴일에는 답변이 늦어질 수 있는점 참고부탁드립니다</string>
+    <string name="service_center_kakao">카카오톡 문의하기</string>
+    <string name="service_center_email">이메일 문의하기</string>
+
+
 
 </resources>

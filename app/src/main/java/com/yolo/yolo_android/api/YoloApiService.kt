@@ -82,4 +82,8 @@ interface YoloApiService {
         @Path("commentId") commentId: Int
     ): Response<CommonResponse>
 
+    @GET("account/post")
+    suspend fun getMyPostList(
+        @Query("page") page: Int
+    ): CommunityListResponse
 }
