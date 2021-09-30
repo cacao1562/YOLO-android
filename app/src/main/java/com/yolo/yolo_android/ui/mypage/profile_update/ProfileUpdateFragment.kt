@@ -63,10 +63,12 @@ class ProfileUpdateFragment: BindingFragment<FragmentProfileUpdateBinding>(R.lay
     private fun presentDialog() {
         val data = FilterListData("프로필 사진 변경", ProfileUpdateOptions::class.java)
         val dialog = FilterBottomDialog.newInstance(data) {
-            val type = ProfileUpdateOptions.valueOf(it)
-            when(type) {
-                ProfileUpdateOptions.OPTION_01 -> viewModel.presentImagePicker(requireContext())
-                ProfileUpdateOptions.OPTION_02 -> viewModel.deleteProfileImage()
+            if (it != "dismiss") {
+                val type = ProfileUpdateOptions.valueOf(it)
+                when(type) {
+                    ProfileUpdateOptions.OPTION_01 -> viewModel.presentImagePicker(requireContext())
+                    ProfileUpdateOptions.OPTION_02 -> viewModel.deleteProfileImage()
+                }
             }
         }
         dialog.show(childFragmentManager, dialog.tag)
