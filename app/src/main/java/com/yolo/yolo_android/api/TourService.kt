@@ -10,10 +10,12 @@ interface TourService {
     suspend fun fetchList(
         @Query("ServiceKey") ServiceKey: String,
         @Query("contentTypeId") contentTypeId: Int?,
+        @Query("areaCode") areaCode: Int,
         @Query("numOfRows") numOfRows: Int,
         @Query("pageNo") pageNo: Int,
-        @Query("MobileOS") MobileOS: String = "ETC",
-        @Query("MobileApp") MobileApp: String = "AppTest",
+        @Query("MobileOS") MobileOS: String = "AND",
+        @Query("MobileApp") MobileApp: String = "YOLO",
+        @Query("arrange") arrange: String = "P",
         @Query("_type") _type: String = "json"
     ): TestResponse
 

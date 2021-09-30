@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class HomeListDataSource @Inject constructor(
     private val service: TourService,
+    private val areaCode: Int,
     private val contentTypeId: Int?
 ): PagingSource<Int, Item>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
@@ -18,10 +19,11 @@ class HomeListDataSource @Inject constructor(
             val currentLoadingPageKey = params.key ?: 1
 
             val response = service.fetchList(
-                BuildConfig.SERVICE_KEY,
-                contentTypeId,
-                20,
-                currentLoadingPageKey
+                ServiceKey = BuildConfig.SERVICE_KEY,
+                contentTypeId = contentTypeId,
+                areaCode = areaCode,
+                numOfRows = 20,
+                pageNo = currentLoadingPageKey
 
             )
             if (response.response.header.resultCode != "0000") throw Exception(response.response.header.resultCode)

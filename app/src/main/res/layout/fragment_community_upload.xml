@@ -223,7 +223,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="@dimen/default_margin_24"
-                android:background="@drawable/bg_picture_upload_btn"
+                android:background="@drawable/bg_enable_btn"
                 android:fontFamily="@font/notosanskr_medium_hestia"
                 android:onClick="@{(v) -> viewModel.clickUploadPost(v.context)}"
                 android:text="@string/picture_upload"

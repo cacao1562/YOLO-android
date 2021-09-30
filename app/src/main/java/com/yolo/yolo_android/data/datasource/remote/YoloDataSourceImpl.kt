@@ -7,7 +7,6 @@ import com.yolo.yolo_android.common.extensions.toResult
 import com.yolo.yolo_android.data.ResultData
 import com.yolo.yolo_android.data.error.ErrorHandlerImpl
 import com.yolo.yolo_android.model.*
-import com.yolo.yolo_android.util.MyLogger
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -114,6 +113,45 @@ class YoloDataSourceImpl @Inject constructor(
         return flow {
             emit(safeApiCall(errorHandler) {
                 yoloService.deleteComment(commentId)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getMyProfile(
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<ProfileResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.getMyProfile()
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun updateProfile(
+        param: HashMap<String, RequestBody>,
+        image: MultipartBody.Part?,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.updateProfile(param, image)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun deleteProfileImage(
+        imageUrl: String,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<CommonResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.deleteProfileImage(imageUrl)
             })
         }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
     }

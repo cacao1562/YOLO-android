@@ -14,26 +14,28 @@ import dagger.assisted.AssistedInject
 
 class HomeListViewModel @AssistedInject constructor(
     private val service: TourService,
+    @Assisted private val areaCode: Int,
     @Assisted private val contentTypeId: Int?
 ): ViewModel() {
 
     val listData = Pager(PagingConfig(20)) {
-        HomeListDataSource(service, contentTypeId)
+        HomeListDataSource(service, areaCode, contentTypeId)
     }.flow.cachedIn(viewModelScope)
 
     @AssistedFactory
     interface HomeListViewModelFactory {
-        fun create(contentTypeId: Int?): HomeListViewModel
+        fun create(areaCode: Int, contentTypeId: Int?): HomeListViewModel
     }
 
     companion object {
         fun provideFactory(
             assistedFactory: HomeListViewModelFactory,
+            areaCode: Int,
             contentTypeId: Int?
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return assistedFactory.create(contentTypeId) as T
+                return assistedFactory.create(areaCode, contentTypeId) as T
             }
         }
     }

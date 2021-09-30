@@ -19,6 +19,7 @@ class CommonDialog: DialogFragment() {
         const val KEY_MSG = "KEY_MSG"
         const val KEY_TYPE = "KEY_TYPE"
         const val KEY_POST_ID = "KEY_POST_ID"
+        const val REQ_RESULT_CONFIRM = "REQ_RESULT_CONFIRM"
         const val REQ_RESULT_POST_ID = "REQ_RESULT_POST_ID"
 
         fun newInstance(title: String,
@@ -50,6 +51,7 @@ class CommonDialog: DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.btnDialogConfirm.setOnClickListener {
+            setFragmentResult(REQ_RESULT_CONFIRM, bundleOf())
             dismissAllowingStateLoss()
         }
         binding.btnDialogCancel.setOnClickListener {

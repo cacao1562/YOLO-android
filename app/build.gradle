@@ -130,6 +130,7 @@ dependencies {
         exclude group: 'com.squareup.retrofit2', module: 'retrofit'
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
+    implementation "com.kakao.sdk:v2-talk:2.8.1" // 친구, 메시지(카카오톡)
 
     // rx
     def rxJava_version = "2.2.16"
