@@ -36,6 +36,13 @@ class FilterBottomDialog: BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogFilterBottomBinding
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        if (clickResult != null) {
+            clickResult.invoke("dismiss")
+        }
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

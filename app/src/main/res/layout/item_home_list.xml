@@ -29,7 +29,7 @@
                 android:id="@+id/iv_item_home_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:loadImageOrDefault="@{data.firstimage}"
+                app:loadImageOrDefault="@{data.firstimage2}"
                 android:scaleType="centerCrop" />
         </androidx.cardview.widget.CardView>
 

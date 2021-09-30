@@ -15,6 +15,9 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -169,4 +172,13 @@ fun Group.addOnClickListener(listener: (view: View) -> Unit) {
     referencedIds.forEach { id ->
         rootView.findViewById<View>(id).setOnClickListener(listener)
     }
+}
+
+fun rotateFilterArrow(isDefault: Boolean, view: View) {
+    val anim = if (isDefault) RotateAnimation(-180f, 0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+    else RotateAnimation(0f, -180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+    anim.duration = 250
+    anim.interpolator = LinearInterpolator()
+    anim.fillAfter = true
+    view.startAnimation(anim)
 }

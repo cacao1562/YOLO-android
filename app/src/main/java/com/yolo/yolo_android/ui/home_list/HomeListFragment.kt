@@ -13,6 +13,7 @@ import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentHomeListBinding
 import com.yolo.yolo_android.dpToPx
 import com.yolo.yolo_android.model.FilterListData
+import com.yolo.yolo_android.rotateFilterArrow
 import com.yolo.yolo_android.ui.dialog.FilterBottomDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -24,11 +25,13 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
     companion object {
 
+        const val AREA_NUMBER = "AREA_NUMBER"
         const val CATEGORY_NUMBER = "CATEGORY_NUMBER"
 
-        fun newInstance(number: Int): HomeListFragment {
+        fun newInstance(areaCode: Int, contentTypeId: Int): HomeListFragment {
             val bundle = Bundle()
-            bundle.putInt(CATEGORY_NUMBER, number)
+            bundle.putInt(AREA_NUMBER, areaCode)
+            bundle.putInt(CATEGORY_NUMBER, contentTypeId)
             val fragment = HomeListFragment()
             fragment.arguments = bundle
             return fragment
@@ -39,8 +42,9 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
     lateinit var factory: HomeListViewModel.HomeListViewModelFactory
 
     private val viewModel: HomeListViewModel by viewModels {
-        val id = arguments?.getInt(CATEGORY_NUMBER)
-        HomeListViewModel.provideFactory(factory, if (id == -1) null else id)
+        val areaCode = arguments?.getInt(AREA_NUMBER)
+        val contentTypeId = arguments?.getInt(CATEGORY_NUMBER)
+        HomeListViewModel.provideFactory(factory, areaCode ?: -1, if (contentTypeId == -1) null else contentTypeId)
     }
 
     private var mSelectedType = HomeListFilter.OPTION_01
@@ -69,11 +73,18 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
             }
         }
 
-        binding.tvHomeListFilter.setOnClickListener {
+        binding.llHomeListFilter.setOnClickListener {
+
+            rotateFilterArrow(false, binding.ivHomeListFilterDropdown)
+
             val data = FilterListData("정렬 방법", HomeListFilter::class.java, mSelectedType)
             val dialog = FilterBottomDialog.newInstance(data) {
-                mSelectedType = HomeListFilter.valueOf(it)
-                binding.tvHomeListFilter.text = mSelectedType.options
+                if (it == "dismiss") {
+                    rotateFilterArrow(true, binding.ivHomeListFilterDropdown)
+                }else {
+                    mSelectedType = HomeListFilter.valueOf(it)
+                    binding.tvHomeListFilter.text = mSelectedType.options
+                }
             }
             dialog.show(childFragmentManager, dialog.tag)
 

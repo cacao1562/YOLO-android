@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.yolo.yolo_android.ui.home_list.HomeListFragment
 
 class HomeListPagerAdapter(
+    private val areaCode: Int,
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
@@ -16,15 +17,15 @@ class HomeListPagerAdapter(
     override fun createFragment(position: Int): Fragment {
 
         return when (position) {
-            0 -> HomeListFragment.newInstance(-1)
-            1 -> HomeListFragment.newInstance(12)
-            2 -> HomeListFragment.newInstance(14)
-            3 -> HomeListFragment.newInstance(15)
-            4 -> HomeListFragment.newInstance(25)
-            5 -> HomeListFragment.newInstance(28)
-            6 -> HomeListFragment.newInstance(32)
-            7 -> HomeListFragment.newInstance(38)
-            8 -> HomeListFragment.newInstance(39)
+            0 -> HomeListFragment.newInstance(areaCode, -1)
+            1 -> HomeListFragment.newInstance(areaCode, 12)
+            2 -> HomeListFragment.newInstance(areaCode, 14)
+            3 -> HomeListFragment.newInstance(areaCode, 15)
+            4 -> HomeListFragment.newInstance(areaCode, 25)
+            5 -> HomeListFragment.newInstance(areaCode, 28)
+            6 -> HomeListFragment.newInstance(areaCode, 32)
+            7 -> HomeListFragment.newInstance(areaCode, 38)
+            8 -> HomeListFragment.newInstance(areaCode, 39)
             else -> error("No Fragment")
         }
     }

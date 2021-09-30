@@ -137,6 +137,11 @@
             app:argType="com.yolo.yolo_android.model.Region"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_homeTabFragment_self"
+            app:destination="@id/homeTabFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeTabFragment"/>
     </fragment>
     <fragment
         android:id="@+id/profileUpdateFragment"
