@@ -35,6 +35,14 @@ class DataStoreModule(val context: Context) {
         set(KEY_LOGIN_TYPE, loginType)
         set(KEY_USER_ID, userId)
     }
+
+    suspend fun clearLoginInfo() {
+        context.dataStore.edit {
+            it.remove(KEY_USER_TOKEN)
+            it.remove(KEY_LOGIN_TYPE)
+            it.remove(KEY_USER_ID)
+        }
+    }
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "yoloDataStore")

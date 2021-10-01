@@ -5,203 +5,220 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription, SpUsage">
 
         <com.yolo.yolo_android.ui.custom.TopNavBarView
             android:id="@+id/view_top_nav"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:title_text="@string/top_title_setting"
-            app:visible_back="true"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:title_text="@string/top_title_setting"
+            app:visible_back="true" />
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fillViewport="true"
-            app:layout_constraintTop_toBottomOf="@+id/view_top_nav"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_top_nav">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="15dp"
-                android:showDividers="middle"
                 android:divider="@drawable/divider_setting"
+                android:orientation="vertical"
                 android:paddingStart="@dimen/default_margin_24"
-                android:paddingEnd="@dimen/default_margin_24">
+                android:paddingEnd="@dimen/default_margin_24"
+                android:showDividers="middle">
 
                 <LinearLayout
                     android:id="@+id/ll_setting_notice"
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/mypage_notice"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/mypage_notice" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_24_arrow_70"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icn_24_arrow_70" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_notification"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_notification" />
+
                     <Switch
                         android:layout_width="wrap_content"
                         android:layout_height="27dp"
+                        android:layout_gravity="center"
                         android:switchMinWidth="0dp"
                         android:textOff=""
                         android:textOn=""
+                        android:thumb="@drawable/bg_switch_thumb"
                         android:thumbTextPadding="10.5dp"
                         android:track="@drawable/selected_switch_setting"
-                        android:thumb="@drawable/bg_switch_thumb"
-                        android:layout_gravity="center"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_version"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_version" />
+
                     <TextView
                         android:id="@+id/tv_setting_version"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/color_gray_707070"
-                        android:fontFamily="@font/notosanskr_regular_hestia"
                         android:layout_gravity="center"
-                        tools:text="1.0.0"/>
+                        android:fontFamily="@font/notosanskr_regular_hestia"
+                        android:textColor="@color/color_gray_707070"
+                        android:textSize="14dp"
+                        tools:text="1.0.0" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_setting_policy"
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_policy"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_policy" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_24_arrow_70"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icn_24_arrow_70" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_setting_user_guide"
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_user_guide"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_user_guide" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_24_arrow_70"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icn_24_arrow_70" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_setting_suggestion_guide"
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_suggestion_guide"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_suggestion_guide" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_24_arrow_70"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icn_24_arrow_70" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_setting_user_expire"
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_user_expire"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_user_expire" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_24_arrow_70"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icn_24_arrow_70" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_setting_logout"
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
-                    android:orientation="horizontal"
-                    android:background="?selectableItemBackground">
+                    android:background="?selectableItemBackground"
+                    android:orientation="horizontal">
+
                     <TextView
                         style="@style/settingItemTextAppearance"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_logout"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/setting_logout" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_24_arrow_70"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icn_24_arrow_70" />
                 </LinearLayout>
 
             </LinearLayout>
