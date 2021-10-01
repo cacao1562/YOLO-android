@@ -14,6 +14,7 @@ import com.yolo.yolo_android.databinding.FragmentProfileUpdateBinding
 import com.yolo.yolo_android.model.FilterListData
 import com.yolo.yolo_android.ui.dialog.CommonDialog
 import com.yolo.yolo_android.ui.dialog.FilterBottomDialog
+import com.yolo.yolo_android.util.MyLogger
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

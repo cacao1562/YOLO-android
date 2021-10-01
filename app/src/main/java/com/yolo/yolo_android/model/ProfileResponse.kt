@@ -11,7 +11,7 @@ data class ProfileResponse(
 @Parcelize
 data class MyProfile(
     val accountId: Int,
-    val socialId: Double,
+    val socialId: String?,
     val type: String,
     val nickname: String,
     val imageUrl: String?

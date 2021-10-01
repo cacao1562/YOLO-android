@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.yolo.yolo_android.DialogButtonType
 import com.yolo.yolo_android.databinding.DialogCommonBinding
+import com.yolo.yolo_android.util.MyLogger
 
 class CommonDialog: DialogFragment() {
 
@@ -46,7 +47,7 @@ class CommonDialog: DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DialogCommonBinding.inflate(layoutInflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
