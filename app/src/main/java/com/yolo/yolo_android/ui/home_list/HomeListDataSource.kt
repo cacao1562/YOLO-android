@@ -11,6 +11,7 @@ import javax.inject.Inject
 class HomeListDataSource @Inject constructor(
     private val service: TourService,
     private val areaCode: Int,
+    private val arrange: String,
     private val contentTypeId: Int?
 ): PagingSource<Int, Item>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
@@ -22,6 +23,7 @@ class HomeListDataSource @Inject constructor(
                 ServiceKey = BuildConfig.SERVICE_KEY,
                 contentTypeId = contentTypeId,
                 areaCode = areaCode,
+                arrange = arrange,
                 numOfRows = 20,
                 pageNo = currentLoadingPageKey
 

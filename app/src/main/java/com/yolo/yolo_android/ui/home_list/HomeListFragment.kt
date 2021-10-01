@@ -2,11 +2,14 @@ package com.yolo.yolo_android.ui.home_list
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
@@ -38,6 +41,8 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         }
     }
 
+    private var mFilterType: HomeListBaseFilter = HomeListBaseFilter.OPTION_02
+
     @Inject
     lateinit var factory: HomeListViewModel.HomeListViewModelFactory
 
@@ -47,7 +52,6 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         HomeListViewModel.provideFactory(factory, areaCode ?: -1, if (contentTypeId == -1) null else contentTypeId)
     }
 
-    private var mSelectedType = HomeListFilter.OPTION_01
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +59,9 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         savedInstanceState: Bundle?
     ): View? {
         val root = super.onCreateView(inflater, container, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.tvHomeListFilter.text = mFilterType.options
+
         val homeListPagingAdapter = HomeListPagingAdapter()
         binding.rvHomeList.apply {
             adapter = homeListPagingAdapter
@@ -77,22 +84,57 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
             rotateFilterArrow(false, binding.ivHomeListFilterDropdown)
 
-            val data = FilterListData("정렬 방법", HomeListFilter::class.java, mSelectedType)
+            val data = FilterListData("정렬 방법", HomeListBaseFilter::class.java, mFilterType)
             val dialog = FilterBottomDialog.newInstance(data) {
                 if (it == "dismiss") {
                     rotateFilterArrow(true, binding.ivHomeListFilterDropdown)
                 }else {
-                    mSelectedType = HomeListFilter.valueOf(it)
-                    binding.tvHomeListFilter.text = mSelectedType.options
+                    mFilterType = HomeListBaseFilter.valueOf(it)
+                    binding.tvHomeListFilter.text = mFilterType.options
+                    viewModel.setArrage(mFilterType.optionValue)
+                    homeListPagingAdapter.refresh()
                 }
             }
             dialog.show(childFragmentManager, dialog.tag)
+        }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeListPagingAdapter.loadStateFlow.collectLatest { loadStates ->
+                Log.d("error addLoadStateListener", "${loadStates}")
+                binding.llHomeListError.isVisible = loadStates.source.refresh is LoadState.Error
+
+                val errorState = loadStates.source.refresh as? LoadState.Error
+                    ?: loadStates.refresh as? LoadState.Error
+                    ?: loadStates.append as? LoadState.Error
+                    ?: loadStates.prepend as? LoadState.Error
+                errorState?.let {
+                    viewModel._toastMessage.emit(it.error.message ?: "")
+                }
+
+            }
+        }
+
+        binding.btnHomeListRetry.setOnClickListener {
+            homeListPagingAdapter.retry()
         }
 
         return root
     }
 
+}
+
+enum class HomeListBaseFilter(val options: String, val optionValue: String) {
+    OPTION_01("제목순", "O"),
+    OPTION_02("조회순", "P"),
+    OPTION_03("수정일순", "Q"),
+    OPTION_04("생성일순", "R");
+
+    override fun toString(): String {
+        return options.toString()
+    }
+    companion object {
+        fun from(type: String?): HomeListBaseFilter = HomeListBaseFilter.values().find { it.options == type } ?: HomeListBaseFilter.OPTION_02
+    }
 }
 
 enum class HomeListFilter(val options: String) {
