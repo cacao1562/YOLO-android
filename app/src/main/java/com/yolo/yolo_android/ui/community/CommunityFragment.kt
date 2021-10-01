@@ -8,6 +8,8 @@ import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityBinding
 import com.yolo.yolo_android.safeNavigate
+import com.yolo.yolo_android.ui.community_list.CommunityListFragment
+import com.yolo.yolo_android.ui.community_upload.CommunityUploadFragment
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
 
 class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
@@ -26,6 +28,22 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
             tab.text = tabTitle[position]
         }.attach()
         binding.vp2Community.isUserInputEnabled = false
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Boolean>(CommunityUploadFragment.KEY_FROM_UPLOAD_SUCCESS)?.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.tlCommunityTab.getTabAt(1)?.select()
+                    val fragment = childFragmentManager.findFragmentByTag("f" + binding.vp2Community.currentItem)
+                    if (fragment is CommunityListFragment) {
+                        fragment.refreshAdapter()
+                    }
+                    findNavController().currentBackStackEntry?.savedStateHandle?.remove<Boolean>(
+                        CommunityUploadFragment.KEY_FROM_UPLOAD_SUCCESS
+                    )
+                }
+            }
 
         binding.ivCreatePost.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToCommunityUploadFragment()

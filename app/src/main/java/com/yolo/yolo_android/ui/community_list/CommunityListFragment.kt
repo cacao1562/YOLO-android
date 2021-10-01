@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.*
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentCommunityListBinding
@@ -18,6 +19,9 @@ import com.yolo.yolo_android.model.CallbackPostButton
 import com.yolo.yolo_android.ui.dialog.CommonDialog
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -47,6 +51,8 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
 
     lateinit var mAdapter: CommunityListPagingAdapter
 
+    private var evnetRefresh = false
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
@@ -73,6 +79,15 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
             }
         }
 
+        mAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (evnetRefresh && itemCount == 1) {
+                    binding.rvCommunityList.scrollToPosition(0)
+                    evnetRefresh = false
+                }
+                super.onItemRangeInserted(positionStart, itemCount)
+            }
+        })
     }
 
     private fun initAdapter() {
@@ -111,6 +126,14 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
         }
     }
 
+
+    fun refreshAdapter() {
+        evnetRefresh = true
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(300)
+            mAdapter.refresh()
+        }
+    }
 
     private fun presentDialog(id: Int) {
         val dialog = CommonDialog

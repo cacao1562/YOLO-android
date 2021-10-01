@@ -30,7 +30,8 @@
             <ImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                app:loadImageOrDefault="@{data.authorImage}"/>
+                android:scaleType="centerCrop"
+                app:loadImageProfile="@{data.authorImage}"/>
 
         </androidx.cardview.widget.CardView>
 
