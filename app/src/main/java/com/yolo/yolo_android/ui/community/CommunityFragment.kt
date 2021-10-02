@@ -28,7 +28,7 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
             tab.text = tabTitle[position]
         }.attach()
         binding.vp2Community.isUserInputEnabled = false
-
+        binding.vp2Community.isSaveEnabled = false
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle

@@ -5,6 +5,8 @@ import androidx.paging.PagingState
 import com.yolo.yolo_android.BuildConfig
 import com.yolo.yolo_android.api.TourService
 import com.yolo.yolo_android.model.Item
+import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 
@@ -13,7 +15,7 @@ class HomeListDataSource @Inject constructor(
     private val areaCode: Int,
     private val arrange: String,
     private val contentTypeId: Int?
-): PagingSource<Int, Item>() {
+) : PagingSource<Int, Item>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
         try {
 
@@ -28,17 +30,25 @@ class HomeListDataSource @Inject constructor(
                 pageNo = currentLoadingPageKey
 
             )
-            if (response.response.header.resultCode != "0000") throw Exception(response.response.header.resultCode)
 
             val responseData = response.response.body.items.item
 
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
+            val nextKey = if (responseData.isNullOrEmpty()) null else currentLoadingPageKey.plus(1)
 
             return LoadResult.Page(
                 data = responseData,
                 prevKey = prevKey,
-                nextKey = currentLoadingPageKey.plus(1)
+                nextKey = nextKey
             )
+
+        } catch (e: IOException) {
+            // IOException for network failures.
+            return LoadResult.Error(Exception("인터넷 연결을 확인해 주세요."))
+        } catch (e: HttpException) {
+            return LoadResult.Error(e)
+        } catch (e: com.squareup.moshi.JsonDataException) {
+            return LoadResult.Error(Exception(""))
         } catch (e: Exception) {
             return LoadResult.Error(e)
         }

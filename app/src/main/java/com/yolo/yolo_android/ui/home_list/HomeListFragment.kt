@@ -102,13 +102,15 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
             homeListPagingAdapter.loadStateFlow.collectLatest { loadStates ->
                 Log.d("error addLoadStateListener", "${loadStates}")
                 binding.llHomeListError.isVisible = loadStates.source.refresh is LoadState.Error
-
+                viewModel._isLoading.value = loadStates.source.append is LoadState.Loading
                 val errorState = loadStates.source.refresh as? LoadState.Error
                     ?: loadStates.refresh as? LoadState.Error
                     ?: loadStates.append as? LoadState.Error
                     ?: loadStates.prepend as? LoadState.Error
                 errorState?.let {
-                    viewModel._toastMessage.emit(it.error.message ?: "")
+                    if (!it.error.message.isNullOrEmpty()) {
+                        viewModel._toastMessage.emit(it.error.message!!)
+                    }
                 }
 
             }
