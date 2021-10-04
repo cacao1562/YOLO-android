@@ -1,5 +1,6 @@
 package com.yolo.yolo_android.ui.community_list
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -146,9 +147,18 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
 
     private fun presentMap(callback: CallbackPostButton.Map) {
         val url = "kakaomap://look?p=${callback.latitude},${callback.longitude}"
-        Intent(Intent.ACTION_VIEW, Uri.parse(url)).also {
-            startActivity(it)
+        try {
+            Intent(Intent.ACTION_VIEW, Uri.parse(url)).also {
+                startActivity(it)
+            }
+        }catch (e: ActivityNotFoundException) {
+            Intent(Intent.ACTION_VIEW).also { intent ->
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.data = Uri.parse("market://details?id=net.daum.android.map")
+                startActivity(intent)
+            }
         }
+
     }
 
     private fun presentComment(id: Int) {

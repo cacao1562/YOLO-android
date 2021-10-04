@@ -66,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icn_24_more"
+            app:isVisible="@{data.author}"
             app:layout_constraintTop_toTopOf="@+id/iv_post_profile_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/iv_post_profile_img"/>

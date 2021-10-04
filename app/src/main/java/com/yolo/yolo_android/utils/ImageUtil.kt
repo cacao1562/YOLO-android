@@ -10,7 +10,6 @@ import android.util.Log
 import androidx.exifinterface.media.ExifInterface
 import com.yolo.yolo_android.uri2path
 import java.io.*
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -27,7 +26,8 @@ object ImageUtil {
             val img = uri2path(context, uri)
             val path = img.first ?: return null
             if (img.second != null) {
-                if (img.second!! > 1000000) {
+                // 파일 사이즈 1MB 이상이면 resize
+                if (img.second!! > 1048576) {
                     val options = BitmapFactory.Options()
                     options.inSampleSize = 2
                     var bitmap = BitmapFactory.decodeFile(path, options)

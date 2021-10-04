@@ -11,7 +11,19 @@ plugins {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+    signingConfigs {
+        release {
+            keyAlias 'upload'
+            storeFile file('/Users/hwanungyu/Work_Android_2021/YOLO-android/yolo-key')
+            storePassword keystoreProperties['password']
+            keyPassword keystoreProperties['password']
+        }
+    }
     compileSdk 30
 
     defaultConfig {
@@ -39,7 +51,9 @@ android {
         }
         release {
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

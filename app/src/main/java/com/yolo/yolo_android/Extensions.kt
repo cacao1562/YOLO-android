@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.OpenableColumns
-import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.View
@@ -61,12 +60,15 @@ fun Int.dpToPx(): Int = (this * YoLoApplication.context!!.resources.displayMetri
 fun Int.toDp() : Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), YoLoApplication.context!!.resources.displayMetrics)
 
 fun uri2path(context: Context, contentUri: Uri): Pair<String?, Long?> {
+    if (contentUri.path!!.startsWith("/storage")) {
+        return Pair(contentUri.path, File(contentUri.path).length())
+    }
+
     val proj = arrayOf(MediaStore.Images.Media.DATA, MediaStore.Images.Media.SIZE)
     val cursor: Cursor? = context.contentResolver.query(contentUri, proj, null, null, null)
     cursor?.moveToNext()
     val path = cursor?.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA))
     val size = cursor?.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE))
-    val uri = Uri.fromFile(File(path))
     cursor?.close()
     return Pair(path, size)
 }

@@ -13,6 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+keystore.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio
