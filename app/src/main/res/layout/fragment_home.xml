@@ -15,7 +15,8 @@
         android:layout_height="match_parent"
         tools:ignore="ContentDescription, SpUsage">
 
-        <androidx.core.widget.NestedScrollView
+        <com.yolo.yolo_android.ui.custom.OrientationAwareScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -144,12 +145,11 @@
                         android:layout_marginHorizontal="@dimen/default_margin_24"
                         android:layout_marginTop="@dimen/default_margin_60" />
 
-
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </com.yolo.yolo_android.ui.custom.OrientationAwareScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

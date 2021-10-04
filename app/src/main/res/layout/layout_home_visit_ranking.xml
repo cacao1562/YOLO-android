@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.yolo.yolo_android.ui.custom.OrientationAwareRecyclerView
             android:layout_marginTop="18dp"
             android:id="@+id/rv_restaurant_ranking"
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_restaurant_ranking" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.yolo.yolo_android.ui.custom.OrientationAwareRecyclerView
             android:layout_marginTop="18dp"
             android:id="@+id/rv_place_ranking"
             android:layout_width="match_parent"
