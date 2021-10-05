@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.abs
 
 /**
  * A RecyclerView that only handles scroll events with the same orientation of its LayoutManager.
@@ -41,8 +42,8 @@ class OrientationAwareRecyclerView @JvmOverloads constructor(
                 // to scroll vertically or horizontally so we don't intercept the wrong event.
                 val currentX = e.x
                 val currentY = e.y
-                val dx = Math.abs(currentX - lastX)
-                val dy = Math.abs(currentY - lastY)
+                val dx = abs(currentX - lastX)
+                val dy = abs(currentY - lastY)
 
                 allowScroll = if (dy > dx) lm.canScrollVertically() else lm.canScrollHorizontally()
             }

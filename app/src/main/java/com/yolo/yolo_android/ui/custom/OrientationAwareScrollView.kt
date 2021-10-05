@@ -16,6 +16,7 @@ class OrientationAwareScrollView @JvmOverloads constructor(
     private var xDistance = 0.0f
     private var yDistance = 0.0f
     private var firstOnTouch = false
+    private var touchSlop = 10  // 터치 or 드래그 이벤트 구분 기준값
 
     override fun onInterceptTouchEvent(e: MotionEvent?): Boolean {
         when (e?.actionMasked) {
@@ -32,12 +33,17 @@ class OrientationAwareScrollView @JvmOverloads constructor(
             MotionEvent.ACTION_MOVE -> {
                 val currentX = e.x
                 val currentY = e.y
-                xDistance += abs(currentX - lastX)
-                yDistance += abs(currentY - lastY)
+                val deltaY = currentY - lastY
 
-                lastX = currentX
-                lastY = currentY
-                return yDistance > xDistance  // true : 자식뷰로 터치 이벤트 전달 차단
+                return if (abs(deltaY) > touchSlop) {
+                    xDistance += abs(currentX - lastX)
+                    yDistance += abs(currentY - lastY)
+                    lastX = currentX
+                    lastY = currentY
+                    yDistance > xDistance  // true : 자식뷰로 터치 이벤트 전달 차단
+                } else {
+                    false
+                }
             }
             else -> {
                 return false
