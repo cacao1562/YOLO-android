@@ -20,6 +20,7 @@ android {
         release {
             keyAlias 'upload'
             storeFile file('/Users/hwanungyu/Work_Android_2021/YOLO-android/yolo-key')
+//            storeFile file('D:/Android_Project/YOLO-android/yolo-key')
             storePassword keystoreProperties['password']
             keyPassword keystoreProperties['password']
         }
