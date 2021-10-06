@@ -62,7 +62,7 @@ class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_m
         binding.llUserGuide.setOnClickListener {
             val dialog = ConfirmCancelDialog
                 .newInstance(
-                    msg = getString(R.string.settings_message_download_user_guide),
+                    msg = getString(R.string.setting_message_download_user_guide),
                     confirm = {
                         FileDownloader(requireContext(), fileName = getString(R.string.setting_user_guide), fullPath = USER_GUIDE_URL).download()
                     }
