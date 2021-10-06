@@ -11,9 +11,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.yolo.yolo_android.DialogButtonType
 import com.yolo.yolo_android.databinding.DialogCommonBinding
-import com.yolo.yolo_android.util.MyLogger
 
-class CommonDialog: DialogFragment() {
+class CommonDialog : DialogFragment() {
 
     companion object {
         const val KEY_TITLE = "KEY_TITLE"
@@ -23,10 +22,12 @@ class CommonDialog: DialogFragment() {
         const val REQ_RESULT_CONFIRM = "REQ_RESULT_CONFIRM"
         const val REQ_RESULT_POST_ID = "REQ_RESULT_POST_ID"
 
-        fun newInstance(title: String,
-                        msg: String,
-                        btnType: DialogButtonType = DialogButtonType.Cancel,
-                        postId: Int = -1): CommonDialog {
+        fun newInstance(
+            title: String,
+            msg: String,
+            btnType: DialogButtonType = DialogButtonType.Cancel,
+            postId: Int = -1
+        ): CommonDialog {
             val fragment = CommonDialog()
             val args = Bundle()
             args.putString(KEY_TITLE, title)

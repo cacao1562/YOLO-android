@@ -14,13 +14,13 @@ import com.yolo.yolo_android.databinding.FragmentProfileUpdateBinding
 import com.yolo.yolo_android.model.FilterListData
 import com.yolo.yolo_android.ui.dialog.CommonDialog
 import com.yolo.yolo_android.ui.dialog.FilterBottomDialog
-import com.yolo.yolo_android.util.MyLogger
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProfileUpdateFragment: BindingFragment<FragmentProfileUpdateBinding>(R.layout.fragment_profile_update) {
+class ProfileUpdateFragment :
+    BindingFragment<FragmentProfileUpdateBinding>(R.layout.fragment_profile_update) {
 
     private val viewModel: ProfileUpdateViewModel by viewModels()
 
@@ -29,6 +29,7 @@ class ProfileUpdateFragment: BindingFragment<FragmentProfileUpdateBinding>(R.lay
     companion object {
         const val KEY_FROM_UPDATE_PROFILE = "KEY_FROM_UPDATE_PROFILE"
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
@@ -40,16 +41,28 @@ class ProfileUpdateFragment: BindingFragment<FragmentProfileUpdateBinding>(R.lay
             Glide.with(binding.ivProfileUpdateImg).load(it).into(binding.ivProfileUpdateImg)
         }
 
-        childFragmentManager.setFragmentResultListener(CommonDialog.REQ_RESULT_CONFIRM, this) { requestKey, bundle ->
-            findNavController().previousBackStackEntry?.savedStateHandle?.set(KEY_FROM_UPDATE_PROFILE, true)
+        childFragmentManager.setFragmentResultListener(
+            CommonDialog.REQ_RESULT_CONFIRM,
+            this
+        ) { requestKey, bundle ->
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                KEY_FROM_UPDATE_PROFILE,
+                true
+            )
             findNavController().popBackStack()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.updateSuccess.collect {
-                val dialog = when(it) {
-                    "update" -> CommonDialog.newInstance(getString(R.string.profile_update), getString(R.string.alert_update_nickName))
-                    "delete" -> CommonDialog.newInstance(getString(R.string.profile_update), getString(R.string.alert_delete_profile_image))
+                val dialog = when (it) {
+                    "update" -> CommonDialog.newInstance(
+                        getString(R.string.profile_update),
+                        getString(R.string.alert_update_nickName)
+                    )
+                    "delete" -> CommonDialog.newInstance(
+                        getString(R.string.profile_update),
+                        getString(R.string.alert_delete_profile_image)
+                    )
                     else -> null
                 }
                 dialog?.show(childFragmentManager, CommonDialog::class.java.simpleName)
@@ -66,7 +79,7 @@ class ProfileUpdateFragment: BindingFragment<FragmentProfileUpdateBinding>(R.lay
         val dialog = FilterBottomDialog.newInstance(data) {
             if (it != "dismiss") {
                 val type = ProfileUpdateOptions.valueOf(it)
-                when(type) {
+                when (type) {
                     ProfileUpdateOptions.OPTION_01 -> viewModel.presentImagePicker(requireContext())
                     ProfileUpdateOptions.OPTION_02 -> viewModel.deleteProfileImage()
                 }

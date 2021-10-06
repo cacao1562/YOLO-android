@@ -2,7 +2,7 @@ package com.yolo.yolo_android.network
 
 import com.yolo.yolo_android.common.extensions.printRequestBody
 import com.yolo.yolo_android.common.extensions.printResponseBody
-import com.yolo.yolo_android.util.MyLogger
+import com.yolo.yolo_android.utils.MyLogger
 import okhttp3.Interceptor
 import okhttp3.Response
 
