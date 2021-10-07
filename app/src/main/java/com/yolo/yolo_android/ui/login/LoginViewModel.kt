@@ -8,11 +8,10 @@ import com.yolo.yolo_android.base.DisposableViewModel
 import com.yolo.yolo_android.common.Event
 import com.yolo.yolo_android.common.constants.*
 import com.yolo.yolo_android.data.ResultData
-import com.yolo.yolo_android.data.datastore.DataStoreModule
 import com.yolo.yolo_android.data.error.ErrorEntity
 import com.yolo.yolo_android.repository.SnsRepository
 import com.yolo.yolo_android.repository.YoloRepository
-import com.yolo.yolo_android.util.MyLogger
+import com.yolo.yolo_android.utils.MyLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo

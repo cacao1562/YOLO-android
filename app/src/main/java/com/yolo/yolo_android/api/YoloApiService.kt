@@ -1,6 +1,5 @@
 package com.yolo.yolo_android.api
 
-import com.yolo.yolo_android.YOLO_URL
 import com.yolo.yolo_android.model.*
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -10,15 +9,18 @@ import retrofit2.http.*
 
 interface YoloApiService {
     @FormUrlEncoded
-    @POST(YOLO_URL + "signup")
+    @POST("signup")
     fun signup(@FieldMap queryMap: HashMap<String, String>): Single<SignupResponse>
 
     @FormUrlEncoded
-    @POST(YOLO_URL + "login")
+    @POST("login")
     fun login(@FieldMap queryMap: HashMap<String, String>): Single<LoginResponse>
 
     @GET("home")
     fun getHomeInfo(): Single<HomeResponse>
+
+    @DELETE("account/withdraw")
+    fun deleteAccount(): Single<BaseResponse>
 
     @GET("account/profile")
     suspend fun getMyProfile(): Response<ProfileResponse>

@@ -28,6 +28,10 @@ class YoloRepositoryImpl @Inject constructor(
         return datasource.getHomeInfo()
     }
 
+    override fun deleteAccount(): Single<ResultData<BaseResponse>> {
+        return datasource.deleteAccount()
+    }
+
     override suspend fun uploadPost(
         images: List<MultipartBody.Part>,
         params: HashMap<String, RequestBody>,

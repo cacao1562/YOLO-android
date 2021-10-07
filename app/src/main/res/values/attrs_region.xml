@@ -42,21 +42,21 @@
 
     <array name="areaIcon">
         <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_incheon</item>
+        <item>@drawable/ic_region_daejeon</item>
+        <item>@drawable/ic_region_daegu</item>
+        <item>@drawable/ic_region_gwangju</item>
         <item>@drawable/ic_region_busan</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_ulsan</item>
+        <item>@drawable/ic_region_sejong</item>
         <item>@drawable/ic_region_gyeonggi</item>
         <item>@drawable/ic_region_gangwon</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_chungbuk</item>
+        <item>@drawable/ic_region_chungnam</item>
         <item>@drawable/ic_region_gyeongbuk</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
-        <item>@drawable/ic_region_seoul</item>
+        <item>@drawable/ic_region_gyeongnam</item>
+        <item>@drawable/ic_region_jeonbuk</item>
+        <item>@drawable/ic_region_jeonnam</item>
         <item>@drawable/ic_region_jeju</item>
     </array>
 </resources>

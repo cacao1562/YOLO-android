@@ -27,7 +27,16 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
         binding.llSettingPolicy.setOnClickListener { }
         binding.llSettingUserGuide.setOnClickListener { }
         binding.llSettingSuggestionGuide.setOnClickListener { }
-        binding.llSettingUserExpire.setOnClickListener { }
+        binding.llSettingUserExpire.setOnClickListener {
+            val dialog = ConfirmCancelDialog
+                .newInstance(
+                    msg = getString(R.string.setting_message_delete_account),
+                    confirm = {
+                        viewModel.deleteAccount()
+                    }
+                )
+            dialog.show(childFragmentManager, ConfirmCancelDialog::class.java.simpleName)
+        }
         binding.llSettingLogout.setOnClickListener {
             val dialog = ConfirmCancelDialog
                 .newInstance(
