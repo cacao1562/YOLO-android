@@ -1,19 +1,21 @@
 package com.yolo.yolo_android.ui.web
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.os.Build
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.webkit.*
-import androidx.annotation.RequiresApi
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebView
 import androidx.navigation.fragment.navArgs
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentWebBinding
 
-class WebFragment : BindingFragment<FragmentWebBinding>(R.layout.fragment_web) {
+class WebFragment : BindingFragment<FragmentWebBinding>(R.layout.fragment_web),
+    WebViewEventListener {
     private val args: WebFragmentArgs by navArgs()
+    private var eventListener: WebViewEventListener? = null
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,55 +32,32 @@ class WebFragment : BindingFragment<FragmentWebBinding>(R.layout.fragment_web) {
             settings.domStorageEnabled = true
             settings.javaScriptEnabled = true
             webChromeClient = WebChromeClient()
-            webViewClient = yoloWebViewClient
+            webViewClient = YoloWebClient(eventListener)
             setNetworkAvailable(true)
         }.run {
             loadUrl(args.url)
         }
     }
 
-    private val yoloWebViewClient = object : WebViewClient() {
-        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-            super.onPageStarted(view, url, favicon)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        eventListener = this
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        eventListener = null
+    }
+
+    override fun onPageStarted(view: WebView?, url: String?) {
+        eventListener?.let {
             binding.viewLoading.visibility = View.VISIBLE
         }
+    }
 
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
+    override fun onPageFinished(view: WebView?, url: String?) {
+        eventListener?.let {
             binding.viewLoading.visibility = View.INVISIBLE
-        }
-
-        override fun onReceivedError(
-            view: WebView?,
-            request: WebResourceRequest?,
-            error: WebResourceError?
-        ) {
-            super.onReceivedError(view, request, error)
-            binding.viewLoading.visibility = View.INVISIBLE
-        }
-
-        override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-            return loadNewPage(view, url)
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.N)
-        override fun shouldOverrideUrlLoading(
-            view: WebView?,
-            request: WebResourceRequest
-        ): Boolean {
-            return try {
-                loadNewPage(view, request.url.toString())
-            } catch (e: java.lang.Exception) {
-                super.shouldOverrideUrlLoading(view, request)
-            }
-        }
-
-        private fun loadNewPage(view: WebView?, url: String?): Boolean {
-            if (url != null) {
-                view?.loadUrl(url)
-                return true
-            }
-            return false
         }
     }
 }
