@@ -68,8 +68,16 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
+
             android:id="@+id/action_mainFragment_to_bookMarkFragment"
             app:destination="@id/bookMarkFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_webFragment"
+            app:destination="@id/webFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -189,6 +197,7 @@
         android:label="ServiceCenterFragment"
         tools:layout="@layout/fragment_service_center"/>
     <fragment
+
         android:id="@+id/homeDateTabFragment"
         android:name="com.yolo.yolo_android.ui.home_date.tab.HomeDateTabFragment"
         android:label="HomeDateTabFragment"
@@ -225,6 +234,15 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="com.yolo.yolo_android.ui.web.WebFragment"
+        android:label="WebFragment"
+        tools:layout="@layout/fragment_web">
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 
 </navigation>

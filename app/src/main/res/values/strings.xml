@@ -91,6 +91,8 @@
     <string name="setting_user_expire">회원탈퇴</string>
     <string name="setting_logout">로그아웃</string>
     <string name="setting_message_logout">로그아웃 하시겠습니까?</string>
+    <string name="setting_message_download_user_guide">사용자 가이드\n다운 받으시겠습니까?</string>
+    <string name="setting_message_delete_account">탈퇴하시겠습니까?</string>
 
 <!--    내스팟-->
     <string name="top_title_myspot">내스팟</string>

@@ -8,9 +8,8 @@ import com.yolo.yolo_android.common.constants.LOGIN_TYPE
 import com.yolo.yolo_android.common.constants.NICKNAME
 import com.yolo.yolo_android.common.constants.SOCIAL_ID
 import com.yolo.yolo_android.data.ResultData
-import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.KEY_USER_TOKEN
 import com.yolo.yolo_android.repository.YoloRepository
-import com.yolo.yolo_android.util.MyLogger
+import com.yolo.yolo_android.utils.MyLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo

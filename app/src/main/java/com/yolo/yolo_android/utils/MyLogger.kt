@@ -1,4 +1,4 @@
-package com.yolo.yolo_android.util
+package com.yolo.yolo_android.utils
 
 import android.util.Log
 import com.yolo.yolo_android.BuildConfig
