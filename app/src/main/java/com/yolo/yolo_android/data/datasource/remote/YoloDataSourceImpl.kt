@@ -155,4 +155,18 @@ class YoloDataSourceImpl @Inject constructor(
             })
         }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
     }
+
+    override suspend fun getTripDetail(
+        contentId: Int,
+        contentTypeId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<HomeDetailResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.getTripDetail(contentId, contentTypeId)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
 }

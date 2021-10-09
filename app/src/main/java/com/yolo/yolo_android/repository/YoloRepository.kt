@@ -65,4 +65,10 @@ interface YoloRepository {
                                    onStart: () -> Unit,
                                    onComplete: () -> Unit
     ): Flow<ResultData<CommonResponse>>
+
+    suspend fun getTripDetail(contentId: Int,
+                              contentTypeId: Int,
+                              onStart: () -> Unit,
+                              onComplete: () -> Unit
+    ): Flow<ResultData<HomeDetailResponse>>
 }

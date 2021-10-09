@@ -1,4 +1,4 @@
-package com.yolo.yolo_android.ui.home_list
+package com.yolo.yolo_android.ui.home_area.list
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -10,7 +10,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class HomeListDataSource @Inject constructor(
+class HomeAreaListDataSource @Inject constructor(
     private val service: TourService,
     private val areaCode: Int,
     private val arrange: String,

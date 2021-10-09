@@ -1,4 +1,4 @@
-package com.yolo.yolo_android.ui.home_list
+package com.yolo.yolo_android.ui.home_area.list
 
 import androidx.lifecycle.*
 import androidx.paging.Pager
@@ -11,7 +11,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
 
-class HomeListViewModel @AssistedInject constructor(
+class HomeAreaListViewModel @AssistedInject constructor(
     private val service: TourService,
     @Assisted private val areaCode: Int,
     @Assisted private val contentTypeId: Int?
@@ -25,12 +25,12 @@ class HomeListViewModel @AssistedInject constructor(
     }
 
     var listData = Pager(PagingConfig(20)) {
-        HomeListDataSource(service, areaCode, _arrage.value!!, contentTypeId)
+        HomeAreaListDataSource(service, areaCode, _arrage.value!!, contentTypeId)
     }.flow.cachedIn(viewModelScope)
 
     @AssistedFactory
     interface HomeListViewModelFactory {
-        fun create(areaCode: Int, contentTypeId: Int?): HomeListViewModel
+        fun create(areaCode: Int, contentTypeId: Int?): HomeAreaListViewModel
     }
 
     companion object {

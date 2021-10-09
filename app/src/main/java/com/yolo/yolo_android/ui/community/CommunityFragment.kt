@@ -36,9 +36,12 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
                 if (it) {
                     binding.tlCommunityTab.getTabAt(1)?.select()
                     val fragment = childFragmentManager.findFragmentByTag("f" + binding.vp2Community.currentItem)
-                    if (fragment is CommunityListFragment) {
-                        fragment.refreshAdapter()
+                    fragment?.let {
+                        if (fragment is CommunityListFragment) {
+                            fragment.refreshAdapter()
+                        }
                     }
+
                     findNavController().currentBackStackEntry?.savedStateHandle?.remove<Boolean>(
                         CommunityUploadFragment.KEY_FROM_UPLOAD_SUCCESS
                     )

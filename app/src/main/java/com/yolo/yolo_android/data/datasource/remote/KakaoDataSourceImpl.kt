@@ -27,6 +27,22 @@ class KakaoDataSourceImpl @Inject constructor(
         }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun searchCategory(
+        groupCode: String,
+        x: Double,
+        y: Double,
+        radius: Int?,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<KeyWordResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow<ResultData<KeyWordResponse>> {
+            emit(safeApiCall(errorHandler) {
+                kakaoApiService.searchCategory(groupCode, x, y, radius)
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
+
 }
 
 

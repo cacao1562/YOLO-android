@@ -9,4 +9,12 @@ interface KakaoRepository {
                               onStart: () -> Unit,
                               onComplete: () -> Unit
     ): Flow<ResultData<KeyWordResponse>>
+
+    suspend fun searchCategory(groupCode: String,
+                               x: Double,
+                               y: Double,
+                               radius: Int?,
+                               onStart: () -> Unit,
+                               onComplete: () -> Unit
+    ): Flow<ResultData<KeyWordResponse>>
 }

@@ -1,55 +1,58 @@
-package com.yolo.yolo_android.ui.home_list
+package com.yolo.yolo_android.ui.home_date.list
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
-import com.yolo.yolo_android.databinding.FragmentHomeListBinding
+import com.yolo.yolo_android.databinding.FragmentHomeDateListBinding
 import com.yolo.yolo_android.dpToPx
 import com.yolo.yolo_android.model.FilterListData
 import com.yolo.yolo_android.rotateFilterArrow
 import com.yolo.yolo_android.ui.dialog.FilterBottomDialog
+import com.yolo.yolo_android.ui.home_area.list.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragment_home_list) {
+class HomeDateListFragment: BindingFragment<FragmentHomeDateListBinding>(R.layout.fragment_home_date_list) {
 
     companion object {
 
-        const val AREA_NUMBER = "AREA_NUMBER"
+        const val SELECTED_DATE = "SELECTED_DATE"
         const val CATEGORY_NUMBER = "CATEGORY_NUMBER"
 
-        fun newInstance(areaCode: Int, contentTypeId: Int): HomeListFragment {
-            val bundle = Bundle()
-            bundle.putInt(AREA_NUMBER, areaCode)
-            bundle.putInt(CATEGORY_NUMBER, contentTypeId)
-            val fragment = HomeListFragment()
-            fragment.arguments = bundle
+        fun newInstance(selectedDate: String, contentTypeId: Int): HomeDateListFragment {
+            val fragment = HomeDateListFragment()
+            fragment.apply {
+                arguments = bundleOf(SELECTED_DATE to selectedDate, CATEGORY_NUMBER to contentTypeId)
+            }
             return fragment
         }
     }
 
-    private var mFilterType: HomeListBaseFilter = HomeListBaseFilter.OPTION_02
+    private var mFilterType: HomeDateListFilter = HomeDateListFilter.OPTION_01
 
     @Inject
-    lateinit var factory: HomeListViewModel.HomeListViewModelFactory
+    lateinit var factory: HomeDateListViewModel.HomeDateListViewModelFactory
 
-    private val viewModel: HomeListViewModel by viewModels {
-        val areaCode = arguments?.getInt(AREA_NUMBER)
+    private val viewModel: HomeDateListViewModel by viewModels {
+        val selectedDate = arguments?.getString(SELECTED_DATE)
         val contentTypeId = arguments?.getInt(CATEGORY_NUMBER)
-        HomeListViewModel.provideFactory(factory, areaCode ?: -1, if (contentTypeId == -1) null else contentTypeId)
+        HomeDateListViewModel.provideFactory(
+            factory,
+            selectedDate ?: "",
+            if (contentTypeId == -1) null else contentTypeId
+        )
     }
 
 
@@ -62,21 +65,21 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         binding.viewModel = viewModel
         binding.tvHomeListFilter.text = mFilterType.options
 
-        val homeListPagingAdapter = HomeListPagingAdapter()
+        val pagingAdapter = HomeDateListPagingAdapter()
         binding.rvHomeList.apply {
-            adapter = homeListPagingAdapter
+            adapter = pagingAdapter
             setHasFixedSize(true)
             addItemDecoration(HomeListDecoration(20.dpToPx()))
         }
         lifecycleScope.launchWhenCreated {
-            viewModel.listData.collectLatest {
-                homeListPagingAdapter.submitData(it)
-            }
+//            viewModel.listData.collectLatest {
+//                pagingAdapter.submitData(it)
+//            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            homeListPagingAdapter.loadStateFlow.collectLatest { loadStates ->
-                binding.tvHomeListCount.text = "총 ${homeListPagingAdapter.itemCount}"
+            pagingAdapter.loadStateFlow.collectLatest { loadStates ->
+                binding.tvHomeListCount.text = "총 ${pagingAdapter.itemCount}"
             }
         }
 
@@ -84,22 +87,22 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
             rotateFilterArrow(false, binding.ivHomeListFilterDropdown)
 
-            val data = FilterListData("정렬 방법", HomeListBaseFilter::class.java, mFilterType)
+            val data = FilterListData("정렬 방법", HomeDateListFilter::class.java, mFilterType)
             val dialog = FilterBottomDialog.newInstance(data) {
                 if (it == "dismiss") {
                     rotateFilterArrow(true, binding.ivHomeListFilterDropdown)
                 }else {
-                    mFilterType = HomeListBaseFilter.valueOf(it)
+                    mFilterType = HomeDateListFilter.valueOf(it)
                     binding.tvHomeListFilter.text = mFilterType.options
-                    viewModel.setArrage(mFilterType.optionValue)
-                    homeListPagingAdapter.refresh()
+                    viewModel.setCongestion(mFilterType.sortBy)
+                    pagingAdapter.refresh()
                 }
             }
             dialog.show(childFragmentManager, dialog.tag)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            homeListPagingAdapter.loadStateFlow.collectLatest { loadStates ->
+            pagingAdapter.loadStateFlow.collectLatest { loadStates ->
                 Log.d("error addLoadStateListener", "${loadStates}")
                 binding.llHomeListError.isVisible = loadStates.source.refresh is LoadState.Error
                 viewModel._isLoading.value = loadStates.source.append is LoadState.Loading
@@ -117,7 +120,7 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
         }
 
         binding.btnHomeListRetry.setOnClickListener {
-            homeListPagingAdapter.retry()
+            pagingAdapter.retry()
         }
 
         return root
@@ -125,33 +128,11 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
 }
 
-enum class HomeListBaseFilter(val options: String, val optionValue: String) {
-    OPTION_01("제목순", "O"),
-    OPTION_02("조회순", "P"),
-    OPTION_03("수정일순", "Q"),
-    OPTION_04("생성일순", "R");
+enum class HomeDateListFilter(val options: String, val sortBy: String) {
+    OPTION_01("혼잡도 낮은순", "low"),
+    OPTION_02("혼잡도 높은순", "high");
 
     override fun toString(): String {
         return options.toString()
     }
-    companion object {
-        fun from(type: String?): HomeListBaseFilter = HomeListBaseFilter.values().find { it.options == type } ?: HomeListBaseFilter.OPTION_02
-    }
-}
-
-enum class HomeListFilter(val options: String) {
-    OPTION_01("혼잡도 낮은순"),
-    OPTION_02("혼잡도 높은순");
-
-    override fun toString(): String {
-        return options.toString()
-    }
-}
-
-class HomeListDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
-
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        outRect.bottom = space
-    }
-
 }

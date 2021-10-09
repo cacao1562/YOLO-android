@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="data"
+            type="com.yolo.yolo_android.db.entity.MyBookMark" />
+        <variable
+            name="viewModel"
+            type="com.yolo.yolo_android.ui.mypage.book_mark.BookMarkViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:background="?selectableItemBackground"
+        android:onClick="@{(v) -> viewModel.presentDetail(v, data.id, data.contentTypeId)}">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_item_bookmark_image"
+            android:layout_width="92dp"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:loadImageOrDefault="@{data.imageUrl}"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/iv_item_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icn_24_bookmark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_item_bookmark_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/font_black_131313"
+            android:fontFamily="@font/notosanskr_medium_hestia"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{data.title}"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_item_bookmark_image"
+            app:layout_constraintEnd_toStartOf="@+id/iv_item_bookmark"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:textColor="@color/color_gray_909090"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{data.overview}"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_bookmark_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_bookmark_title"
+            app:layout_constraintEnd_toEndOf="@+id/tv_item_bookmark_title"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

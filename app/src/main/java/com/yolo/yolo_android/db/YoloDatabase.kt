@@ -4,19 +4,16 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.yolo.yolo_android.db.keys.RemoteKeys
-import com.yolo.yolo_android.db.keys.RemoteKeysDao
+import com.yolo.yolo_android.db.dao.BookMarkDao
+import com.yolo.yolo_android.db.entity.MyBookMark
 import com.yolo.yolo_android.db.post.ListConverter
-import com.yolo.yolo_android.db.post.PostDao
-import com.yolo.yolo_android.db.post.PostEntity
 import java.util.*
 
 
-@Database(entities = [PostEntity::class, RemoteKeys::class], version = 1, exportSchema = false)
-@TypeConverters(ListConverter::class)
+@Database(entities = [MyBookMark::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class YoloDatabase : RoomDatabase() {
-    abstract fun postDao(): PostDao
-    abstract fun remoteKeyDao(): RemoteKeysDao
+    abstract fun bookMarkDao(): BookMarkDao
 }
 
 class Converters {

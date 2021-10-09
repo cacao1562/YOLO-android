@@ -86,4 +86,11 @@ interface YoloApiService {
     suspend fun getMyPostList(
         @Query("page") page: Int
     ): CommunityListResponse
+
+
+    @GET("trip/detail")
+    suspend fun getTripDetail(
+        @Query("contentId") contentId: Int,
+        @Query("contentTypeId") contentTypeId: Int
+    ): Response<HomeDetailResponse>
 }

@@ -1,14 +1,17 @@
-package com.yolo.yolo_android.ui.home_list
+package com.yolo.yolo_android.ui.home_area.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.yolo.yolo_android.databinding.ItemHomeListBinding
 import com.yolo.yolo_android.model.Item
+import com.yolo.yolo_android.safeNavigate
+import com.yolo.yolo_android.ui.home_area.tab.HomeAreaTabFragmentDirections
 
-class HomeListPagingAdapter: PagingDataAdapter<Item, HomeListViewHolder>(DIFF_CALLBACK) {
+class HomeAreaListPagingAdapter: PagingDataAdapter<Item, HomeListViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListViewHolder {
         return HomeListViewHolder.from(parent)
@@ -35,8 +38,15 @@ class HomeListViewHolder(
     private val binding: ItemHomeListBinding
 ): RecyclerView.ViewHolder(binding.root) {
 
+    init {
+
+    }
     fun bind(data: Item) {
         binding.data = data
+        itemView.setOnClickListener {
+            val action = HomeAreaTabFragmentDirections.actionHomeAreaTabFragmentToHomeDetailFragment(data.contentid!!, data.contenttypeid!!)
+            itemView.findNavController().safeNavigate(action)
+        }
     }
 
     companion object {

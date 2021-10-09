@@ -14,7 +14,7 @@ import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentMySpotBinding
 import com.yolo.yolo_android.dpToPx
 import com.yolo.yolo_android.ui.dialog.CommonDialog
-import com.yolo.yolo_android.ui.home_list.HomeListDecoration
+import com.yolo.yolo_android.ui.home_area.list.HomeListDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest

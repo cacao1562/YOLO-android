@@ -19,6 +19,7 @@ data class PostEntity(
     val createAt: String,
     val cntOfComment: Int,
     var cntOfLike: Int,
+    val placeName: String? = "",
     val author: Boolean? = false,
     var liked: Boolean? = false
 ) {

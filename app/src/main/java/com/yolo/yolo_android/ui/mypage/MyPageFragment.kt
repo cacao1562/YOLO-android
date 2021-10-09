@@ -31,14 +31,30 @@ class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_m
         binding.llMypageProfileName.setOnClickListener {
             presentProfileUpdate()
         }
+        /**
+         * 설정
+         */
         binding.ivMypageSetting.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToSettingFragment()
             findNavController().safeNavigate(action)
         }
+        /**
+         * 찜 목록
+         */
+        binding.tvMypageBookMark.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToBookMarkFragment()
+            findNavController().safeNavigate(action)
+        }
+        /**
+         * 마이페이지
+         */
         binding.tvMypageMySpot.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToMySpotFragment()
             findNavController().safeNavigate(action)
         }
+        /**
+         * 고객센터
+         */
         binding.tvMypageServiceCenter.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToServiceCenterFragment()
             findNavController().safeNavigate(action)

@@ -1,4 +1,4 @@
-package com.yolo.yolo_android.ui.home_tab
+package com.yolo.yolo_android.ui.home_area.tab
 
 import android.os.Bundle
 import android.view.View
@@ -7,16 +7,14 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yolo.yolo_android.*
 import com.yolo.yolo_android.base.BindingFragment
-import com.yolo.yolo_android.databinding.FragmentHomeTabBinding
+import com.yolo.yolo_android.databinding.FragmentHomeAreaTabBinding
 import com.yolo.yolo_android.model.FilterListData
 import com.yolo.yolo_android.model.Region
 import com.yolo.yolo_android.ui.dialog.FilterBottomDialog
 
-class HomeTabFragment: BindingFragment<FragmentHomeTabBinding>(R.layout.fragment_home_tab) {
+class HomeAreaTabFragment: BindingFragment<FragmentHomeAreaTabBinding>(R.layout.fragment_home_area_tab) {
 
-    val tabTitle = arrayOf("전체", "관광지", "문화시설", "축제/공연/행사", "여행코스", "레포츠", "숙박", "쇼핑", "음식")
-
-    private val args: HomeTabFragmentArgs by navArgs()
+    private val args: HomeAreaTabFragmentArgs by navArgs()
 
     private var mSelectedType: AreaListOptions = AreaListOptions.OPTION_01
 
@@ -26,9 +24,9 @@ class HomeTabFragment: BindingFragment<FragmentHomeTabBinding>(R.layout.fragment
             binding.tvHomeTabTitle.text = it.areaName
 
             mSelectedType = AreaListOptions.from(it.areaName)
-            binding.vp2HomeTab.adapter = HomeListPagerAdapter(it.areaCode.toInt(), childFragmentManager, lifecycle)
+            binding.vp2HomeTab.adapter = HomeAreaListPagerAdapter(it.areaCode.toInt(), childFragmentManager, lifecycle)
             TabLayoutMediator(binding.tlHomeTab, binding.vp2HomeTab) { tab, position ->
-                tab.text = tabTitle[position]
+                tab.text = TabTitle[position]
             }.attach()
             binding.tlHomeTab.setMargin(0,0, 12.dpToPx(),0)
         }
@@ -57,7 +55,7 @@ class HomeTabFragment: BindingFragment<FragmentHomeTabBinding>(R.layout.fragment
                 mSelectedType = AreaListOptions.valueOf(it)
                 binding.tvHomeTabTitle.text = mSelectedType.areaName
 
-                val action = HomeTabFragmentDirections.actionHomeTabFragmentSelf()
+                val action = HomeAreaTabFragmentDirections.actionHomeTabFragmentSelf()
                 action.region = Region(-1, mSelectedType.areaCode.toString(), mSelectedType.areaName)
                 findNavController().safeNavigate(action)
 

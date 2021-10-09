@@ -39,8 +39,8 @@ object NetworkModule {
         if (BuildConfig.DEBUG) {
             logging.level = HttpLoggingInterceptor.Level.BODY
             okHttpClient.addInterceptor(MyLoggerInterceptor())
-            okHttpClient.addInterceptor(AuthorizationInterceptor())
         }
+        okHttpClient.addInterceptor(AuthorizationInterceptor())
         okHttpClient.interceptors().add(logging)
         return okHttpClient.build()
     }

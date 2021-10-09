@@ -3,7 +3,7 @@ package com.yolo.yolo_android.di
 import android.content.Context
 import androidx.room.Room
 import com.yolo.yolo_android.db.YoloDatabase
-import com.yolo.yolo_android.db.post.PostDao
+import com.yolo.yolo_android.db.dao.BookMarkDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +26,8 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providePostDao(roomInfoDatabase: YoloDatabase): PostDao{
-        return roomInfoDatabase.postDao()
+    fun provideBookMarkDao(yoloDatabase: YoloDatabase): BookMarkDao{
+        return yoloDatabase.bookMarkDao()
     }
 
 }

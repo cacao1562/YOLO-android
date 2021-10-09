@@ -122,6 +122,7 @@ class CommunityUploadViewModel @Inject constructor(
             if (it.x.isNotEmpty() and it.y.isNotEmpty()) {
                 params["latitude"] = it.y.toRequestBody(MultipartBody.FORM)
                 params["longitude"] = it.x.toRequestBody(MultipartBody.FORM)
+                params["placeName"] = it.place_name.toRequestBody(MultipartBody.FORM)
             }
         }
         uploadIndex.value++

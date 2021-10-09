@@ -11,12 +11,16 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.text.Html
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.TypedValue
 import android.view.*
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -183,4 +187,18 @@ fun rotateFilterArrow(isDefault: Boolean, view: View) {
     anim.interpolator = LinearInterpolator()
     anim.fillAfter = true
     view.startAnimation(anim)
+}
+
+fun String.fromHtmlStr(): String {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY).toString()
+    } else {
+        Html.fromHtml(this).toString()
+    }
+}
+
+fun setUnderLineText(textView: TextView) {
+    val content = SpannableString(textView.text.toString())
+    content.setSpan(UnderlineSpan(), 0, content.length, 0)
+    textView.text = content
 }

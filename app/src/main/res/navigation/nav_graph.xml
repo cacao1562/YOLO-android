@@ -34,7 +34,7 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_mainFragment_to_homeTabFragment"
-            app:destination="@id/homeTabFragment"
+            app:destination="@id/homeAreaTabFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -67,6 +67,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_bookMarkFragment"
+            app:destination="@id/bookMarkFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -79,18 +86,18 @@
         android:label="CalendarFragment"
         tools:layout="@layout/fragment_calendar" >
         <action
-            android:id="@+id/action_calendarFragment_to_homeTabFragment"
-            app:destination="@id/homeTabFragment"
+            android:id="@+id/action_calendarFragment_to_homeDateTabFragment"
+            app:destination="@id/homeDateTabFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/homeListFragment"
-        android:name="com.yolo.yolo_android.ui.home_list.HomeListFragment"
+        android:id="@+id/homeAreaListFragment"
+        android:name="com.yolo.yolo_android.ui.home_area.list.HomeAreaListFragment"
         android:label="HomeListFragment"
-        tools:layout="@layout/fragment_home_list" />
+        tools:layout="@layout/fragment_home_area_list" />
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.yolo.yolo_android.ui.community.CommunityFragment"
@@ -128,10 +135,10 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/homeTabFragment"
-        android:name="com.yolo.yolo_android.ui.home_tab.HomeTabFragment"
+        android:id="@+id/homeAreaTabFragment"
+        android:name="com.yolo.yolo_android.ui.home_area.tab.HomeAreaTabFragment"
         android:label="HomeTabFragment"
-        tools:layout="@layout/fragment_home_tab">
+        tools:layout="@layout/fragment_home_area_tab">
         <argument
             android:name="region"
             app:argType="com.yolo.yolo_android.model.Region"
@@ -139,9 +146,18 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_homeTabFragment_self"
-            app:destination="@id/homeTabFragment"
+            app:destination="@id/homeAreaTabFragment"
             app:popUpToInclusive="true"
-            app:popUpTo="@id/homeTabFragment"/>
+            app:popUpTo="@id/homeAreaTabFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeAreaTabFragment_to_homeDetailFragment"
+            app:destination="@id/homeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/profileUpdateFragment"
@@ -172,5 +188,43 @@
         android:name="com.yolo.yolo_android.ui.mypage.service_center.ServiceCenterFragment"
         android:label="ServiceCenterFragment"
         tools:layout="@layout/fragment_service_center"/>
+    <fragment
+        android:id="@+id/homeDateTabFragment"
+        android:name="com.yolo.yolo_android.ui.home_date.tab.HomeDateTabFragment"
+        android:label="HomeDateTabFragment"
+        tools:layout="@layout/fragment_home_date_tab">
+        <argument
+            android:name="selectedDate"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeDateListFragment"
+        android:name="com.yolo.yolo_android.ui.home_date.list.HomeDateListFragment"
+        android:label="HomeDateListFragment"
+        tools:layout="@layout/fragment_home_date_list"/>
+    <fragment
+        android:id="@+id/homeDetailFragment"
+        android:name="com.yolo.yolo_android.ui.home_detail.HomeDetailFragment"
+        android:label="HomeDetailFragment"
+        tools:layout="@layout/fragment_home_detail">
+        <argument
+            android:name="contentId"
+            app:argType="integer" />
+        <argument android:name="contentTypeId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookMarkFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.book_mark.BookMarkFragment"
+        android:label="BookMarkFragment"
+        tools:layout="@layout/fragment_book_mark">
+        <action
+            android:id="@+id/action_bookMarkFragment_to_homeDetailFragment"
+            app:destination="@id/homeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
 </navigation>
