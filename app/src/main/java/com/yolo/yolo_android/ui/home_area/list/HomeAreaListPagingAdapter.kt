@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.yolo.yolo_android.databinding.ItemHomeListBinding
+import com.yolo.yolo_android.databinding.ItemHomeAreaListBinding
 import com.yolo.yolo_android.model.Item
 import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.home_area.tab.HomeAreaTabFragmentDirections
@@ -35,12 +35,9 @@ class HomeAreaListPagingAdapter: PagingDataAdapter<Item, HomeListViewHolder>(DIF
 }
 
 class HomeListViewHolder(
-    private val binding: ItemHomeListBinding
+    private val binding: ItemHomeAreaListBinding
 ): RecyclerView.ViewHolder(binding.root) {
 
-    init {
-
-    }
     fun bind(data: Item) {
         binding.data = data
         itemView.setOnClickListener {
@@ -52,7 +49,7 @@ class HomeListViewHolder(
     companion object {
         fun from(parent: ViewGroup): HomeListViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ItemHomeListBinding.inflate(layoutInflater, parent, false)
+            val binding = ItemHomeAreaListBinding.inflate(layoutInflater, parent, false)
             return HomeListViewHolder(binding)
         }
     }

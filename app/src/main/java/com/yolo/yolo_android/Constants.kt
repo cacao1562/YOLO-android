@@ -18,3 +18,4 @@ enum class CommunitySort(val sorted: String) {
 }
 
 val TabTitle = arrayOf("전체", "관광지", "문화시설", "축제/공연/행사", "레포츠", "쇼핑", "음식")
+val DateTabTitle = arrayOf("전체", "관광지", "문화시설", "레포츠", "쇼핑", "음식")

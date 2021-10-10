@@ -72,9 +72,9 @@ class HomeDateListFragment: BindingFragment<FragmentHomeDateListBinding>(R.layou
             addItemDecoration(HomeListDecoration(20.dpToPx()))
         }
         lifecycleScope.launchWhenCreated {
-//            viewModel.listData.collectLatest {
-//                pagingAdapter.submitData(it)
-//            }
+            viewModel.listData.collectLatest {
+                pagingAdapter.submitData(it)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -94,7 +94,7 @@ class HomeDateListFragment: BindingFragment<FragmentHomeDateListBinding>(R.layou
                 }else {
                     mFilterType = HomeDateListFilter.valueOf(it)
                     binding.tvHomeListFilter.text = mFilterType.options
-                    viewModel.setCongestion(mFilterType.sortBy)
+                    viewModel.setSort(mFilterType.sortBy)
                     pagingAdapter.refresh()
                 }
             }

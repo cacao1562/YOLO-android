@@ -13,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="92dp">
+        android:layout_height="92dp"
+        android:background="?selectableItemBackground">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_item_home_list"
@@ -34,15 +35,6 @@
         </androidx.cardview.widget.CardView>
 
 
-        <ImageView
-            android:id="@+id/iv_item_home_list_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/badge_state_01"
-            android:layout_marginStart="14dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cv_item_home_list"/>
-
         <TextView
             android:id="@+id/tv_item_home_list_title"
             android:layout_width="0dp"
@@ -55,9 +47,11 @@
             android:ellipsize="end"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="34dp"
-            app:layout_constraintStart_toStartOf="@+id/iv_item_home_list_state"
+            android:layout_marginStart="14dp"
+            app:layout_goneMarginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/cv_item_home_list"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_home_list_state"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:layout_width="0dp"

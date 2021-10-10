@@ -12,7 +12,7 @@ class HomeDateListPagerAdapter(
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    override fun getItemCount(): Int = 7
+    override fun getItemCount(): Int = 6
 
     override fun createFragment(position: Int): Fragment {
 
@@ -20,10 +20,9 @@ class HomeDateListPagerAdapter(
             0 -> HomeDateListFragment.newInstance(selectedDate, -1)
             1 -> HomeDateListFragment.newInstance(selectedDate, 12)
             2 -> HomeDateListFragment.newInstance(selectedDate, 14)
-            3 -> HomeDateListFragment.newInstance(selectedDate, 15)
-            4 -> HomeDateListFragment.newInstance(selectedDate, 28)
-            5 -> HomeDateListFragment.newInstance(selectedDate, 32)
-            6 -> HomeDateListFragment.newInstance(selectedDate, 39)
+            3 -> HomeDateListFragment.newInstance(selectedDate, 28)
+            4 -> HomeDateListFragment.newInstance(selectedDate, 38)
+            5 -> HomeDateListFragment.newInstance(selectedDate, 39)
             else -> error("No Fragment")
         }
     }

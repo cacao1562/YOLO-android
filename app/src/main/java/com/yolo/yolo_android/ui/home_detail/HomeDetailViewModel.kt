@@ -100,7 +100,7 @@ class HomeDetailViewModel @AssistedInject constructor(
                         data.contentTypeId,
                         data.title ?: "",
                         data.overview ?: "",
-                        data.imageUrl.first(),
+                        data.imageUrl.firstOrNull() ?: "",
                         Calendar.getInstance(Locale.KOREA).time)
                     bookMarkDao.insertBookMark(myBookMark)
                     _isBookMark.postValue(true)

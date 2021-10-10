@@ -16,15 +16,15 @@ class HomeDateListViewModel @AssistedInject constructor(
     @Assisted private val contentTypeId: Int?
 ): BaseViewModel() {
 
-    private val _congestion = MutableLiveData<String>("P")
-    val congestion: LiveData<String> = _congestion
+    private val _sort = MutableLiveData<String>("low")
+    val sort: LiveData<String> = _sort
 
-    fun setCongestion(arrange: String) {
-        _congestion.value = arrange
+    fun setSort(sort: String) {
+        _sort.value = sort
     }
 
     var listData = Pager(PagingConfig(20)) {
-        HomeDateListDataSource(service, selectedDate, _congestion.value!!, contentTypeId)
+        HomeDateListDataSource(service, selectedDate, contentTypeId, _sort.value!!)
     }.flow.cachedIn(viewModelScope)
 
     @AssistedFactory

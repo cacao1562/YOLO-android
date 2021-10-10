@@ -175,4 +175,18 @@ object DataBinding {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("setCongestion")
+    fun setCongestion(imageView: ImageView, congestion: Int?) {
+        congestion?.let {
+            when(it) {
+                1 -> imageView.setImageResource(R.drawable.badge_state_01)
+                2 -> imageView.setImageResource(R.drawable.badge_state_02)
+                3 -> imageView.setImageResource(R.drawable.badge_state_03)
+                4 -> imageView.setImageResource(R.drawable.badge_state_04)
+                5 -> imageView.setImageResource(R.drawable.badge_state_05)
+            }
+        }
+    }
+
 }

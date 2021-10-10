@@ -95,4 +95,13 @@ interface YoloApiService {
         @Query("contentId") contentId: Int,
         @Query("contentTypeId") contentTypeId: Int
     ): Response<HomeDetailResponse>
+
+    @GET("trip")
+    suspend fun getDateTripList(
+        @Query("page") page: Int,
+        @Query("contentTypeId") contentTypeId: Int?,
+        @Query("date") date: String,
+        @Query("sort") sort: String = "low" // high
+    ): DateTripListResponse
+
 }

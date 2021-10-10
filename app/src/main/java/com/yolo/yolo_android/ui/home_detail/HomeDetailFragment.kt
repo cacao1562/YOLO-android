@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -62,6 +63,9 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
             }
         }
 
+        binding.ivDetailHeaderBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onTouch() {

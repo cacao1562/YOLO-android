@@ -5,8 +5,8 @@ import androidx.paging.PagingState
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.yolo.yolo_android.api.YoloApiService
-import com.yolo.yolo_android.db.post.PostEntity
 import com.yolo.yolo_android.model.CommonResponse
+import com.yolo.yolo_android.model.DateTripList
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -14,19 +14,21 @@ import javax.inject.Inject
 class HomeDateListDataSource @Inject constructor(
     private val service: YoloApiService,
     private val selectedDate: String,
-    private val congestion: String,
-    private val contentTypeId: Int?
-): PagingSource<Int, PostEntity>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PostEntity> {
+    private val contentTypeId: Int?,
+    private val sort: String
+): PagingSource<Int, DateTripList>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DateTripList> {
 
         try {
             val currentLoadingPageKey = params.key ?: 1
 
-            val response = service.getCommunityList(
+            val response = service.getDateTripList(
                 page = currentLoadingPageKey,
-                sort = "sorted.sorted"
+                contentTypeId = contentTypeId,
+                date = selectedDate,
+                sort = sort
             )
-//            if (response.response.header.resultCode != "0000") throw Exception(response.response.header.resultCode)
+
             val responseData = response.result
 
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
@@ -51,7 +53,7 @@ class HomeDateListDataSource @Inject constructor(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, PostEntity>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, DateTripList>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             // This loads starting from previous page, but since PagingConfig.initialLoadSize spans
             // multiple pages, the initial load will still load items centered around
