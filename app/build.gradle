@@ -6,6 +6,7 @@ plugins {
     id "androidx.navigation.safeargs"
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 Properties properties = new Properties()
@@ -19,8 +20,7 @@ android {
     signingConfigs {
         release {
             keyAlias 'upload'
-            storeFile file('/Users/hwanungyu/Work_Android_2021/YOLO-android/yolo-key')
-//            storeFile file('D:/Android_Project/YOLO-android/yolo-key')
+            storeFile project.rootProject.file('yolo-key')
             storePassword keystoreProperties['password']
             keyPassword keystoreProperties['password']
         }
@@ -31,10 +31,15 @@ android {
         applicationId "com.yolo.yolo_android"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //kakao map
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a'
+        }
 
         buildConfigField "String", "SERVICE_KEY", properties['servicekey']
         buildConfigField "String", "KAKAO_NATIVE_KEY", properties['kakao_native_key']
@@ -52,7 +57,6 @@ android {
         }
         release {
             minifyEnabled false
-            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -175,4 +179,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    // kakao map
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/libDaumMapAndroid.jar')
+
+    // Include open source notices
+    implementation "com.google.android.gms:play-services-oss-licenses:17.0.0"
 }

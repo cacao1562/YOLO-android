@@ -86,7 +86,7 @@ class CommunityViewHolder(
         if (adapter != null) {
             (adapter as CommunityPostImageAdapter).setItems(data.imageUrl)
         }
-        binding.llItemLocation.isVisible = data.latitude > 0 && data.longitude > 0
+        binding.llItemLocation.isVisible = data.latitude > 0.0 && data.longitude > 0.0
 
         if (!data.isExpand) {
             binding.tvItemPostContent.post {

@@ -107,4 +107,13 @@ class YoloRepositoryImpl @Inject constructor(
     ): Flow<ResultData<CommonResponse>> {
         return datasource.deleteProfileImage(imageUrl, onStart, onComplete)
     }
+
+    override suspend fun getTripDetail(
+        contentId: Int,
+        contentTypeId: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<HomeDetailResponse>> {
+        return datasource.getTripDetail(contentId, contentTypeId, onStart, onComplete)
+    }
 }

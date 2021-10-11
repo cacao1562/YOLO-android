@@ -5,7 +5,6 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.common.extensions.ToastExt.toast
@@ -20,9 +19,12 @@ class CalendarFragment : BindingFragment<FragmentCalendarBinding>(R.layout.fragm
         super.onViewCreated(view, savedInstanceState)
         binding.ivClose.setOnClickListener { findNavController().popBackStack() }
         binding.btnApply.setOnClickListener {
-            toast("${binding.calendarView.selectedDate?.date}")
-            val action = CalendarFragmentDirections.actionCalendarFragmentToHomeTabFragment()
-            findNavController().safeNavigate(action)
+            binding.calendarView.selectedDate?.let {
+                val action = CalendarFragmentDirections.actionCalendarFragmentToHomeDateTabFragment(it.date.toString())
+                findNavController().safeNavigate(action)
+            }?: toast("일정을 선택해주세요.")
+
+
         }
 
         initCalendar()

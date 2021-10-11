@@ -17,9 +17,9 @@ object ImageBindingAdapter {
     @BindingAdapter("loadImage")
     fun loadImage(imageView: ImageView, @DrawableRes resourceId: Int?) {
         try {
-            imageView.setImageResource(resourceId ?: android.R.drawable.ic_menu_gallery)
+            imageView.setImageResource(resourceId ?: R.drawable.placeholder_picture)
         } catch (e: Exception) {
-            imageView.setImageResource(android.R.drawable.ic_menu_gallery)
+            imageView.setImageResource(R.drawable.placeholder_picture)
         }
     }
 
@@ -30,8 +30,8 @@ object ImageBindingAdapter {
             .load(resourceId)
             .apply(
                 RequestOptions()
-                    .placeholder(android.R.drawable.ic_menu_gallery)
-                    .error(android.R.drawable.stat_notify_error)
+                    .placeholder(R.drawable.placeholder_picture)
+                    .error(R.drawable.placeholder_picture)
                     .centerCrop()
             )
             .transition(DrawableTransitionOptions.withCrossFade())
@@ -46,16 +46,16 @@ object ImageBindingAdapter {
 
         if (url.isNullOrEmpty()) {
             Glide.with(this)
-                .load(android.R.drawable.ic_menu_gallery)
-                .placeholder(android.R.drawable.ic_menu_gallery)
+                .load(R.drawable.placeholder_picture)
+                .placeholder(R.drawable.placeholder_picture)
                 .apply(RequestOptions.bitmapTransform(multiTransformation))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(this)
         } else {
             Glide.with(this)
                 .load(url)
-                .placeholder(android.R.drawable.ic_menu_gallery)
-                .error(android.R.drawable.stat_notify_error)
+                .placeholder(R.drawable.placeholder_picture)
+                .error(R.drawable.placeholder_picture)
                 .apply(RequestOptions.bitmapTransform(multiTransformation))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(this)

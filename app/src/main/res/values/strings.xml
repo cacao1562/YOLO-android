@@ -84,6 +84,7 @@
     <string name="top_title_setting">설정</string>
     <string name="setting_notification">알림정보</string>
     <string name="setting_version">버전정보</string>
+    <string name="setting_library">오픈소스 라이브러리</string>
     <string name="setting_policy">약관 및 정책</string>
     <string name="setting_user_guide">사용자 가이드</string>
     <string name="setting_suggestion_guide">제휴사 제안 가이드</string>
@@ -106,6 +107,17 @@
     <string name="service_center_kakao">카카오톡 문의하기</string>
     <string name="service_center_email">이메일 문의하기</string>
 
+<!--    상세정보-->
+    <string name="detail_info">상세정보</string>
+    <string name="detail_tel">문의 및 안내</string>
+    <string name="detail_address">주소</string>
+    <string name="detail_homepage">홈페이지</string>
+    <string name="detail_restdate">휴일</string>
+    <string name="detail_parking">주차</string>
+    <string name="detail_usetime">이용시간</string>
+    <string name="detail_suggestion_place">근처 추천 장소</string>
 
+<!--    찜한 여행지-->
+    <string name="top_title_book_mark">찜한 여행지</string>
 
 </resources>

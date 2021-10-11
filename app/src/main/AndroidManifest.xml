@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YOLOandroid"
         android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="LockedOrientationActivity">
+
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
@@ -53,6 +55,14 @@
                     android:scheme="kakao${KAKAO_NATIVE_KEY}" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.MainColorStatusbar"/>
+
+        <activity android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.MainColorStatusbar"/>
+
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="afe44e86a7ea2b5f6d5adc061e114f1a"/>
 
     </application>
 

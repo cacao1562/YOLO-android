@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.google.android.gms.oss.licenses.OssLicensesActivity
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kakao.sdk.user.UserApiClient
 import com.yolo.yolo_android.BuildConfig
 import com.yolo.yolo_android.R
@@ -24,6 +26,9 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
         super.onViewCreated(view, savedInstanceState)
         binding.tvSettingVersion.text = BuildConfig.VERSION_NAME
         binding.llSettingNotice.setOnClickListener { }
+        binding.llSettingLibrary.setOnClickListener {
+            startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
+        }
         binding.llSettingPolicy.setOnClickListener { }
         binding.llSettingUserGuide.setOnClickListener { }
         binding.llSettingSuggestionGuide.setOnClickListener { }

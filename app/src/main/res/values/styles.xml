@@ -54,4 +54,18 @@
         <item name="android:textSize">15dp</item>
         <item name="android:fontFamily">@font/notosanskr_regular_hestia</item>
     </style>
+
+    <style name="detailPlaceTabTheme" parent="MaterialTheme">
+        <item name="tabTextColor">@color/gray</item>
+        <item name="tabSelectedTextColor">@color/main</item>
+        <item name="tabTextAppearance">@style/detailPlaceTabTextAppearence</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabBackground">@drawable/place_tab_selected</item>
+    </style>
+
+    <style name="detailPlaceTabTextAppearence" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15dp</item>
+        <item name="fontFamily">@font/notosanskr_medium_hestia</item>
+    </style>
+
 </resources>

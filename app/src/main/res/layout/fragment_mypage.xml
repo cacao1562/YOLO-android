@@ -111,16 +111,19 @@
             app:layout_constraintTop_toBottomOf="@+id/cv_mypage_profile">
 
             <TextView
+                android:id="@+id/tv_mypage_book_mark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/icn_44_my_like"
                 android:drawablePadding="4dp"
                 android:fontFamily="@font/notosanskr_regular_hestia"
+                android:textColor="@color/font_black_131313"
+                android:textSize="13dp"
                 android:text="@string/mypage_like"
                 android:textAlignment="center"
-                android:textColor="@color/font_black_131313"
-                android:textSize="13dp" />
+                android:background="?selectableItemBackground" />
+
 
             <TextView
                 android:id="@+id/tv_mypage_my_spot"
@@ -133,7 +136,8 @@
                 android:text="@string/mypage_my_spot"
                 android:textAlignment="center"
                 android:textColor="@color/font_black_131313"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:background="?selectableItemBackground"/>
 
             <TextView
                 android:id="@+id/tv_mypage_service_center"
@@ -146,7 +150,8 @@
                 android:text="@string/top_title_service_center"
                 android:textAlignment="center"
                 android:textColor="@color/font_black_131313"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:background="?selectableItemBackground"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,7 +163,8 @@
                 android:text="@string/mypage_coupon"
                 android:textAlignment="center"
                 android:textColor="@color/font_black_131313"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:background="?selectableItemBackground"/>
 
         </LinearLayout>
 

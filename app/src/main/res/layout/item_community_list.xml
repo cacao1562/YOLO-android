@@ -163,6 +163,7 @@
                 android:textColor="@color/main"
                 android:fontFamily="@font/notosanskr_medium_hestia"
                 android:textStyle="normal"
+                android:text="@{data.placeName}"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:drawableLeft="@drawable/icn_24_location"

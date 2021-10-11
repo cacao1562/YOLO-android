@@ -1,7 +1,11 @@
 package com.yolo.yolo_android
 
 import android.net.Uri
+import android.os.Build
+import android.text.Html
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -14,10 +18,12 @@ import androidx.databinding.BindingAdapter
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedAdapter
 import com.yolo.yolo_android.ui.community_upload.ImageSelectedDecoration
+import com.yolo.yolo_android.ui.home_detail.HomeDetailImageAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharedFlow
@@ -35,11 +41,11 @@ object DataBinding {
                 .load(path)
                 .apply(
                     RequestOptions()
-                        .placeholder(android.R.drawable.ic_menu_gallery)
-                        .error(android.R.drawable.stat_notify_error))
+                        .placeholder(R.drawable.placeholder_picture)
+                        .error(R.drawable.placeholder_picture))
                 .into(imageView)
         else
-            imageView.setImageResource(android.R.drawable.ic_menu_gallery)
+            imageView.setImageResource(R.drawable.placeholder_picture)
     }
 
     @JvmStatic
@@ -140,4 +146,47 @@ object DataBinding {
             editText.addTextChangedListener(it)
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("setDetailSimpleAddress")
+    fun setDetailSimpleAddress(textView: TextView, address: String?) {
+        address?.let {
+            val adr = it.split(' ')
+            val sp = adr.take(2)
+            textView.text = sp.joinToString(" ")
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setViewPagerImages")
+    fun setDetailSimpleAddress(view: ViewPager2, data: List<String>?) {
+        if (!data.isNullOrEmpty()) {
+            view.adapter?.let { adapter ->
+                (adapter as HomeDetailImageAdapter).setItems(data)
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setHtmlText")
+    fun setHtmlText(textView: TextView, str: String?) {
+        str?.let {
+            textView.text = str.fromHtmlStr()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setCongestion")
+    fun setCongestion(imageView: ImageView, congestion: Int?) {
+        congestion?.let {
+            when(it) {
+                1 -> imageView.setImageResource(R.drawable.badge_state_01)
+                2 -> imageView.setImageResource(R.drawable.badge_state_02)
+                3 -> imageView.setImageResource(R.drawable.badge_state_03)
+                4 -> imageView.setImageResource(R.drawable.badge_state_04)
+                5 -> imageView.setImageResource(R.drawable.badge_state_05)
+            }
+        }
+    }
+
 }

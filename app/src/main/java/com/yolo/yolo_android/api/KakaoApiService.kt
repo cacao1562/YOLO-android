@@ -21,4 +21,13 @@ interface KakaoApiService {
     suspend fun searchKeyword(
         @Query("query") query: String
     ): Response<KeyWordResponse>
+
+    @Headers("Authorization: ${BuildConfig.KAKAO_REST_KEY}")
+    @GET("https://dapi.kakao.com/v2/local/search/category.json")
+    suspend fun searchCategory(
+        @Query("category_group_code") category_group_code: String,
+        @Query("x") x: Double,
+        @Query("y") y: Double,
+        @Query("radius") radius: Int? = 10000
+    ): Response<KeyWordResponse>
 }
