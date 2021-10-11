@@ -15,6 +15,7 @@ class DataStoreModule(val context: Context) {
         val KEY_USER_TOKEN = stringPreferencesKey("user_token")
         val KEY_LOGIN_TYPE = stringPreferencesKey("login_type")
         val KEY_USER_ID = stringPreferencesKey("user_id")
+        val KEY_FCM_TOKEN = stringPreferencesKey("fcm_token")
     }
 
     suspend fun <T> set(key: Preferences.Key<T>, @NotNull value: T) = when (value) {

@@ -38,6 +38,10 @@ class YoloDataSourceImpl @Inject constructor(
         return yoloService.deleteAccount().toResult(ErrorHandlerImpl(resourceProvider))
     }
 
+    override fun putToken(token: String): Single<ResultData<BaseResponse>> {
+        return yoloService.putToken(token).toResult(ErrorHandlerImpl(resourceProvider))
+    }
+
     override suspend fun uploadPost(
         images: List<MultipartBody.Part>,
         params: HashMap<String, RequestBody>,

@@ -19,6 +19,12 @@ interface YoloApiService {
     @GET("home")
     fun getHomeInfo(): Single<HomeResponse>
 
+    @FormUrlEncoded
+    @PUT("account/token")
+    fun putToken(
+        @Field("token") token: String
+    ): Single<BaseResponse>
+
     @DELETE("account/withdraw")
     fun deleteAccount(): Single<BaseResponse>
 
