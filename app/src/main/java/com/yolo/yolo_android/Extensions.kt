@@ -14,6 +14,7 @@ import android.provider.OpenableColumns
 import android.text.Html
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.*
 import android.view.View
@@ -202,3 +203,12 @@ fun setUnderLineText(textView: TextView) {
     content.setSpan(UnderlineSpan(), 0, content.length, 0)
     textView.text = content
 }
+
+
+fun getWindowHeight(context: Context): Int {
+    // Calculate window height for fullscreen use
+    val displayMetrics = DisplayMetrics()
+    (context as Activity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics.heightPixels
+}
+

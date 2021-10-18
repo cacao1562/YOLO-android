@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.google.android.gms.oss.licenses.OssLicensesActivity
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kakao.sdk.user.UserApiClient
 import com.yolo.yolo_android.BuildConfig
@@ -14,8 +14,10 @@ import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.common.EventObserver
 import com.yolo.yolo_android.common.extensions.ToastExt.toast
 import com.yolo.yolo_android.databinding.FragmentSettingBinding
+import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.dialog.ConfirmCancelDialog
 import com.yolo.yolo_android.ui.login.LoginActivity
+import com.yolo.yolo_android.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,13 +26,15 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.llSettingNotice.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToNoticeFragment()
+            findNavController().safeNavigate(action)
+        }
         binding.tvSettingVersion.text = BuildConfig.VERSION_NAME
-        binding.llSettingNotice.setOnClickListener { }
         binding.llSettingLibrary.setOnClickListener {
             startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         }
         binding.llSettingPolicy.setOnClickListener { }
-        binding.llSettingUserGuide.setOnClickListener { }
         binding.llSettingSuggestionGuide.setOnClickListener { }
         binding.llSettingUserExpire.setOnClickListener {
             val dialog = ConfirmCancelDialog

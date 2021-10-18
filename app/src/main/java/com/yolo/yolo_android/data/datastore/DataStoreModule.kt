@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
@@ -15,6 +16,7 @@ class DataStoreModule(val context: Context) {
         val KEY_USER_TOKEN = stringPreferencesKey("user_token")
         val KEY_LOGIN_TYPE = stringPreferencesKey("login_type")
         val KEY_USER_ID = stringPreferencesKey("user_id")
+        val KEY_NOTICE_NUM = stringSetPreferencesKey("notice_num")
     }
 
     suspend fun <T> set(key: Preferences.Key<T>, @NotNull value: T) = when (value) {
@@ -23,6 +25,7 @@ class DataStoreModule(val context: Context) {
         is Long -> context.dataStore.edit { it[key] = value }
         is Boolean -> context.dataStore.edit { it[key] = value }
         is String -> context.dataStore.edit { it[key] = value }
+        is Set<*> -> context.dataStore.edit { it[key] = value }
         else -> null
     }
 

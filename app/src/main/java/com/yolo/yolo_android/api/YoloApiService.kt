@@ -104,4 +104,7 @@ interface YoloApiService {
         @Query("sort") sort: String = "low" // high
     ): DateTripListResponse
 
+    @GET("notice")
+    suspend fun getNotice(): Response<NoticeResponse>
+
 }

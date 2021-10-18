@@ -82,6 +82,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_noticeFragment"
+            app:destination="@id/noticeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_couponTabFragment"
+            app:destination="@id/couponTabFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -251,5 +265,15 @@
             android:name="url"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/noticeFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.notice.NoticeFragment"
+        android:label="NoticeFragment"
+        tools:layout="@layout/fragment_notice"/>
+    <fragment
+        android:id="@+id/couponTabFragment"
+        android:name="com.yolo.yolo_android.ui.mypage.coupon.CouponTabFragment"
+        android:label="CouponTabFragment"
+        tools:layout="@layout/fragment_coupon_tab"/>
 
 </navigation>

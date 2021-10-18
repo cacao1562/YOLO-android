@@ -1,19 +1,15 @@
 package com.yolo.yolo_android.ui.mypage
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yolo.yolo_android.R
-import com.yolo.yolo_android.USER_GUIDE_URL
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.databinding.FragmentMypageBinding
 import com.yolo.yolo_android.safeNavigate
-import com.yolo.yolo_android.ui.dialog.ConfirmCancelDialog
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
 import com.yolo.yolo_android.ui.mypage.profile_update.ProfileUpdateFragment
-import com.yolo.yolo_android.utils.FileDownloader
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,6 +58,13 @@ class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_m
             val action = MainFragmentDirections.actionMainFragmentToServiceCenterFragment()
             findNavController().safeNavigate(action)
         }
+        /**
+         * 쿠폰
+         */
+        binding.tvMypageCoupon.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToCouponTabFragment()
+            findNavController().safeNavigate(action)
+        }
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
@@ -72,18 +75,8 @@ class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_m
             }
         }
         binding.llNotice.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToWebFragment("viridian-monarch-554.notion.site/fc2796ce4a284b6a978d5005f7316aca")
+            val action = MainFragmentDirections.actionMainFragmentToNoticeFragment()
             findNavController().safeNavigate(action)
-        }
-        binding.llUserGuide.setOnClickListener {
-            val dialog = ConfirmCancelDialog
-                .newInstance(
-                    msg = getString(R.string.setting_message_download_user_guide),
-                    confirm = {
-                        FileDownloader(requireContext(), fileName = getString(R.string.setting_user_guide), fullPath = USER_GUIDE_URL).download()
-                    }
-                )
-            dialog.show(childFragmentManager, ConfirmCancelDialog::class.java.simpleName)
         }
     }
 

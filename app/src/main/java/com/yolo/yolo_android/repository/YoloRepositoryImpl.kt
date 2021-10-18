@@ -116,4 +116,11 @@ class YoloRepositoryImpl @Inject constructor(
     ): Flow<ResultData<HomeDetailResponse>> {
         return datasource.getTripDetail(contentId, contentTypeId, onStart, onComplete)
     }
+
+    override suspend fun getNotice(
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<NoticeResponse>> {
+        return datasource.getNotice(onStart, onComplete)
+    }
 }
