@@ -40,6 +40,21 @@ object ImageBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("loadRoundCornerImage")
+    fun loadRoundCornerImage(imageView: ImageView, drawable: Drawable) {
+        val radius = imageView.context.resources.getDimensionPixelOffset(R.dimen.radius_6)
+        val multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(radius))
+
+        Glide.with(imageView)
+            .load(drawable)
+            .placeholder(R.drawable.placeholder_picture)
+            .error(R.drawable.placeholder_picture)
+            .apply(RequestOptions.bitmapTransform(multiTransformation))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("loadRoundCornerImage")
     fun ImageView.loadRoundCornerImage(url: String?) {
         val radius = context.resources.getDimensionPixelOffset(R.dimen.radius_6)
         val multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(radius))

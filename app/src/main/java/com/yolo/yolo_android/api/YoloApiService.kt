@@ -25,6 +25,15 @@ interface YoloApiService {
         @Field("token") token: String
     ): Single<BaseResponse>
 
+    @GET("magazine")
+    fun getMagazine(): Single<MagazineResponse>
+
+    @POST("magazine")
+    fun postMagazine(): Single<BaseResponse>
+
+    @DELETE("magazine")
+    fun deleteMagazine(): Single<BaseResponse>
+
     @DELETE("account/withdraw")
     fun deleteAccount(): Single<BaseResponse>
 

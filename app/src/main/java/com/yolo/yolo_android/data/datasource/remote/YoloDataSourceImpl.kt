@@ -29,7 +29,7 @@ class YoloDataSourceImpl @Inject constructor(
     override fun getHomeInfo(): Single<ResultData<HomeResponse>> {
         return yoloService.getHomeInfo().map {
             ResultData.Success(it) as ResultData<HomeResponse>
-        }.onErrorReturn{
+        }.onErrorReturn {
             ResultData.Error(errorEntity = ErrorHandlerImpl(resourceProvider).getError(it))
         }
     }
@@ -40,6 +40,18 @@ class YoloDataSourceImpl @Inject constructor(
 
     override fun putToken(token: String): Single<ResultData<BaseResponse>> {
         return yoloService.putToken(token).toResult(ErrorHandlerImpl(resourceProvider))
+    }
+
+    override fun getMagazine(): Single<ResultData<MagazineResponse>> {
+        return yoloService.getMagazine().toResult(ErrorHandlerImpl(resourceProvider))
+    }
+
+    override fun postMagazine(): Single<ResultData<BaseResponse>> {
+        return yoloService.postMagazine().toResult(ErrorHandlerImpl(resourceProvider))
+    }
+
+    override fun deleteMagazine(): Single<ResultData<BaseResponse>> {
+        return yoloService.deleteMagazine().toResult(ErrorHandlerImpl(resourceProvider))
     }
 
     override suspend fun uploadPost(

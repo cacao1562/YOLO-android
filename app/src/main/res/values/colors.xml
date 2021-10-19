@@ -34,4 +34,9 @@
     <color name="color_gray_dfdfdf">#dfdfdf</color>
     <color name="color_gray_dcdcdc">#dcdcdc</color>
 
+    <integer-array name="swipe_refresh_color_scheme">
+        <item>@color/primary</item>
+        <item>@color/main</item>
+        <item>@color/purple_700</item>
+    </integer-array>
 </resources>

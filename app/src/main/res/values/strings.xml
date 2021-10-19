@@ -120,4 +120,9 @@
 <!--    찜한 여행지-->
     <string name="top_title_book_mark">찜한 여행지</string>
 
+    <!-- 욜로갈래 -->
+    <string name="magazine_view_past">지난 월간호 살펴보기</string>
+    <string name="magazine_subscribe_cancel">구독 취소</string>
+    <string name="magazine_message_subscribe_cancel">구독을 취소하시겠습니까?</string>
+
 </resources>
