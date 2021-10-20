@@ -31,50 +31,49 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_homeTabFragment"
             app:destination="@id/homeAreaTabFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_profileUpdateFragment"
             app:destination="@id/profileUpdateFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_settingFragment"
             app:destination="@id/settingFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_mySpotFragment"
             app:destination="@id/mySpotFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_serviceCenterFragment"
             app:destination="@id/serviceCenterFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
-
             android:id="@+id/action_mainFragment_to_bookMarkFragment"
             app:destination="@id/bookMarkFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"/>
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_webFragment"
             app:destination="@id/webFragment"
@@ -96,6 +95,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -106,14 +106,14 @@
         android:id="@+id/calendarFragment"
         android:name="com.yolo.yolo_android.ui.home_calendar.CalendarFragment"
         android:label="CalendarFragment"
-        tools:layout="@layout/fragment_calendar" >
+        tools:layout="@layout/fragment_calendar">
         <action
             android:id="@+id/action_calendarFragment_to_homeDateTabFragment"
             app:destination="@id/homeDateTabFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeAreaListFragment"
@@ -153,7 +153,8 @@
         android:name="com.yolo.yolo_android.ui.community_comment.CommentListFragment"
         android:label="CommentListFragment"
         tools:layout="@layout/fragment_comment_list">
-        <argument android:name="postId"
+        <argument
+            android:name="postId"
             app:argType="integer" />
     </fragment>
     <fragment
@@ -163,23 +164,23 @@
         tools:layout="@layout/fragment_home_area_tab">
         <argument
             android:name="region"
+            android:defaultValue="@null"
             app:argType="com.yolo.yolo_android.model.Region"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <action
             android:id="@+id/action_homeTabFragment_self"
             app:destination="@id/homeAreaTabFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/homeAreaTabFragment"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/homeAreaTabFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeAreaTabFragment_to_homeDetailFragment"
             app:destination="@id/homeDetailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/profileUpdateFragment"
@@ -194,22 +195,22 @@
         android:id="@+id/myPageFragment"
         android:name="com.yolo.yolo_android.ui.mypage.MyPageFragment"
         android:label="MyPageFragment"
-        tools:layout="@layout/fragment_mypage"/>
+        tools:layout="@layout/fragment_mypage" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.yolo.yolo_android.ui.mypage.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting"/>
+        tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/mySpotFragment"
         android:name="com.yolo.yolo_android.ui.mypage.myspot.MySpotFragment"
         android:label="MySpotFragment"
-        tools:layout="@layout/fragment_my_spot"/>
+        tools:layout="@layout/fragment_my_spot" />
     <fragment
         android:id="@+id/serviceCenterFragment"
         android:name="com.yolo.yolo_android.ui.mypage.service_center.ServiceCenterFragment"
         android:label="ServiceCenterFragment"
-        tools:layout="@layout/fragment_service_center"/>
+        tools:layout="@layout/fragment_service_center" />
     <fragment
 
         android:id="@+id/homeDateTabFragment"
@@ -225,13 +226,13 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeDateListFragment"
         android:name="com.yolo.yolo_android.ui.home_date.list.HomeDateListFragment"
         android:label="HomeDateListFragment"
-        tools:layout="@layout/fragment_home_date_list"/>
+        tools:layout="@layout/fragment_home_date_list" />
     <fragment
         android:id="@+id/homeDetailFragment"
         android:name="com.yolo.yolo_android.ui.home_detail.HomeDetailFragment"
@@ -240,7 +241,8 @@
         <argument
             android:name="contentId"
             app:argType="integer" />
-        <argument android:name="contentTypeId"
+        <argument
+            android:name="contentTypeId"
             app:argType="integer" />
     </fragment>
     <fragment
@@ -254,7 +256,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/webFragment"

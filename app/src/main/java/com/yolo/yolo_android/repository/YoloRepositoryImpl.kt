@@ -32,6 +32,22 @@ class YoloRepositoryImpl @Inject constructor(
         return datasource.deleteAccount()
     }
 
+    override fun putToken(token: String): Single<ResultData<BaseResponse>> {
+        return datasource.putToken(token)
+    }
+
+    override fun getMagazine(): Single<ResultData<MagazineResponse>> {
+        return datasource.getMagazine()
+    }
+
+    override fun postMagazine(): Single<ResultData<BaseResponse>> {
+        return datasource.postMagazine()
+    }
+
+    override fun deleteMagazine(): Single<ResultData<BaseResponse>> {
+        return datasource.deleteMagazine()
+    }
+
     override suspend fun uploadPost(
         images: List<MultipartBody.Part>,
         params: HashMap<String, RequestBody>,

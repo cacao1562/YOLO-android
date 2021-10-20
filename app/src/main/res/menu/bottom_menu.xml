@@ -8,7 +8,7 @@
         android:title="@string/bottom_menu_home" />
 
     <item
-        android:id="@+id/menu_sub"
+        android:id="@+id/menu_magazine"
         android:enabled="true"
         android:icon="@drawable/icn_24_magazine"
         android:title="@string/bottom_menu_magazine"/>

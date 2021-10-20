@@ -12,6 +12,10 @@ interface YoloDataSource {
     fun login(queryMap: HashMap<String, String>): Single<ResultData<LoginResponse>>
     fun getHomeInfo(): Single<ResultData<HomeResponse>>
     fun deleteAccount(): Single<ResultData<BaseResponse>>
+    fun putToken(token: String): Single<ResultData<BaseResponse>>
+    fun getMagazine(): Single<ResultData<MagazineResponse>>
+    fun postMagazine(): Single<ResultData<BaseResponse>>
+    fun deleteMagazine(): Single<ResultData<BaseResponse>>
 
     suspend fun uploadPost(images: List<MultipartBody.Part>,
                            params: HashMap<String, RequestBody>,

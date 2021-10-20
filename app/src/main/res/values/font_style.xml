@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="customTextViewFontStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/notosanskr_regular_hestia</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="customEditTextFontStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:fontFamily">@font/notosanskr_regular_hestia</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="customButtonFontStyle" parent="Widget.AppCompat.Button">
+        <item name="android:fontFamily">@font/notosanskr_regular_hestia</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>
