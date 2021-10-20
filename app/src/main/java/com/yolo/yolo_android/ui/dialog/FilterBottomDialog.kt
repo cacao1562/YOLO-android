@@ -92,15 +92,4 @@ class FilterBottomDialog: BottomSheetDialogFragment() {
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    private fun getBottomSheetDialogDefaultHeight(): Int {
-        return getWindowHeight() * 47 / 100
-    }
-
-    private fun getWindowHeight(): Int {
-        // Calculate window height for fullscreen use
-        val displayMetrics = DisplayMetrics()
-        (context as Activity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics.heightPixels
-    }
-
 }

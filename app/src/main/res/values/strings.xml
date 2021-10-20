@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YOLO-android</string>
+    <string name="app_name">욜로 여행</string>
 
 <!--    main bottom navigation-->
     <string name="bottom_menu_home">홈</string>
@@ -56,6 +56,9 @@
     <string name="alert">알림</string>
     <string name="alert_msg_picture_limit">최대 3장까지 선택가능합니다.</string>
     <string name="alert_msg_delete_post">게시글을 삭제 하시겠습니까?</string>
+
+    <string name="alert_title_coupon">쿠폰 사용조건</string>
+    <string name="alert_msg_coupon">* 현장에서 사용가능한 무료입장권입니다.\n* 3만원 이상 결제시 사용가능한 쿠폰입니다.\n* 중복사용이 불가능합니다. </string>
 
 <!--    comment-->
     <string name="comment">댓글</string>

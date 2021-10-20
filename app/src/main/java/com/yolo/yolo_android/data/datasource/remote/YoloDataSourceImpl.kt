@@ -189,4 +189,16 @@ class YoloDataSourceImpl @Inject constructor(
             })
         }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
     }
+
+    override suspend fun getNotice(
+        onStart: () -> Unit,
+        onComplete: () -> Unit
+    ): Flow<ResultData<NoticeResponse>> {
+        val errorHandler = ErrorHandlerImpl(resourceProvider)
+        return flow {
+            emit(safeApiCall(errorHandler) {
+                yoloService.getNotice()
+            })
+        }.onStart { onStart.invoke() }.onCompletion { onComplete.invoke() }.flowOn(Dispatchers.IO)
+    }
 }

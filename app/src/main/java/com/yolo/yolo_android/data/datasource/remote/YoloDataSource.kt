@@ -72,4 +72,8 @@ interface YoloDataSource {
                               onStart: () -> Unit,
                               onComplete: () -> Unit
     ): Flow<ResultData<HomeDetailResponse>>
+
+    suspend fun getNotice(onStart: () -> Unit,
+                          onComplete: () -> Unit
+    ): Flow<ResultData<NoticeResponse>>
 }
