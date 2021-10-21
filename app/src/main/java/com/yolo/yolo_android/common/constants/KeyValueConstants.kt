@@ -11,3 +11,4 @@ const val FCM_ACTION = "fcm_action"
 /* value */
 const val TYPE_KAKAO = "kakao"
 const val TYPE_NAVER = "naver"
+const val TYPE_NONE = "none"

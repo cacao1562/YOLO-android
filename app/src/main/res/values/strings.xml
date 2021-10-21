@@ -52,6 +52,7 @@
     <string name="hint_picture_location">위치 검색을 클릭하세요</string>
     <string name="caution_upload">관련없는 사진은 관리자에 의해 삭제될 수 있습니다\n나만의 멋진 스팟 공유로 매너있는 커뮤니티를 만드세요!</string>
     <string name="picture_upload">등록하기</string>
+    <string name="common_login">로그인</string>
 
 <!--    alert-->
     <string name="alert">알림</string>

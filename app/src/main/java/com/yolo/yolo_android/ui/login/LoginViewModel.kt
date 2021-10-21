@@ -70,6 +70,12 @@ class LoginViewModel @Inject constructor(
         return focused && validInput
     }
 
+    fun clickedLogin() {
+        showProgress()
+        id.value?.let {
+            requestLogin(TYPE_NONE, it)
+        }
+    }
 
     fun clickedKakaoLogin() {
         _showKakaoLoginType.value = Event(true)
