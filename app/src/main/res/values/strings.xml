@@ -128,4 +128,7 @@
     <string name="magazine_subscribe_cancel">구독 취소</string>
     <string name="magazine_message_subscribe_cancel">구독을 취소하시겠습니까?</string>
 
+    <!-- fcm -->
+    <string name="fcm_ticker">새로운 알림이 도착하였습니다</string>
+
 </resources>

@@ -47,6 +47,7 @@ class TokenManager constructor(
                 return@OnCompleteListener
             }
             val currentToken = task.result ?: ""
+            MyLogger.e("currentToken : $currentToken")
             if (storedToken != currentToken) {
                 sendRegistrationToServer(currentToken)
                 CoroutineScope(Dispatchers.IO).launch {
