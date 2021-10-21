@@ -7,6 +7,7 @@ const val KAKAO_URL = "https://kapi.kakao.com/"
 const val KAKAO_PLACE_URL = "https://place.map.kakao.com/"
 const val USER_GUIDE_URL = "https://chae-bucket.s3.ap-northeast-2.amazonaws.com/images/kotlin_docs_ko_20171031.pdf"
 const val MAGAZINE_URL = "https://yunseokj.github.io/yolo_magazine/#/"
+const val HOME_BANNER_URL = "https://yunseokj.github.io/yolo_eventpage/#/"
 
 enum class DialogButtonType {
     Cancel,
