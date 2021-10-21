@@ -20,6 +20,7 @@
     <!-- 소셜 로그인 -->
     <string name="login_tv_with_kakao">카카오톡으로 간편로그인</string>
     <string name="login_tv_with_other_kakao_id">다른 카카오계정으로 로그인</string>
+    <string name="login_hint_test_account">테스트 계정</string>
 
     <!-- 회원가입 -->
     <string name="signup_please_input_nick_name">닉네임을 입력해주세요.</string>

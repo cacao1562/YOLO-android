@@ -49,6 +49,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         }
 
         binding.vm = loginViewModel
+        binding.etId.setOnFocusChangeListener { _, focus -> loginViewModel.idFocus.value = focus }
 
         with(loginViewModel) {
             loading.observe(this@LoginActivity, {
