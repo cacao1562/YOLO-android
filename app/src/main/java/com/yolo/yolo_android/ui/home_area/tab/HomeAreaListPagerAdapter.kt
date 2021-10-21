@@ -22,7 +22,7 @@ class HomeAreaListPagerAdapter(
             2 -> HomeAreaListFragment.newInstance(areaCode, 14)
             3 -> HomeAreaListFragment.newInstance(areaCode, 15)
             4 -> HomeAreaListFragment.newInstance(areaCode, 28)
-            5 -> HomeAreaListFragment.newInstance(areaCode, 32)
+            5 -> HomeAreaListFragment.newInstance(areaCode, 38)
             6 -> HomeAreaListFragment.newInstance(areaCode, 39)
             else -> error("No Fragment")
         }
