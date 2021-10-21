@@ -84,6 +84,7 @@
                         android:thumbTextPadding="10.5dp"
                         android:track="@drawable/selected_switch_setting"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -147,28 +148,6 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text="@string/setting_policy" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icn_24_arrow_70" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_setting_user_guide"
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    android:background="?selectableItemBackground"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/settingItemTextAppearance"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="@string/setting_user_guide" />
 
                     <ImageView
                         android:layout_width="wrap_content"
