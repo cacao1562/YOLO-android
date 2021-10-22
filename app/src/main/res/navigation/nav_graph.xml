@@ -17,7 +17,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-
         <action
             android:id="@+id/action_mainFragment_to_calendarFragment"
             app:destination="@+id/calendarFragment"
@@ -95,7 +94,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
-
+        <action
+            android:id="@+id/action_mainFragment_to_communityFragment"
+            app:destination="@id/communityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_magazineFragment"
+            app:destination="@id/magazineFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -120,6 +132,11 @@
         android:name="com.yolo.yolo_android.ui.home_area.list.HomeAreaListFragment"
         android:label="HomeListFragment"
         tools:layout="@layout/fragment_home_area_list" />
+    <fragment
+        android:id="@+id/magazineFragment"
+        android:name="com.yolo.yolo_android.ui.magazine.MagazineFragment"
+        android:label="MagazineFragment"
+        tools:layout="@layout/fragment_magazine" />
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.yolo.yolo_android.ui.community.CommunityFragment"

@@ -1,6 +1,7 @@
 package com.yolo.yolo_android.ui.login
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.OnCompleteListener
@@ -30,6 +31,9 @@ class LoginViewModel @Inject constructor(
     private val snsRepository: SnsRepository,
     private val yoloRepository: YoloRepository
 ) : DisposableViewModel() {
+    val id = MutableLiveData<String>()
+    val idFocus = MutableLiveData<Boolean>()
+
     private var _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
@@ -44,6 +48,34 @@ class LoginViewModel @Inject constructor(
 
     private val _navigateToMain = MutableLiveData<Event<Boolean>>()
     val navigateToMain: LiveData<Event<Boolean>> get() = _navigateToMain
+
+    fun clearId() {
+        id.value = ""
+    }
+
+    fun clearIdImgVisible(): LiveData<Boolean> {
+        val visibility = MediatorLiveData<Boolean>()
+        visibility.addSource(id) {
+            visibility.value = combineEditStatus(id, idFocus)
+        }
+        visibility.addSource(idFocus) {
+            visibility.value = combineEditStatus(id, idFocus)
+        }
+        return visibility
+    }
+
+    private fun combineEditStatus(id: LiveData<String>, focus: LiveData<Boolean>): Boolean {
+        val focused = focus.value ?: false
+        val validInput = id.value?.isNotEmpty() ?: false
+        return focused && validInput
+    }
+
+    fun clickedLogin() {
+        showProgress()
+        id.value?.let {
+            requestLogin(TYPE_NONE, it)
+        }
+    }
 
     fun clickedKakaoLogin() {
         _showKakaoLoginType.value = Event(true)

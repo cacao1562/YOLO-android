@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="clickListener"
+            type="com.yolo.yolo_android.common.listener.OnOpenWebItemClickListener" />
 
         <variable
-            name="drawableId"
-            type="Integer" />
+            name="banner"
+            type="com.yolo.yolo_android.model.HomeBanner" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +18,16 @@
         android:layout_height="match_parent">
 
         <ImageView
-            loadCenterCropImage="@{drawableId}"
+            android:clickable="true"
+            android:focusable="true"
+            loadCenterCropImage="@{banner.drawableId}"
             android:layout_width="260dp"
             android:layout_height="122dp"
+            android:onClick="@{(v) -> clickListener.onClick(v, banner.link)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_test_banner1" />
+            tools:src="@drawable/img_home_banner2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

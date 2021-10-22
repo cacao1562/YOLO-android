@@ -60,7 +60,7 @@ class MagazineFragment : BindingFragment<FragmentMagazineBinding>(R.layout.fragm
         magazineViewModel.toastMessage.observe(viewLifecycleOwner, { toast(it) })
         magazineViewModel.magazineList.observe(viewLifecycleOwner, {
             magazineAdapter.setData(it)
-            binding.vpMagazine.offscreenPageLimit = it.size
+            binding.vpMagazine.offscreenPageLimit = if (it.isEmpty()) 1 else it.size
         })
     }
 

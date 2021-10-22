@@ -44,16 +44,78 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_logo"
             tools:ignore="SpUsage" />
 
+        <FrameLayout
+            android:id="@+id/fl_test_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+            <EditText
+                android:id="@+id/etId"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_login"
+                android:hint="@string/login_hint_test_account"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="22dp"
+                android:privateImeOptions="defaultInputmode=english"
+                android:singleLine="true"
+                android:text="@={vm.id}"
+                android:textColorHint="@color/gray"
+                android:textSize="15dp"
+                tools:ignore="SpUsage" />
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{() -> vm.clearId()}"
+                android:src="@drawable/icn_24_delete_round_disable"
+                android:visibility="@{vm.clearIdImgVisible()? View.VISIBLE : View.GONE}" />
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_login"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/primary"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_test_account">
+
+            <TextView
+                android:id="@+id/login_button"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/common_login"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:onThrottleSingleClick="@{(v) -> vm.clickedLogin()}" />
+        </androidx.cardview.widget.CardView>
+
         <ImageButton
             android:id="@+id/btn_kakao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/ic_login_kakao"
             android:foreground="@drawable/bg_ripple_rectangle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/cv_login"
             app:onThrottleSingleClick="@{(v) -> vm.clickedKakaoLogin()}" />
 
         <ImageButton
