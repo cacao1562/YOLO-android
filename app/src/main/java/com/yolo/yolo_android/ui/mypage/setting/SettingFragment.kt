@@ -13,11 +13,11 @@ import com.yolo.yolo_android.YoLoApplication.Companion.naverOAuthLoginInstance
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.common.EventObserver
 import com.yolo.yolo_android.common.extensions.ToastExt.toast
+import com.yolo.yolo_android.common.extensions.ViewExt.openExternalWebView
 import com.yolo.yolo_android.databinding.FragmentSettingBinding
 import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.dialog.ConfirmCancelDialog
 import com.yolo.yolo_android.ui.login.LoginActivity
-import com.yolo.yolo_android.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,15 +27,19 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.llSettingNotice.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToNoticeFragment()
+            val action = SettingFragmentDirections.actionSettingFragmentToNoticeFragment2()
             findNavController().safeNavigate(action)
         }
         binding.tvSettingVersion.text = BuildConfig.VERSION_NAME
         binding.llSettingLibrary.setOnClickListener {
             startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         }
-        binding.llSettingPolicy.setOnClickListener { }
-        binding.llSettingSuggestionGuide.setOnClickListener { }
+        binding.llSettingPolicy.setOnClickListener {
+            it.openExternalWebView("https://viridian-monarch-554.notion.site/fc2796ce4a284b6a978d5005f7316aca")
+        }
+        binding.llSettingSuggestionGuide.setOnClickListener {
+            it.openExternalWebView("https://cheddar-accordion-275.notion.site/YOL-O-c20e58d54a0d43a7bad0677d9b11b1e0")
+        }
         binding.llSettingUserExpire.setOnClickListener {
             val dialog = ConfirmCancelDialog
                 .newInstance(

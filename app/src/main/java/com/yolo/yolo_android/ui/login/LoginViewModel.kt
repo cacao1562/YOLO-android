@@ -67,8 +67,8 @@ class LoginViewModel @Inject constructor(
     }
 
     fun clickedLogin() {
-        showProgress()
         id.value?.let {
+            showProgress()
             requestLogin(TYPE_NONE, it)
         }
     }

@@ -217,7 +217,15 @@
         android:id="@+id/settingFragment"
         android:name="com.yolo.yolo_android.ui.mypage.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_noticeFragment2"
+            app:destination="@id/noticeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/mySpotFragment"
         android:name="com.yolo.yolo_android.ui.mypage.myspot.MySpotFragment"

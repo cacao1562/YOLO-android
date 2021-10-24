@@ -27,7 +27,7 @@ class ServiceCenterFragment: BindingFragment<FragmentServiceCenterBinding>(R.lay
         binding.tvServiceCenterEmail.setOnClickListener {
             Intent(Intent.ACTION_SEND).also {
                 it.type = "plain/text";
-                it.putExtra(Intent.EXTRA_EMAIL, arrayOf("yolo_help@gmail.com"))
+                it.putExtra(Intent.EXTRA_EMAIL, arrayOf("yolo.help.center@gmail.com"))
                 it.putExtra(Intent.EXTRA_SUBJECT, "문의드립니다.")
                 it.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(it, ""))
