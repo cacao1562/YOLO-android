@@ -8,6 +8,7 @@ import com.yolo.yolo_android.common.constants.LOGIN_TYPE
 import com.yolo.yolo_android.common.constants.NICKNAME
 import com.yolo.yolo_android.common.constants.SOCIAL_ID
 import com.yolo.yolo_android.data.ResultData
+import com.yolo.yolo_android.fcm.FcmTokenManager
 import com.yolo.yolo_android.repository.YoloRepository
 import com.yolo.yolo_android.utils.MyLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -86,6 +87,7 @@ class SignupViewModel @Inject constructor(
                                 loginType = loginType,
                                 userId = socialID
                             )
+                            FcmTokenManager(yoloRepository).sendRegistrationToServer()
                         }
                         _navigateToMain.value = Event(true)
                     }

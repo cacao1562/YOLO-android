@@ -36,7 +36,7 @@
 
             <ImageView
                 android:id="@+id/iv_restaurant"
-                loadRoundCornerImage="@{restaurant.image}"
+                loadRoundCornerImage="@{restaurant.imageUrl}"
                 android:layout_width="62dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical"

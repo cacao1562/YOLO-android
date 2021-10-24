@@ -21,7 +21,7 @@ data class PopularRestaurant(
     val ranking: String,
     val name: String,
     val address: String,
-    val image: String?,
+    val imageUrl: String?,
     val placeId: String?
 )
 
@@ -29,6 +29,6 @@ data class PopularPlace(
     val ranking: String,
     val name: String,
     val address: String,
-    val image: String?,
+    val imageUrl: String?,
     val placeId: String?
 )
