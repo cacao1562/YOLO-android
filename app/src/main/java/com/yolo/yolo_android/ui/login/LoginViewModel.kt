@@ -4,20 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
 import com.yolo.yolo_android.YoLoApplication
 import com.yolo.yolo_android.base.DisposableViewModel
 import com.yolo.yolo_android.common.Event
 import com.yolo.yolo_android.common.constants.*
 import com.yolo.yolo_android.data.ResultData
-import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.KEY_FCM_TOKEN
 import com.yolo.yolo_android.data.error.ErrorEntity
 import com.yolo.yolo_android.repository.SnsRepository
 import com.yolo.yolo_android.repository.YoloRepository
 import com.yolo.yolo_android.utils.MyLogger
-import com.yolo.yolo_android.utils.TokenManager
+import com.yolo.yolo_android.fcm.FcmTokenManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
@@ -149,7 +145,7 @@ class LoginViewModel @Inject constructor(
                                 loginType = loginType,
                                 userId = id
                             )
-                            TokenManager(yoloRepository).validateFcmToken()
+                            FcmTokenManager(yoloRepository).sendRegistrationToServer()
                         }
                         _navigateToMain.value = Event(true)
                     }

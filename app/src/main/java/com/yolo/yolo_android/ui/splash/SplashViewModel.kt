@@ -13,7 +13,7 @@ import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.KEY_LOGIN_
 import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.KEY_USER_ID
 import com.yolo.yolo_android.data.datastore.DataStoreModule.Companion.KEY_USER_TOKEN
 import com.yolo.yolo_android.repository.YoloRepository
-import com.yolo.yolo_android.utils.TokenManager
+import com.yolo.yolo_android.fcm.FcmTokenManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
@@ -62,7 +62,7 @@ class SplashViewModel @Inject constructor(
                                 userId = id,
                                 loginType = loginType
                             )
-                            TokenManager(yoloRepository).validateFcmToken()
+                            FcmTokenManager(yoloRepository).sendRegistrationToServer()
                         }
                         _navigateToMain.value = Event(true)
                     }
