@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.yolo.yolo_android.R
 import com.yolo.yolo_android.YoLoApplication
 import com.yolo.yolo_android.data.datastore.DataStoreModule
 import com.yolo.yolo_android.databinding.ItemNoticeBinding
@@ -19,10 +18,10 @@ class NoticeAdapter: ListAdapter<NoticeResult, NoticeViewHolder>(DIFF_CALLBACK) 
             getItem(position).isExpand = !getItem(position).isExpand
 
             CoroutineScope(Dispatchers.IO).launch {
-                val noticeNum = YoLoApplication.context?.getDataStore()?.get(DataStoreModule.KEY_NOTICE_NUM)
+                val noticeNum = YoLoApplication.context?.getDataStoreModule()?.get(DataStoreModule.KEY_NOTICE_NUM)
                 val data = noticeNum?.toMutableList()
                 data?.add(getItem(position).noticeId.toString())
-                YoLoApplication.context?.getDataStore()?.set(DataStoreModule.KEY_NOTICE_NUM, data?.toSet() ?: setOf())
+                YoLoApplication.context?.getDataStoreModule()?.set(DataStoreModule.KEY_NOTICE_NUM, data?.toSet() ?: setOf())
                 withContext(Dispatchers.Main) {
                     notifyItemChanged(position)
                 }
@@ -64,7 +63,7 @@ class NoticeViewHolder(
         binding.data = data
 
         CoroutineScope(Dispatchers.IO).launch {
-            val checkNoticeNum = YoLoApplication.context?.getDataStore()?.get(DataStoreModule.KEY_NOTICE_NUM)
+            val checkNoticeNum = YoLoApplication.context?.getDataStoreModule()?.get(DataStoreModule.KEY_NOTICE_NUM)
             withContext(Dispatchers.Main) {
                 checkNoticeNum?.forEach {
                     if (it == data.noticeId.toString()) binding.tvItemNoticeTitle.setCompoundDrawablesWithIntrinsicBounds(

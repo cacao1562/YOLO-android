@@ -3,6 +3,8 @@ package com.yolo.yolo_android.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.yolo.yolo_android.KAKAO_PLACE_URL
+import com.yolo.yolo_android.common.extensions.ViewExt.openExternalWebView
 import com.yolo.yolo_android.databinding.ItemPlaceRankingBinding
 import com.yolo.yolo_android.model.PopularPlace
 
@@ -33,6 +35,12 @@ class PlaceRankingViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(place: PopularPlace) {
         binding.place = place
+        binding.root.setOnClickListener { view ->
+            place.placeId?.let {
+                val url = KAKAO_PLACE_URL.plus(place.placeId)
+                view.openExternalWebView(url)
+            }
+        }
     }
 
     companion object {

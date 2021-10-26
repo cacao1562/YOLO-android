@@ -4,20 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kakao.sdk.user.UserApiClient
-import com.yolo.yolo_android.BuildConfig
-import com.yolo.yolo_android.R
+import com.yolo.yolo_android.*
 import com.yolo.yolo_android.YoLoApplication.Companion.naverOAuthLoginInstance
 import com.yolo.yolo_android.base.BindingFragment
 import com.yolo.yolo_android.common.EventObserver
 import com.yolo.yolo_android.common.extensions.ToastExt.toast
 import com.yolo.yolo_android.common.extensions.ViewExt.openExternalWebView
 import com.yolo.yolo_android.databinding.FragmentSettingBinding
-import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.dialog.ConfirmCancelDialog
 import com.yolo.yolo_android.ui.login.LoginActivity
+import com.yolo.yolo_android.ui.main.MainFragmentDirections
+import com.yolo.yolo_android.utils.MyLogger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,10 +36,12 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
             startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         }
         binding.llSettingPolicy.setOnClickListener {
-            it.openExternalWebView("https://viridian-monarch-554.notion.site/fc2796ce4a284b6a978d5005f7316aca")
+            val action = SettingFragmentDirections.actionSettingFragmentToWebFragment(YOLO_POLICY_URL, getString(R.string.setting_policy))
+            findNavController().safeNavigate(action)
         }
         binding.llSettingSuggestionGuide.setOnClickListener {
-            it.openExternalWebView("https://cheddar-accordion-275.notion.site/YOL-O-c20e58d54a0d43a7bad0677d9b11b1e0")
+            val action = SettingFragmentDirections.actionSettingFragmentToWebFragment(YOLO_SUGGESTION_GUIDE_URL, getString(R.string.setting_suggestion_guide))
+            findNavController().safeNavigate(action)
         }
         binding.llSettingUserExpire.setOnClickListener {
             val dialog = ConfirmCancelDialog
@@ -59,6 +62,14 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
                     }
                 )
             dialog.show(childFragmentManager, ConfirmCancelDialog::class.java.simpleName)
+        }
+
+        binding.switchPushConfig.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.changePushConfig(isChecked)
+        }
+
+        viewModel.pushConfig?.asLiveData()?.observe(viewLifecycleOwner) {
+            binding.switchPushConfig.isChecked = it
         }
 
         viewModel.kakaoLogout.observe(viewLifecycleOwner, EventObserver {

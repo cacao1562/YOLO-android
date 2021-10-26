@@ -10,6 +10,7 @@ import com.yolo.yolo_android.R
 import com.yolo.yolo_android.base.BindingActivity
 import com.yolo.yolo_android.common.EventObserver
 import com.yolo.yolo_android.common.constants.SOCIAL_ID
+import com.yolo.yolo_android.common.extensions.ToastExt.toast
 import com.yolo.yolo_android.databinding.ActivitySignupBinding
 import com.yolo.yolo_android.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,10 @@ class SignupActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
                 startActivity(it)
                 finish()
             }
+        })
+
+        signupViewModel.toastMessage.observe(this, {
+            toast(it)
         })
     }
 }

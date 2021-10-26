@@ -14,12 +14,12 @@ class YoLoApplication : Application() {
         context = this
     }
 
-    private lateinit var dataStore: DataStoreModule
+    private lateinit var dataStoreModule: DataStoreModule
 
     override fun onCreate() {
         super.onCreate()
 
-        dataStore = DataStoreModule(this)
+        dataStoreModule = DataStoreModule(this)
 
         val naverClientId = BuildConfig.NAVER_CLIENT_ID
         val naverClientSecret = BuildConfig.NAVER_CLIENT_SECRET
@@ -43,6 +43,6 @@ class YoLoApplication : Application() {
         }
     }
 
-    fun getDataStore(): DataStoreModule = dataStore
+    fun getDataStoreModule(): DataStoreModule = dataStoreModule
 
 }

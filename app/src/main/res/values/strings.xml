@@ -78,6 +78,7 @@
     <string name="mypage_coupon">쿠폰</string>
     <string name="mypage_notice">공지사항</string>
     <string name="mypage_guide">사용자 가이드</string>
+    <string name="mypage_yolo_market">YOL.O MARKET</string>
 
 <!--    프로필 수정-->
     <string name="top_title_profile_update">프로필 수정</string>

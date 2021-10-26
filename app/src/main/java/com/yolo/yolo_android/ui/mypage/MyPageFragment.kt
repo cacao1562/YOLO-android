@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yolo.yolo_android.R
+import com.yolo.yolo_android.YOLO_MARKET_URL
 import com.yolo.yolo_android.base.BindingFragment
+import com.yolo.yolo_android.common.extensions.ViewExt.openExternalWebView
 import com.yolo.yolo_android.databinding.FragmentMypageBinding
 import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
@@ -13,7 +15,7 @@ import com.yolo.yolo_android.ui.mypage.profile_update.ProfileUpdateFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
+class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
 
     companion object {
         fun newInstance() = MyPageFragment()
@@ -68,15 +70,22 @@ class MyPageFragment: BindingFragment<FragmentMypageBinding>(R.layout.fragment_m
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Boolean>(ProfileUpdateFragment.KEY_FROM_UPDATE_PROFILE)?.observe(viewLifecycleOwner) {
-            if (it) {
-                viewModel.callGetMyProfile()
-                findNavController().currentBackStackEntry?.savedStateHandle?.remove<Boolean>(ProfileUpdateFragment.KEY_FROM_UPDATE_PROFILE)
+            ?.getLiveData<Boolean>(ProfileUpdateFragment.KEY_FROM_UPDATE_PROFILE)
+            ?.observe(viewLifecycleOwner) {
+                if (it) {
+                    viewModel.callGetMyProfile()
+                    findNavController().currentBackStackEntry?.savedStateHandle?.remove<Boolean>(
+                        ProfileUpdateFragment.KEY_FROM_UPDATE_PROFILE
+                    )
+                }
             }
-        }
         binding.llNotice.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToNoticeFragment()
             findNavController().safeNavigate(action)
+        }
+
+        binding.llYoloMarket.setOnClickListener {
+            it.openExternalWebView(YOLO_MARKET_URL)
         }
     }
 

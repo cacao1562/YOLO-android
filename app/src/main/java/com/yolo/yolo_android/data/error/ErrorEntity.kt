@@ -5,6 +5,7 @@ sealed class ErrorEntity(
 ) {
     sealed class ApiError : ErrorEntity() {
         class NotFound(override val message: String) : ErrorEntity(message)
+        class InternalError(override val message: String) : ErrorEntity(message)
         class UnKnown(override val message: String) : ErrorEntity(message)
     }
 

@@ -28,6 +28,9 @@ class SignupViewModel @Inject constructor(
     private val loginType = savedStateHandle.get<String>(LOGIN_TYPE)
     val nickname = MutableLiveData<String>()
 
+    private var _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> get() = _toastMessage
+
     private val _navigateToMain = MutableLiveData<Event<Boolean>>()
     val navigateToMain: LiveData<Event<Boolean>> get() = _navigateToMain
 
@@ -63,6 +66,7 @@ class SignupViewModel @Inject constructor(
 
                     is ResultData.Error -> {
                         hideProgress()
+                        _toastMessage.value = result.errorEntity.message
                     }
                 }
             }.addTo(compositeDisposable)
@@ -82,7 +86,7 @@ class SignupViewModel @Inject constructor(
                         hideProgress()
                         MyLogger.e("message : ${result.data.message}")
                         viewModelScope.launch(Dispatchers.IO) {
-                            YoLoApplication.context?.getDataStore()?.setLoginInfo(
+                            YoLoApplication.context?.getDataStoreModule()?.setLoginInfo(
                                 token = result.data.token,
                                 loginType = loginType,
                                 userId = socialID
@@ -94,6 +98,7 @@ class SignupViewModel @Inject constructor(
 
                     is ResultData.Error -> {
                         hideProgress()
+                        _toastMessage.value = result.errorEntity.message
                     }
                 }
             }.addTo(compositeDisposable)

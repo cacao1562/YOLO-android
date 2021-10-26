@@ -21,6 +21,7 @@ data class MyProfile(
         return when(type) {
             "kakao" -> "카카오 로그인"
             "naver" -> "네이버 로그인"
+            "none" -> "일반 로그인"
             else -> "알 수 없음"
         }
     }
