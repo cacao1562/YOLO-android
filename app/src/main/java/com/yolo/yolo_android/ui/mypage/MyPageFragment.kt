@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yolo.yolo_android.R
+import com.yolo.yolo_android.YOLO_MARKET_URL
 import com.yolo.yolo_android.base.BindingFragment
+import com.yolo.yolo_android.common.extensions.ViewExt.openExternalWebView
 import com.yolo.yolo_android.databinding.FragmentMypageBinding
 import com.yolo.yolo_android.safeNavigate
 import com.yolo.yolo_android.ui.main.MainFragmentDirections
@@ -80,6 +82,10 @@ class MyPageFragment : BindingFragment<FragmentMypageBinding>(R.layout.fragment_
         binding.llNotice.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToNoticeFragment()
             findNavController().safeNavigate(action)
+        }
+
+        binding.llYoloMarket.setOnClickListener {
+            it.openExternalWebView(YOLO_MARKET_URL)
         }
     }
 

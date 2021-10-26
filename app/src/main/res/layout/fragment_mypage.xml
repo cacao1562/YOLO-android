@@ -232,6 +232,32 @@
                     android:src="@drawable/icn_18_arrow_c_0" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_yolo_market"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/notosanskr_regular_hestia"
+                    android:text="@string/mypage_yolo_market"
+                    android:textColor="@color/font_black_131313"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icn_18_arrow_c_0" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <com.yolo.yolo_android.ui.custom.MySpinKitView
