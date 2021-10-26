@@ -14,7 +14,7 @@ class AuthorizationInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request.Builder = chain.request().newBuilder()
         val token = runBlocking {
-            YoLoApplication.context?.getDataStore()?.get(DataStoreModule.KEY_USER_TOKEN)
+            YoLoApplication.context?.getDataStoreModule()?.get(DataStoreModule.KEY_USER_TOKEN)
         }
         if (token.isNullOrEmpty().not()) {
             request.addHeader("Authorization", "Bearer $token")

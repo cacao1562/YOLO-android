@@ -34,7 +34,7 @@ class SplashViewModel @Inject constructor(
 
     fun autoLogin() {
         viewModelScope.launch {
-            YoLoApplication.context?.getDataStore()?.let {
+            YoLoApplication.context?.getDataStoreModule()?.let {
                 val userToken = it.get(KEY_USER_TOKEN)
                 val loginType = it.get(KEY_LOGIN_TYPE)
                 val userId = it.get(KEY_USER_ID)
@@ -57,7 +57,7 @@ class SplashViewModel @Inject constructor(
                 when (result) {
                     is ResultData.Success -> {
                         viewModelScope.launch(Dispatchers.IO) {
-                            YoLoApplication.context?.getDataStore()?.setLoginInfo(
+                            YoLoApplication.context?.getDataStoreModule()?.setLoginInfo(
                                 token = result.data.token,
                                 userId = id,
                                 loginType = loginType

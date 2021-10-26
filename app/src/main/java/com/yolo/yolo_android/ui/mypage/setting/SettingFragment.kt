@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kakao.sdk.user.UserApiClient
@@ -59,6 +60,14 @@ class SettingFragment : BindingFragment<FragmentSettingBinding>(R.layout.fragmen
                     }
                 )
             dialog.show(childFragmentManager, ConfirmCancelDialog::class.java.simpleName)
+        }
+
+        binding.switchPushConfig.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.changePushConfig(isChecked)
+        }
+
+        viewModel.pushConfig?.asLiveData()?.observe(viewLifecycleOwner) {
+            binding.switchPushConfig.isChecked = it
         }
 
         viewModel.kakaoLogout.observe(viewLifecycleOwner, EventObserver {

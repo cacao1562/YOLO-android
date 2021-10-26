@@ -2,14 +2,14 @@ package com.yolo.yolo_android.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.core.stringSetPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import org.jetbrains.annotations.NotNull
+import java.io.IOException
 
 class DataStoreModule(val context: Context) {
     companion object {
@@ -18,7 +18,7 @@ class DataStoreModule(val context: Context) {
         val KEY_USER_ID = stringPreferencesKey("user_id")
         val KEY_FCM_TOKEN = stringPreferencesKey("fcm_token")
         val KEY_NOTICE_NUM = stringSetPreferencesKey("notice_num")
-
+        val KEY_PUSH_CONFIG = booleanPreferencesKey("push_config")
     }
 
     suspend fun <T> set(key: Preferences.Key<T>, @NotNull value: T) = when (value) {
@@ -49,6 +49,25 @@ class DataStoreModule(val context: Context) {
             it.remove(KEY_FCM_TOKEN)
         }
     }
+
+    suspend fun clearDataStore() {
+        context.dataStore.edit {
+            it.clear()
+        }
+    }
+
+    val pushConfig: Flow<Boolean> =
+        context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { pref ->
+                pref[KEY_PUSH_CONFIG] ?: true
+            }
 }
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "yoloDataStore")

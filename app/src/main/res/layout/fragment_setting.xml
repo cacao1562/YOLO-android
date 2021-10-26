@@ -74,6 +74,7 @@
                         android:text="@string/setting_notification" />
 
                     <Switch
+                        android:id="@+id/switch_push_config"
                         android:layout_width="wrap_content"
                         android:layout_height="27dp"
                         android:layout_gravity="center"

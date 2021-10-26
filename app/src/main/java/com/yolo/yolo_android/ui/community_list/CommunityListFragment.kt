@@ -69,7 +69,6 @@ class CommunityListFragment: BindingFragment<FragmentCommunityListBinding>(R.lay
             mAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
 
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.callbackPostBtn.collect {
                 when(it) {

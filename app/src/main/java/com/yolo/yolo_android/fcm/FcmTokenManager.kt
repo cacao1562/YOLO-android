@@ -26,14 +26,14 @@ class FcmTokenManager constructor(
                     is ResultData.Success -> {
                         compositeDisposable.dispose()
                         CoroutineScope(Dispatchers.IO).launch {
-                            YoLoApplication.context?.getDataStore()?.set(KEY_FCM_TOKEN, token)
+                            YoLoApplication.context?.getDataStoreModule()?.set(KEY_FCM_TOKEN, token)
                         }
                     }
 
                     is ResultData.Error -> {
                         compositeDisposable.dispose()
                         CoroutineScope(Dispatchers.IO).launch {
-                            YoLoApplication.context?.getDataStore()?.set(KEY_FCM_TOKEN, "")
+                            YoLoApplication.context?.getDataStoreModule()?.set(KEY_FCM_TOKEN, "")
                         }
                     }
                 }
@@ -50,9 +50,9 @@ class FcmTokenManager constructor(
             currentToken?.let {
                 sendRegistrationToServer(it)
                 CoroutineScope(Dispatchers.IO).launch {
-                    val storedToken = YoLoApplication.context?.getDataStore()?.get(KEY_FCM_TOKEN)
+                    val storedToken = YoLoApplication.context?.getDataStoreModule()?.get(KEY_FCM_TOKEN)
                     if (storedToken != it) {
-                        YoLoApplication.context?.getDataStore()?.set(KEY_FCM_TOKEN, it)
+                        YoLoApplication.context?.getDataStoreModule()?.set(KEY_FCM_TOKEN, it)
                     }
                     MyLogger.e("currentToken : $currentToken / storedToken : $storedToken")
                 }

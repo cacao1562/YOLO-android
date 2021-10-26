@@ -20,6 +20,7 @@ import javax.inject.Inject
 class SettingViewModel @Inject constructor(
     private val yoloRepository: YoloRepository
 ) : DisposableViewModel() {
+
     private var _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
@@ -32,9 +33,18 @@ class SettingViewModel @Inject constructor(
     private val _kakaoLogout = MutableLiveData<Event<Boolean>>()
     val kakaoLogout: LiveData<Event<Boolean>> get() = _kakaoLogout
 
+    val pushConfig = YoLoApplication.context?.getDataStoreModule()?.pushConfig
+    fun changePushConfig(config: Boolean) {
+        viewModelScope.launch {
+            YoLoApplication.context?.getDataStoreModule()
+                ?.set(DataStoreModule.KEY_PUSH_CONFIG, config)
+        }
+    }
+
     fun logout() {
         viewModelScope.launch {
-            when (YoLoApplication.context?.getDataStore()?.get(DataStoreModule.KEY_LOGIN_TYPE)) {
+            when (YoLoApplication.context?.getDataStoreModule()
+                ?.get(DataStoreModule.KEY_LOGIN_TYPE)) {
                 "kakao" -> {
                     _kakaoLogout.value = Event(true)
                 }
@@ -42,7 +52,7 @@ class SettingViewModel @Inject constructor(
                     _naverLogout.value = Event(true)
                 }
             }
-            YoLoApplication.context?.getDataStore()?.clearLoginInfo()
+            YoLoApplication.context?.getDataStoreModule()?.clearDataStore()
             _navigateToLoginPage.value = Event(true)
         }
     }
@@ -57,7 +67,7 @@ class SettingViewModel @Inject constructor(
                     is ResultData.Success -> {
                         hideProgress()
                         viewModelScope.launch {
-                            YoLoApplication.context?.getDataStore()?.clearLoginInfo()
+                            YoLoApplication.context?.getDataStoreModule()?.clearDataStore()
                         }
                         _navigateToLoginPage.value = Event(true)
                     }
