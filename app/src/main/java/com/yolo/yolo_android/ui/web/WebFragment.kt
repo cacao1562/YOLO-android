@@ -21,6 +21,8 @@ class WebFragment : BindingFragment<FragmentWebBinding>(R.layout.fragment_web),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val title = args.title
+        binding.viewTopNav.setTitle(title)
         binding.webView.apply {
             settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW // https allow
             settings.useWideViewPort = true

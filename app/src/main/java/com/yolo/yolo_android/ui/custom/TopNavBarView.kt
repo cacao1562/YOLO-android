@@ -41,4 +41,9 @@ class TopNavBarView @JvmOverloads constructor(context: Context, attrs: Attribute
         val titleView = findViewById<TextView>(R.id.tv_layout_nav_bar)
         titleView.text = title
     }
+
+    fun setTitle(title: String) {
+        val titleView = findViewById<TextView>(R.id.tv_layout_nav_bar)
+        titleView.text = title
+    }
 }

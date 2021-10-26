@@ -9,6 +9,8 @@ const val USER_GUIDE_URL = "https://chae-bucket.s3.ap-northeast-2.amazonaws.com/
 const val MAGAZINE_URL = "https://yunseokj.github.io/yolo_magazine/#/"
 const val HOME_BANNER_URL = "https://yunseokj.github.io/yolo_eventpage/#/"
 const val YOLO_MARKET_URL = "https://m.smartstore.naver.com/yolo-market"
+const val YOLO_POLICY_URL = "https://viridian-monarch-554.notion.site/fc2796ce4a284b6a978d5005f7316aca"
+const val YOLO_SUGGESTION_GUIDE_URL = "https://cheddar-accordion-275.notion.site/YOL-O-c20e58d54a0d43a7bad0677d9b11b1e0"
 
 
 enum class DialogButtonType {
