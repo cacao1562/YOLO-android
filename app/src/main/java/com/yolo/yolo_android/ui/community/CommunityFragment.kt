@@ -28,7 +28,7 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CommunityTabPagerAdapter(childFragmentManager, lifecycle)
+        val adapter = CommunityTabPagerAdapter(requireActivity())
         binding.vp2Community.adapter = adapter
         adapter.setFragment(fragments)
         TabLayoutMediator(binding.tlCommunityTab, binding.vp2Community) { tab, position ->

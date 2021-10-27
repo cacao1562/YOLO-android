@@ -4,10 +4,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
@@ -93,6 +97,20 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
                     oAuthLoginHandler
                 )
             })
+        }
+
+        val mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+        val configSettings = FirebaseRemoteConfigSettings.Builder().setMinimumFetchIntervalInSeconds(3600).build()
+        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings)
+        mFirebaseRemoteConfig.fetchAndActivate().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val updated = task.result
+//                Log.d("xxx", "Fetch and activate succeded = $updated")
+                val isVisibleLogin = mFirebaseRemoteConfig.getBoolean("isVisibleLogin")
+                binding.llTestLogin.isVisible = isVisibleLogin
+            }else {
+//                Log.d("xxx", "Fetch fail")
+            }
         }
     }
 

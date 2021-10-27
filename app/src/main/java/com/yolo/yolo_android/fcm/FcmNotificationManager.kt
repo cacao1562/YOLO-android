@@ -11,7 +11,6 @@ import androidx.core.app.NotificationCompat
 import com.yolo.yolo_android.R
 import com.yolo.yolo_android.common.constants.FCM_ACTION
 import com.yolo.yolo_android.ui.main.MainActivity
-import com.yolo.yolo_android.utils.MyLogger
 
 object FcmNotificationManager {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -67,7 +66,7 @@ object FcmNotificationManager {
 
         val notificationBuilder = NotificationCompat.Builder(context, fcmType.channelId)
             .setTicker(context.getString(R.string.fcm_ticker))
-            .setSmallIcon(R.mipmap.ic_launcher_yolo_round)
+            .setSmallIcon(R.mipmap.ic_launcher_yolo1_round)
             .setContentTitle(title)
             .setContentText(body)
             .setVibrate(longArrayOf(0, 500))

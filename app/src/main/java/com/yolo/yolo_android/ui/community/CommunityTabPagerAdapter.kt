@@ -1,14 +1,14 @@
 package com.yolo.yolo_android.ui.community
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class CommunityTabPagerAdapter(
-    fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
-) : FragmentStateAdapter(fragmentManager, lifecycle) {
+    fr: FragmentActivity
+) : FragmentStateAdapter(fr) {
 
     private var fragments = arrayListOf<Fragment>()
 
