@@ -14,6 +14,8 @@ suspend fun <T> safeApiCall(errorHandler: ErrorHandler, apiCall: suspend () -> R
             }
         }
         return callError("${response.code()} ${response.message()}")
+    } catch (throwable: Throwable) {
+        return ResultData.Error(errorEntity = errorHandler.getError(throwable))
     } catch (e: Exception) {
         e.cause?.let {
             return ResultData.Error(errorEntity = errorHandler.getError(it))
