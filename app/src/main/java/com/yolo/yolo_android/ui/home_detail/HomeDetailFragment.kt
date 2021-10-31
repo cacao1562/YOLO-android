@@ -26,6 +26,8 @@ import com.yolo.yolo_android.databinding.FragmentHomeDetailBinding
 import com.yolo.yolo_android.setUnderLineText
 import com.yolo.yolo_android.ui.home_detail.map.HomeDetailMapFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -110,18 +112,23 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
     }
 
     private fun initMoreBtn() {
-        binding.tvHomeDetailContent.postDelayed({
-            val lineCount = binding.tvHomeDetailContent.layout.lineCount
-            if (lineCount > 0) {
-                if (binding.tvHomeDetailContent.layout.getEllipsisCount(lineCount - 1) > 0) {
-                    binding.tvHomeDetailContentMore.isVisible = true
+        MainScope().launch {
+            delay(300)
+            try {
+                val lineCount = binding.tvHomeDetailContent.layout.lineCount
+                if (lineCount > 0) {
+                    if (binding.tvHomeDetailContent.layout.getEllipsisCount(lineCount - 1) > 0) {
+                        binding.tvHomeDetailContentMore.isVisible = true
+                    }
+                    binding.tvHomeDetailContentMore.setOnClickListener {
+                        binding.tvHomeDetailContent.maxLines = Int.MAX_VALUE
+                        binding.tvHomeDetailContentMore.isVisible = false
+                    }
                 }
-                binding.tvHomeDetailContentMore.setOnClickListener {
-                    binding.tvHomeDetailContent.maxLines = Int.MAX_VALUE
-                    binding.tvHomeDetailContentMore.isVisible = false
-                }
+            }catch (e: Exception) {
+                e.printStackTrace()
             }
-        }, 300)
+        }
     }
 
     private fun initTopImageViewPager() {
