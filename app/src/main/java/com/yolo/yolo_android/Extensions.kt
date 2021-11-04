@@ -4,6 +4,7 @@ package com.yolo.yolo_android
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Color
@@ -11,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.provider.Settings
 import android.text.Html
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -212,3 +214,12 @@ fun getWindowHeight(context: Context): Int {
     return displayMetrics.heightPixels
 }
 
+fun presentAppSetting(context: Context) {
+    Intent().also { intent ->
+        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        intent.addCategory(Intent.CATEGORY_DEFAULT)
+        intent.data = Uri.parse("package:${context.packageName}")
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
+    }
+}

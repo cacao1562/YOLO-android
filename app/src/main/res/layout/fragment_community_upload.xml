@@ -226,6 +226,7 @@
                 android:background="@drawable/bg_enable_btn"
                 android:fontFamily="@font/notosanskr_medium_hestia"
                 android:onClick="@{(v) -> viewModel.clickUploadPost(v.context)}"
+                app:isEnable="@{viewModel.isLoading() == false}"
                 android:text="@string/picture_upload"
                 android:textColor="@color/white"
                 android:textSize="16dp"

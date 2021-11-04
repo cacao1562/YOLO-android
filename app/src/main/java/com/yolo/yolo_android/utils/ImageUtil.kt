@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.exifinterface.media.ExifInterface
-import com.yolo.yolo_android.uri2path
 import java.io.*
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -23,64 +22,59 @@ object ImageUtil {
     fun getResizeBitmapFromUri(context: Context, uri: Uri): Bitmap? {
 
         try {
-            val img = uri2path(context, uri)
-            val path = img.first ?: return null
-            if (img.second != null) {
-                // 파일 사이즈 1MB 이상이면 resize
-                if (img.second!! > 1048576) {
-                    val options = BitmapFactory.Options()
-                    options.inSampleSize = 2
-                    var bitmap = BitmapFactory.decodeFile(path, options)
-                    val degrees = getOrientationOfImage(path)
-                    if (degrees != -1) bitmap = getRotatedBitmap(bitmap, degrees) ?: return null
-                    var bmpWidth = bitmap.width.toFloat()
-                    var bmpHeight = bitmap.height.toFloat()
-                    Log.d("aaa", "bmpWidth= ${bmpWidth}")
-                    Log.d("aaa", "bmpHeight= ${bmpHeight}")
+            val pfd = context.contentResolver.openFileDescriptor(uri, "r")
+            val fd = pfd?.fileDescriptor
+            val inStream = FileInputStream(fd)
+            // 파일 사이즈 1MB 이상이면 resize
+            if (inStream.channel.size() > 1048576) {
+                val options = BitmapFactory.Options()
+                options.inSampleSize = 2
+                var bitmap = BitmapFactory.decodeFileDescriptor(fd, null, options) ?: return null
+                val degrees = getOrientationOfImage(inStream)
+                Log.d("aaa", "degrees= ${degrees}")
+                if (degrees != -1) bitmap = getRotatedBitmap(bitmap, degrees) ?: return null
+                var bmpWidth = bitmap.width.toFloat()
+                var bmpHeight = bitmap.height.toFloat()
+                Log.d("aaa", "bmpWidth= ${bmpWidth}")
+                Log.d("aaa", "bmpHeight= ${bmpHeight}")
 
-                    if (bmpWidth > fixSize || bmpHeight > fixSize) {
-                        val hRatio = fixSize / bmpHeight
-                        val wRatio = fixSize / bmpWidth
-                        val ratio = if (bmpHeight > bmpWidth) hRatio else wRatio
-                        bmpWidth *= ratio
-                        bmpHeight *= ratio
-                    }
-
-                    Log.d("aaa", "scale bmpWidth= ${bmpWidth}")
-                    Log.d("aaa", "sacle bmpHeight= ${bmpHeight}")
-
-                    return Bitmap.createScaledBitmap(bitmap, bmpWidth.toInt(), bmpHeight.toInt(), true)
-                }else {
-                    val options = BitmapFactory.Options()
-                    options.inSampleSize = 1
-                    return BitmapFactory.decodeFile(path, options)
+                if (bmpWidth > fixSize || bmpHeight > fixSize) {
+                    val hRatio = fixSize / bmpHeight
+                    val wRatio = fixSize / bmpWidth
+                    val ratio = if (bmpHeight > bmpWidth) hRatio else wRatio
+                    bmpWidth *= ratio
+                    bmpHeight *= ratio
                 }
-            }
 
-            return null
+                Log.d("aaa", "scale bmpWidth= ${bmpWidth}")
+                Log.d("aaa", "sacle bmpHeight= ${bmpHeight}")
+
+                return Bitmap.createScaledBitmap(bitmap, bmpWidth.toInt(), bmpHeight.toInt(), true)
+            }else {
+                val options = BitmapFactory.Options()
+                options.inSampleSize = 1
+                return BitmapFactory.decodeFileDescriptor(fd, null, options)
+            }
 
         } catch (e: Exception) {
             e.printStackTrace()
             return null
         }
     }
-
-
-    fun getOrientationOfImage(filepath: String): Int {
+    
+    fun getOrientationOfImage(inputStream: InputStream): Int {
         var exif: ExifInterface? = null
         try {
-            exif = ExifInterface(filepath)
+            exif = ExifInterface(inputStream)
         } catch (e: IOException) {
             e.printStackTrace()
             return -1
         }
         val orientation: Int = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1)
-        if (orientation != -1) {
-            when (orientation) {
-                ExifInterface.ORIENTATION_ROTATE_90 -> return 90
-                ExifInterface.ORIENTATION_ROTATE_180 -> return 180
-                ExifInterface.ORIENTATION_ROTATE_270 -> return 270
-            }
+        when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> return 90
+            ExifInterface.ORIENTATION_ROTATE_180 -> return 180
+            ExifInterface.ORIENTATION_ROTATE_270 -> return 270
         }
         return 0
     }
@@ -91,7 +85,14 @@ object ImageUtil {
         if (degrees == 0) return bitmap
         val m = Matrix()
         m.setRotate(degrees.toFloat(), bitmap.width.toFloat() / 2, bitmap.height.toFloat() / 2)
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, m, true)
+        try {
+            val bitmapRotaed = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, m, true)
+            bitmap.recycle()
+            return bitmapRotaed
+        }catch (e: Exception) {
+            e.printStackTrace()
+            return null
+        }
     }
 
     fun convertBitmapToFile(context: Context, bitmap: Bitmap): File {
