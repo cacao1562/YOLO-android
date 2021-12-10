@@ -5,26 +5,46 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id "androidx.navigation.safeargs"
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+    signingConfigs {
+        release {
+            keyAlias 'upload'
+            storeFile project.rootProject.file('yolo-key')
+            storePassword keystoreProperties['password']
+            keyPassword keystoreProperties['password']
+        }
+    }
     compileSdk 30
 
     defaultConfig {
         applicationId "com.yolo.yolo_android"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 8
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "SERVICE_KEY", properties['servicekey']
-        buildConfigField "String", "KAKAO_KEY", properties['kakaokey']
 
+        buildConfigField "String", "SERVICE_KEY", properties['servicekey']
+        buildConfigField "String", "KAKAO_NATIVE_KEY", properties['kakao_native_key']
+        buildConfigField "String", "KAKAO_REST_KEY", properties['kakao_rest_key']
+        buildConfigField "String", "NAVER_CLIENT_ID", properties['naver_client_id']
+        buildConfigField "String", "NAVER_CLIENT_SECRET", properties['naver_client_secret']
+        def kakaoNativeKey = properties.getProperty('kakao_native_key')
+
+        manifestPlaceholders = ["KAKAO_NATIVE_KEY":kakaoNativeKey]
     }
 
     buildTypes {
@@ -34,6 +54,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -64,9 +85,9 @@ dependencies {
     kapt 'com.google.dagger:hilt-compiler:2.36'
 
     // network
-    implementation "com.github.skydoves:sandwich:1.2.0"  // response interface
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
@@ -76,8 +97,9 @@ dependencies {
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.12.0'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
 
     // architecture components
     implementation "androidx.fragment:fragment-ktx:1.3.6"
@@ -112,5 +134,56 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // image picker
-    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.4'
+    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.7'
+    
+    // social login
+    def naver_sdk_version = "4.2.6"
+    def kakao_sdk_version = "2.8.1"
+    implementation("com.naver.nid:naveridlogin-android-sdk:$naver_sdk_version")
+    implementation("com.kakao.sdk:v2-user:$kakao_sdk_version") {
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation "com.kakao.sdk:v2-talk:$kakao_sdk_version" // 친구, 메시지(카카오톡)
+
+    // rx
+    def rxJava_version = "2.2.16"
+    def rxAndroid_version = "2.1.1"
+    def rxKotlin_version = "2.4.0"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
+
+    // Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences-rxjava2:1.0.0"
+
+    // etc
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+    implementation 'com.github.takusemba:multisnaprecyclerview:2.0.2'
+
+    // calendar
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
+
+    // swiperefreshlayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-config-ktx'
+
+    // kakao map
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/libDaumMapAndroid.jar')
+
+    // Include open source notices
+    implementation "com.google.android.gms:play-services-oss-licenses:17.0.0"
+
+    // Zxing
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
 }

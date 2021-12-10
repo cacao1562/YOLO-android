@@ -13,7 +13,7 @@ class MainFragment: BindingFragment<FragmentMainBinding>(R.layout.fragment_main)
         override fun onPageSelected(position: Int) {
             binding.bnvMain.selectedItemId = when(position) {
                 0 -> R.id.menu_home
-                1 -> R.id.menu_sub
+                1 -> R.id.menu_magazine
                 2 -> R.id.menu_community
                 3 -> R.id.menu_mypage
                 else -> error("No id")
@@ -32,7 +32,7 @@ class MainFragment: BindingFragment<FragmentMainBinding>(R.layout.fragment_main)
                     binding.vp2Main.currentItem = 0
                     return@setOnItemSelectedListener true
                 }
-                R.id.menu_sub -> {
+                R.id.menu_magazine -> {
                     binding.vp2Main.currentItem = 1
                     return@setOnItemSelectedListener true
                 }

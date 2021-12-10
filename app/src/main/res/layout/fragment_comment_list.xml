@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.yolo.yolo_android.ui.community_comment.CommentListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:toast="@{viewModel.toastMessage}">
+
+        <com.yolo.yolo_android.ui.custom.TopNavBarView
+            android:id="@+id/view_top_nav"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:title_text="@string/comment"
+            app:visible_back="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_caution"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="36dp"
+            android:background="@color/color_gray_f4f5f8"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginEnd="@dimen/default_margin_24"
+            app:layout_constraintTop_toBottomOf="@+id/view_top_nav"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_caution_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_ic_caution"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_comment"
+                android:textSize="11dp"
+                android:textColor="@color/color_gray_909090"
+                android:fontFamily="@font/notosanskr_medium_hestia"
+                android:layout_marginStart="7dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_caution_upload"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_comment_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginBottom="78dp"
+            app:layout_constraintTop_toBottomOf="@+id/view_caution"
+            app:layout_constraintStart_toStartOf="@+id/view_caution"
+            app:layout_constraintEnd_toEndOf="@id/view_caution"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_comment_image_container"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="10dp"
+            app:isVisible="@{viewModel.uri != null}"
+            app:layout_constraintStart_toStartOf="@+id/view_caution"
+            app:layout_constraintEnd_toEndOf="@+id/view_caution"
+            app:layout_constraintBottom_toTopOf="@+id/view_comment_input"
+            android:background="@color/bg_comment_img">
+
+            <ImageView
+                android:id="@+id/iv_comment_image"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:loadImageOrDefault="@{viewModel.uri}"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_comment_image_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_comment_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="44dp"
+            android:background="@drawable/bg_comment_input"
+            android:layout_marginBottom="22dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintStart_toStartOf="@+id/view_caution"
+            app:layout_constraintEnd_toEndOf="@+id/view_caution"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/et_comment_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                android:layout_marginEnd="14dp"
+                android:background="@null"
+                android:hint="@string/hint_input_comment"
+                android:textColorHint="@color/gray_line"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosanskr_medium_hestia"
+                android:maxLines="3"
+                android:maxLength="70"
+                android:ellipsize="end"
+                android:text="@{viewModel.commentStr}"
+                app:textChangedListener="@{viewModel.inputWatcher}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_post_comment_img"/>
+
+            <ImageView
+                android:id="@+id/iv_post_comment_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icn_24_camera"
+                android:layout_marginEnd="14dp"
+                app:layout_constraintVertical_bias="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_post_comment"/>
+
+            <TextView
+                android:id="@+id/tv_post_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/post_comment"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosanskr_medium_hestia"
+                app:postCommentEnable="@{viewModel.commentStr}"
+                android:onClick="@{(v) -> viewModel.postComment(v.context, viewModel.commentStr)}"
+                app:layout_constraintTop_toTopOf="@id/iv_post_comment_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/iv_post_comment_img"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.yolo.yolo_android.ui.custom.MySpinKitView
+            style="@style/SpinKitView.ThreeBounce"
+            android:layout_width="@dimen/loading_progressbar_size"
+            android:layout_height="@dimen/loading_progressbar_size"
+            app:SpinKit_Color="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:isVisible="@{viewModel.isLoading()}"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,11 +1,137 @@
 <resources>
-    <string name="app_name">YOLO-android</string>
+    <string name="app_name">yolo</string>
 
+<!--    main bottom navigation-->
     <string name="bottom_menu_home">홈</string>
-    <string name="bottom_menu_sub">구독</string>
+    <string name="bottom_menu_magazine">욜로갈래</string>
     <string name="bottom_menu_community">커뮤니티</string>
     <string name="bottom_menu_mypage">마이</string>
 
+<!--    community upload-->
     <string name="top_title_community_upload">내스팟 공유하기</string>
+    <string name="top_title_choose_schedule">일정선택</string>
+
+    <!-- 페이지 타이틀 -->
+    <string name="page_title_nick_name">닉네임 설정</string>
+
+    <!-- splash -->
+    <string name="splash_title">여행에 타이밍은\n바로 지.금.부.터</string>
+
+    <!-- 소셜 로그인 -->
+    <string name="login_tv_with_kakao">카카오톡으로 간편로그인</string>
+    <string name="login_tv_with_other_kakao_id">다른 카카오계정으로 로그인</string>
+    <string name="login_hint_test_account">테스트 계정</string>
+
+    <!-- 회원가입 -->
+    <string name="signup_please_input_nick_name">닉네임을 입력해주세요.</string>
+    <string name="signup_hint">ex.하리보</string>
+    <string name="signup_guide">영문/한글/밑줄 포함 최대 10글자까지 입력이 가능합니다.</string>
+
+    <!-- Home -->
+    <string name="home_main_title">즉흥여행\n지금 바로 떠나볼까요?</string>
+    <string name="home_btn_select_date">즉흥일자 선택하기</string>
+    <string name="home_recommend_by_region">지역별 여행지 추천</string>
+    <string name="home_event_banner">이벤트 기획전</string>
+    <string name="home_popular_restaurant_ranking">가볼만한 인기 맛집 순위표</string>
+    <string name="home_popular_place_ranking">가볼만한 인기 장소 순위표</string>
+
+    <!-- Message -->
+    <string name="message_network_unstable">네트워크가 불안정합니다. 잠시후에 다시 이용해 주세요.</string>
+    <string name="message_request_failed_please_try_again">서버 통신에 실패하였습니다. 잠시 후 재시도해주세요.</string>
+    <string name="message_please_press_again_if_you_want_finish">앱을 종료 하려면 한번 더 눌러주세요.</string>
+
+    <!-- common -->
+    <string name="common_complete">완료</string>
+    <string name="common_apply">적용하기</string>
+    <string name="common_confirm">확인</string>
+    <string name="common_cancel">취소</string>
+    <string name="title_picture_upload">사진등록</string>
+    <string name="picture_upload_limit">최대 3개</string>
+    <string name="title_picture_description">내용입력</string>
+    <string name="title_picture_location">위치태그</string>
+    <string name="hint_picture_location">위치 검색을 클릭하세요</string>
+    <string name="caution_upload">관련없는 사진은 관리자에 의해 삭제될 수 있습니다\n나만의 멋진 스팟 공유로 매너있는 커뮤니티를 만드세요!</string>
+    <string name="picture_upload">등록하기</string>
+    <string name="common_login">로그인</string>
+
+<!--    alert-->
+    <string name="alert">알림</string>
+    <string name="alert_msg_picture_limit">최대 3장까지 선택가능합니다.</string>
+    <string name="alert_msg_delete_post">게시글을 삭제 하시겠습니까?</string>
+
+    <string name="alert_title_coupon">쿠폰 사용조건</string>
+    <string name="alert_msg_coupon">* 현장에서 사용가능한 무료입장권입니다.\n* 3만원 이상 결제시 사용가능한 쿠폰입니다.\n* 중복사용이 불가능합니다. </string>
+
+<!--    comment-->
+    <string name="comment">댓글</string>
+    <string name="caution_comment">공유한 나만의 스팟에 댓글을 남겨주세요!\n폭력적인 댓글은 신고가 될수 있으며 매너문화를 지향합시다</string>
+    <string name="post_comment">게시</string>
+    <string name="hint_input_comment">내용을 입력해주세요</string>
+
+<!--    욜로갈래-->
+    <string name="top_title_magazine">욜로갈래</string>
+
+<!--    마이페이지-->
+    <string name="top_title_mypage">마이페이지</string>
+    <string name="mypage_like">찜</string>
+    <string name="mypage_my_spot">내스팟</string>
+    <string name="mypage_coupon">쿠폰</string>
+    <string name="mypage_notice">공지사항</string>
+    <string name="mypage_guide">사용자 가이드</string>
+    <string name="mypage_yolo_market">YOL.O MARKET</string>
+
+<!--    프로필 수정-->
+    <string name="top_title_profile_update">프로필 수정</string>
+    <string name="profile_update">수정완료</string>
+    <string name="alert_update_nickName">설정하신 닉네임이 저장되었습니다.</string>
+    <string name="alert_delete_profile_image">프로필 사진이 삭제되었습니다.</string>
+
+<!--    설정-->
+    <string name="top_title_setting">설정</string>
+    <string name="setting_notification">알림정보</string>
+    <string name="setting_version">버전정보</string>
+    <string name="setting_library">오픈소스 라이브러리</string>
+    <string name="setting_policy">약관 및 정책</string>
+    <string name="setting_user_guide">사용자 가이드</string>
+    <string name="setting_suggestion_guide">제휴사 제안 가이드</string>
+    <string name="setting_user_expire">회원탈퇴</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_message_logout">로그아웃 하시겠습니까?</string>
+    <string name="setting_message_download_user_guide">사용자 가이드\n다운 받으시겠습니까?</string>
+    <string name="setting_message_delete_account">탈퇴하시겠습니까?</string>
+
+<!--    내스팟-->
+    <string name="top_title_myspot">내스팟</string>
+
+<!--    고객센터-->
+    <string name="top_title_service_center">고객센터</string>
+    <string name="service_center_question">궁금하신 점이 있으신가요?</string>
+    <string name="service_center_number">070.7383.9033</string>
+    <string name="service_center_time">오전 9시 ~ 오후6시 (공휴일 제외)</string>
+    <string name="service_center_call">전화 연결하기</string>
+    <string name="service_center_caution">*공휴일에는 답변이 늦어질 수 있는점 참고부탁드립니다</string>
+    <string name="service_center_kakao">카카오톡 문의하기</string>
+    <string name="service_center_email">이메일 문의하기</string>
+
+<!--    상세정보-->
+    <string name="detail_info">상세정보</string>
+    <string name="detail_tel">문의 및 안내</string>
+    <string name="detail_address">주소</string>
+    <string name="detail_homepage">홈페이지</string>
+    <string name="detail_restdate">휴일</string>
+    <string name="detail_parking">주차</string>
+    <string name="detail_usetime">이용시간</string>
+    <string name="detail_suggestion_place">근처 추천 장소</string>
+
+<!--    찜한 여행지-->
+    <string name="top_title_book_mark">찜한 여행지</string>
+
+    <!-- 욜로갈래 -->
+    <string name="magazine_view_past">지난 월간호 살펴보기</string>
+    <string name="magazine_subscribe_cancel">구독 취소</string>
+    <string name="magazine_message_subscribe_cancel">구독을 취소하시겠습니까?</string>
+
+    <!-- fcm -->
+    <string name="fcm_ticker">새로운 알림이 도착하였습니다</string>
 
 </resources>

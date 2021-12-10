@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.yolo.yolo_android.ui.mypage.profile_update.ProfileUpdateViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:toast="@{viewModel.toastMessage}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_top_nav"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_bold_hestia"
+                android:text="@string/top_title_profile_update"
+                android:textColor="@color/font_black_131313"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_profile_update_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:padding="10dp"
+                android:src="@drawable/icn_24_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_profile_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="cv_profile_update, iv_profile_update_camera"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_profile_update"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="80dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_top_nav">
+
+            <ImageView
+                android:id="@+id/iv_profile_update_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:loadImageProfile="@{viewModel.profile.imageUrl}"/>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/iv_profile_update_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-17dp"
+            android:layout_marginTop="-23dp"
+            android:src="@drawable/icn_30_mycamera"
+            app:layout_constraintStart_toEndOf="@+id/cv_profile_update"
+            app:layout_constraintTop_toBottomOf="@+id/cv_profile_update" />
+
+
+        <EditText
+            android:id="@+id/et_profile_update"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/font_black_131313"
+            android:fontFamily="@font/notosanskr_medium_hestia"
+            android:textAlignment="center"
+            android:inputType="text"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:background="@null"
+            android:text="@{viewModel.inputNickname}"
+            app:textChangedListener="@{viewModel.inputWatcher}"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_profile_update_clear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_profile_update"
+            tools:text="nick name"/>
+
+        <ImageView
+            android:id="@+id/iv_profile_update_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="19dp"
+            android:padding="5dp"
+            android:src="@drawable/selected_end_icon"
+            android:onClick="@{() -> viewModel.clearInput()}"
+            app:isEnable="@{viewModel.isEnable()}"
+            app:layout_constraintBottom_toBottomOf="@+id/et_profile_update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_profile_update" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_line"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginEnd="@dimen/default_margin_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_profile_update" />
+
+        <com.yolo.yolo_android.ui.custom.MySpinKitView
+            android:layout_width="@dimen/loading_progressbar_size"
+            android:layout_height="@dimen/loading_progressbar_size"
+            app:SpinKit_Color="@color/primary"
+            android:id="@+id/iv_test"
+            app:isVisible="@{viewModel.isLoading()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/profile_update"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/notosanskr_medium_hestia"
+            android:background="@drawable/selected_profile_update_btn"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginEnd="@dimen/default_margin_24"
+            android:layout_marginBottom="@dimen/default_margin_24"
+            app:isEnable="@{viewModel.isEnable()}"
+            android:onClick="@{(v) -> viewModel.updateProfile(v.context)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

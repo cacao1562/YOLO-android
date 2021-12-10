@@ -1,11 +1,11 @@
 package com.yolo.yolo_android.di
 
-import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.yolo.yolo_android.BASE_URL
-import com.yolo.yolo_android.BuildConfig
-import com.yolo.yolo_android.api.ApiService
+import com.yolo.yolo_android.*
+import com.yolo.yolo_android.api.*
+import com.yolo.yolo_android.network.AuthorizationInterceptor
+import com.yolo.yolo_android.network.MyLoggerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,21 +13,48 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class AuthInterceptorOkHttpClient
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class BaseInterceptorOkHttpClient
+
+
+    @AuthInterceptorOkHttpClient
     @Provides
-    @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideAuthOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) logging.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            okHttpClient.addInterceptor(MyLoggerInterceptor())
+        }
+        okHttpClient.addInterceptor(AuthorizationInterceptor())
         okHttpClient.interceptors().add(logging)
-        okHttpClient.interceptors().add(HttpLoggingInterceptor())
+        return okHttpClient.build()
+    }
+
+    @BaseInterceptorOkHttpClient
+    @Provides
+    fun provideBaseOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        val okHttpClient = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            okHttpClient.addInterceptor(MyLoggerInterceptor())
+        }
+        okHttpClient.interceptors().add(logging)
         return okHttpClient.build()
     }
 
@@ -41,18 +68,47 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient, moshi: Moshi) : Retrofit {
+    fun provideRetrofitBuilder(@BaseInterceptorOkHttpClient client: OkHttpClient, moshi: Moshi) : Retrofit.Builder {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
-            .build()
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     }
 
     @Provides
     @Singleton
-    fun provideNewssterService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideRetrofit(retrofitBuilder: Retrofit.Builder) : Retrofit {
+        return retrofitBuilder.build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthorizationInterceptor() = AuthorizationInterceptor()
+
+
+    @Provides
+    @Singleton
+    fun provideTourService(retrofitBuilder: Retrofit.Builder): TourService {
+        return retrofitBuilder.baseUrl(BASE_URL).build().create(TourService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideYoloService(retrofitBuilder: Retrofit.Builder, @AuthInterceptorOkHttpClient okHttpClient: OkHttpClient) : YoloApiService {
+        return retrofitBuilder.baseUrl(YOLO_URL).client(okHttpClient).build().create(YoloApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideKakaoService(retrofitBuilder: Retrofit.Builder, @BaseInterceptorOkHttpClient client: OkHttpClient) : KakaoApiService {
+        return retrofitBuilder.baseUrl(KAKAO_URL).client(client).build().create(KakaoApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNaverService(retrofitBuilder: Retrofit.Builder) : NaverApiService {
+        return retrofitBuilder.baseUrl(NAVER_URL).build().create(NaverApiService::class.java)
     }
 }
+
+

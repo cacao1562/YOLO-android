@@ -1,9 +1,11 @@
 package com.yolo.yolo_android.ui.place_list
 
 import androidx.annotation.MainThread
-import androidx.lifecycle.*
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.skydoves.whatif.whatIf
-import com.yolo.yolo_android.repository.ApiRepository
+import com.yolo.yolo_android.base.BaseViewModel
+import com.yolo.yolo_android.repository.KakaoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
@@ -13,27 +15,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlaceListViewModel @Inject constructor(
-    private val apiRepository: ApiRepository
-): ViewModel() {
-
-    private val _toastMessage: MutableLiveData<String> = MutableLiveData()
-    val toastMessage: LiveData<String> get() = _toastMessage
-
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val kakaoRepository: KakaoRepository
+): BaseViewModel() {
 
     private val placeFetchingKeyWord: MutableStateFlow<String> = MutableStateFlow("")
     val placeListFlow = placeFetchingKeyWord
         .debounce(400)
         .filter { it.isNullOrEmpty().not() }
-        .flatMapLatest { keyWord ->
-        apiRepository.searchKeyword(
-            keyWord = keyWord,
-            onStart = { _isLoading.postValue(true) },
-            onComplete = { _isLoading.postValue(false) },
-            onError = { _toastMessage.postValue(it) }
-        )
-    }.asLiveData(viewModelScope.coroutineContext)
+        .flatMapLatest {
+            kakaoRepository.searchKeyword(
+                query = it,
+                onStart = { _isLoading.postValue(true) },
+                onComplete = { _isLoading.postValue(false) }
+            )
+        }
+        .asLiveData(viewModelScope.coroutineContext)
+
 
     @MainThread
     fun searchKeyword(keyWord: String) {

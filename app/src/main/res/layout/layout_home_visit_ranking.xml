@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_restaurant"
+            style="@style/homeSectionTextAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_popular_restaurant_ranking"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.yolo.yolo_android.ui.custom.OrientationAwareRecyclerView
+            android:layout_marginTop="18dp"
+            android:id="@+id/rv_restaurant_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/tv_restaurant"
+            app:spanCount="3"
+            tools:listitem="@layout/item_restaurant_ranking" />
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:id="@+id/tv_place"
+            style="@style/homeSectionTextAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_popular_place_ranking"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_restaurant_ranking" />
+
+        <com.yolo.yolo_android.ui.custom.OrientationAwareRecyclerView
+            android:layout_marginTop="18dp"
+            android:id="@+id/rv_place_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/tv_place"
+            app:spanCount="3"
+            tools:listitem="@layout/item_place_ranking" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

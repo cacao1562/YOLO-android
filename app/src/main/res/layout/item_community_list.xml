@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.yolo.yolo_android.db.post.PostEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_margin_24"
+        android:paddingStart="@dimen/default_margin_24"
+        android:paddingEnd="@dimen/default_margin_24"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iv_post_profile_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="19dp"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:scaleType="centerCrop"
+                app:loadImageProfile="@{data.authorImage}"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_item_post_nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="@color/font_black"
+            android:fontFamily="@font/notosanskr_medium_hestia"
+            android:textStyle="normal"
+            android:text="@{data.nickname}"
+            tools:text="nick name"
+            android:layout_marginStart="14dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_post_profile_img"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/color_gray_c9c9c9"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:textStyle="normal"
+            android:text="@{data.createAt}"
+            tools:text="2021년 7월 3일"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_post_nickName"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_post_profile_img"/>
+
+        <ImageView
+            android:id="@+id/iv_item_post_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icn_24_more"
+            app:isVisible="@{data.author}"
+            app:layout_constraintTop_toTopOf="@+id/iv_post_profile_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_post_profile_img"/>
+
+        <TextView
+            android:id="@+id/tv_item_post_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/font_black"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:text="@{data.content}"
+            app:layout_constraintEnd_toStartOf="@+id/tv_item_post_content_more"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_post_profile_img"
+            tools:text="이것은 후기다 후기다 인기 공유스팟 이것은 후기다 후기다 인기 공유스팟 이것은 후기다 후기다 인기 공유스팟 이것은 후기다 후기"/>
+
+        <TextView
+            android:id="@+id/tv_item_post_content_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더보기"
+            android:textSize="13dp"
+            android:textColor="@color/color_gray_c0c0c0"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:drawableRight="@drawable/icn_18_plus"
+            android:drawablePadding="6dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginTop="-9dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_post_content"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp2_item_post_images"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginTop="21dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_post_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_item_post"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:scrollIndicators="none"
+            android:background="@android:color/transparent"
+            app:tabBackground="@drawable/selected_post_indicator"
+            app:tabGravity="center"
+            app:tabIndicator="@null"
+            app:tabPaddingStart="10dp"
+            app:tabPaddingEnd="10dp"
+            app:isVisible="@{data.imageUrl.size() > 1}"
+            android:layout_marginBottom="@dimen/default_margin_16"
+            app:layout_constraintStart_toStartOf="@+id/vp2_item_post_images"
+            app:layout_constraintEnd_toEndOf="@+id/vp2_item_post_images"
+            app:layout_constraintBottom_toBottomOf="@+id/vp2_item_post_images"/>
+
+        <ImageView
+            android:id="@+id/iv_item_post_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/selected_post_like"
+            android:layout_marginEnd="@dimen/default_margin_16"
+            android:layout_marginBottom="@dimen/default_margin_16"
+            app:isSelected="@{data.liked}"
+            app:layout_constraintEnd_toEndOf="@+id/vp2_item_post_images"
+            app:layout_constraintBottom_toBottomOf="@+id/vp2_item_post_images"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_item_location"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_post_location"
+            android:layout_marginTop="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/vp2_item_post_images"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:textColor="@color/main"
+                android:fontFamily="@font/notosanskr_medium_hestia"
+                android:textStyle="normal"
+                android:text="@{data.placeName}"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawableLeft="@drawable/icn_24_location"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="@dimen/default_margin_24"
+                tools:text="제주시 애월읍"/>
+
+            <TextView
+                android:id="@+id/tv_item_post_move_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="@color/color_gray_888888"
+                android:fontFamily="@font/notosanskr_regular_hestia"
+                android:textStyle="normal"
+                android:layout_gravity="center_vertical"
+                android:drawableRight="@drawable/icn_18_east"
+                android:drawablePadding="2dp"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="14dp"
+                android:text="지도로 확인하기"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_post_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="@color/font_black"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:textStyle="normal"
+            android:text="@{data.displayLikeCount}"
+            android:drawableLeft="@drawable/icn_24_like_on"
+            android:drawablePadding="4dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_item_location"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="좋아요 23개"/>
+
+        <TextView
+            android:id="@+id/tv_item_post_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="@color/font_black"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:textStyle="normal"
+            android:text="@{data.displayCommentCount}"
+            android:drawableLeft="@drawable/icn_24_comment"
+            android:drawablePadding="4dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/ll_item_location"
+            app:layout_constraintStart_toEndOf="@+id/tv_item_post_like_count"
+            tools:text="댓글 5개"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_gray_f0f0f0"
+            android:layout_marginTop="@dimen/default_margin_24"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_post_like_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

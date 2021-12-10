@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.yolo.yolo_android.ui.mypage.MyPageViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:toast="@{viewModel.toastMessage}"
+        tools:ignore="SpUsage, ContentDescription">
+
+        <com.yolo.yolo_android.ui.custom.TopNavBarView
+            android:id="@+id/view_top_nav"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title_text="@string/top_title_mypage">
+
+        </com.yolo.yolo_android.ui.custom.TopNavBarView>
+
+        <ImageView
+            android:id="@+id/iv_mypage_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin_16"
+            android:src="@drawable/icn_40_settings"
+            app:layout_constraintBottom_toBottomOf="@+id/view_top_nav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_top_nav" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_mypage_profile"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginTop="44dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_top_nav">
+
+            <ImageView
+                android:id="@+id/iv_mypage_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:loadImageProfile="@{viewModel.myProfile.imageUrl}" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ll_mypage_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/cv_mypage_profile"
+            app:layout_constraintTop_toTopOf="@+id/cv_mypage_profile">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_regular_hestia"
+                android:text="@{viewModel.myProfile.displayNickName}"
+                android:textColor="@color/font_black_131313"
+                android:textSize="18dp"
+                tools:text="김욜로 님" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:src="@drawable/icn_24_arrow_70" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="93dp"
+            android:layout_height="24dp"
+            android:background="@color/color_gray_f4f5f8"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:gravity="center"
+            android:text="@{viewModel.myProfile.displayLoginType}"
+            android:textColor="@color/color_gray_707070"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_mypage_profile"
+            app:layout_constraintStart_toStartOf="@+id/ll_mypage_profile_name"
+            tools:text="카카오 로그인" />
+
+        <LinearLayout
+            android:id="@+id/ll_mypage_btns"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="@dimen/default_margin_24"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_mypage_profile">
+
+            <TextView
+                android:id="@+id/tv_mypage_book_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/icn_44_my_like"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/notosanskr_regular_hestia"
+                android:textColor="@color/font_black_131313"
+                android:textSize="13dp"
+                android:text="@string/mypage_like"
+                android:textAlignment="center"
+                android:background="?selectableItemBackground" />
+
+
+            <TextView
+                android:id="@+id/tv_mypage_my_spot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/icn_44_my_spot"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/notosanskr_regular_hestia"
+                android:text="@string/mypage_my_spot"
+                android:textAlignment="center"
+                android:textColor="@color/font_black_131313"
+                android:textSize="13dp"
+                android:background="?selectableItemBackground"/>
+
+            <TextView
+                android:id="@+id/tv_mypage_service_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/icn_44_my_call"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/notosanskr_regular_hestia"
+                android:text="@string/top_title_service_center"
+                android:textAlignment="center"
+                android:textColor="@color/font_black_131313"
+                android:textSize="13dp"
+                android:background="?selectableItemBackground"/>
+
+            <TextView
+                android:id="@+id/tv_mypage_coupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/icn_44_my_coupon_2"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/notosanskr_regular_hestia"
+                android:text="@string/mypage_coupon"
+                android:textAlignment="center"
+                android:textColor="@color/font_black_131313"
+                android:textSize="13dp"
+                android:background="?selectableItemBackground"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_mypage_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_mypage_btns" />
+
+        <TextView
+            android:id="@+id/tv_mypage_title_etc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/notosanskr_regular_hestia"
+            android:textColor="@color/color_gray_909090"
+            android:textSize="14dp"
+            android:text="기타"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_mypage_line" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/default_margin_24"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="@dimen/default_margin_24"
+            android:divider="@drawable/divider_6dp"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mypage_title_etc">
+
+            <LinearLayout
+                android:id="@+id/ll_notice"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/notosanskr_regular_hestia"
+                    android:text="@string/mypage_notice"
+                    android:textColor="@color/font_black_131313"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icn_18_arrow_c_0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_yolo_market"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/notosanskr_regular_hestia"
+                    android:text="@string/mypage_yolo_market"
+                    android:textColor="@color/font_black_131313"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icn_18_arrow_c_0" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.yolo.yolo_android.ui.custom.MySpinKitView
+            android:id="@+id/iv_test"
+            android:layout_width="@dimen/loading_progressbar_size"
+            android:layout_height="@dimen/loading_progressbar_size"
+            app:SpinKit_Color="@color/primary"
+            app:isVisible="@{viewModel.isLoading()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
